@@ -47,10 +47,10 @@ const Contact = () => {
 
             <div style={{ display:'flex', flexDirection:'column', gap:'2rem', marginBottom:'3rem' }}>
               {[
-                { icon:'📍', label:'Our Office', val:'102 Elite Avenue, Tech Park, Coimbatore, TN 641018' },
-                { icon:'📞', label:'Phone Number', val:'+91 90000 11111 / +91 90000 22222' },
+                { icon:'📍', label:'Our Office', val:'Erode, Tamil Nadu\n(Serving All Over Tamil Nadu)' },
+                { icon:'📞', label:'Direct Contact', val:'+91 97902 41089 / +91 70100 72474' },
                 { icon:'✉️', label:'Email Address', val:'contact@eagleentertainment.com' },
-                { icon:'⏰', label:'Business Hours', val:'Mon – Sat: 10:00 AM – 7:00 PM\nSunday: Appointment Only' },
+                { icon:'⏰', label:'Business Hours', val:'Mon – Sat: 10:00 AM – 8:00 PM\nSunday: Appointment Only' },
               ].map((c, i) => (
                 <div key={i} style={{ display:'flex', gap:'1.5rem', alignItems:'flex-start' }}>
                   <div style={{ 

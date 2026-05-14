@@ -27,7 +27,7 @@ const Footer = () => {
               </div>
             </div>
             <p style={{ color:'var(--text-muted)', fontSize:'0.9rem', lineHeight:1.8, marginBottom:'2rem' }}>
-              We plan amazing events all over the world. From big company meetings to beautiful luxury weddings, we handle every detail perfectly.
+              Tamil Nadu's premier event management agency based in Erode. From grand weddings to corporate galas, we deliver professional excellence all over the state.
             </p>
             <div style={{ display:'flex', gap:'1rem' }}>
               {['FB', 'IG', 'YT', 'LI'].map((s, i) => (
@@ -78,9 +78,9 @@ const Footer = () => {
             <h4 className="display-font" style={{ fontSize:'1.25rem', color:'#fff', marginBottom:'2rem' }}>Our Office</h4>
             <div style={{ display:'flex', flexDirection:'column', gap:'1.5rem', marginBottom:'2rem' }}>
               {[
-                { icon:'📍', val:'102 Elite Avenue, Tech Park, Coimbatore, TN 641018' },
+                { icon:'📍', val:'Erode, Tamil Nadu (Serving All Over TN)' },
                 { icon:'✉️', val:'contact@eagleentertainment.com' },
-                { icon:'📞', val:'+91 90000 11111' },
+                { icon:'📞', val:'+91 97902 41089' },
               ].map((c, i) => (
                 <div key={i} style={{ display:'flex', gap:'1rem', alignItems:'flex-start' }}>
                   <span style={{ fontSize:'1.2rem', opacity:0.8 }}>{c.icon}</span>

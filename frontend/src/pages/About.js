@@ -3,14 +3,12 @@ import { Link } from 'react-router-dom';
 
 const About = () => {
   const team = [
-    { name:'Arjun Selvam', role:'Managing Director', img:'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300', bio:'A leader with over 12 years of experience in making big events happen.' },
-    { name:'Priya Nair', role:'Creative Head', img:'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300', bio:'A creative expert who makes every event look beautiful and unique.' },
-    { name:'Karthik Raj', role:'Operations Head', img:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300', bio:'A specialist who makes sure everything runs perfectly on time.' },
-    { name:'Deepika Iyer', role:'Planning Head', img:'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300', bio:'A planning expert focused on giving our clients the best experience.' },
+    { name:'Arjun', role:'CEO & Founder', img:'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300', bio:'Visionary leader dedicated to setting new benchmarks in the event entertainment industry across Tamil Nadu.' },
+    { name:'Priyaarjun', role:'Website Management & Stuffs', img:'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300', bio:'Driving the digital presence and operational excellence of Eagle Entertainment.' },
   ];
 
   const milestones = [
-    { year:'2014', event:'Started in Coimbatore with a small, passionate team' },
+    { year:'2014', event:'Inception of Eagle Entertainment in Erode, Tamil Nadu' },
     { year:'2016', event:'Expanded our services to major cities across India' },
     { year:'2018', event:'Completed over 100 successful company events' },
     { year:'2020', event:'Started using new digital tools for online events' },
@@ -30,7 +28,7 @@ const About = () => {
           <span className="section-label">Our Legacy</span>
           <h1 className="section-title">About <span>Eagle Entertainment</span></h1>
           <p style={{ color:'var(--text-muted)', maxWidth:700, margin:'0 auto', fontSize:'1.1rem', lineHeight:1.9 }}>
-            Over 10 years of experience in making events perfect. We don't just manage events; we create memories that last forever.
+            Over 10 years of mastery in transforming events into legendary experiences. From our base in Erode, we serve the entire state of Tamil Nadu with unmatched passion and precision.
           </p>
         </div>
       </div>
@@ -48,10 +46,10 @@ const About = () => {
               <span className="section-label">Who We Are</span>
               <h2 className="section-title" style={{ marginBottom:'2rem' }}>We Create <span>Amazing</span> Memories</h2>
               <p style={{ color:'var(--text-muted)', lineHeight:1.9, marginBottom:'1.5rem', fontSize:'1rem' }}>
-                Founded in 2014, Eagle Entertainment started with a simple goal: to make every event a work of art. Over the last 10 years, we have grown from a small group into a top agency known for great ideas and perfect planning.
+                Founded in 2014 in Erode, Eagle Entertainment started with a singular vision: to elevate every celebration into an extraordinary masterpiece. Over the past decade, we have evolved into Tamil Nadu's premier event management agency, renowned for our innovative concepts and flawless execution.
               </p>
               <p style={{ color:'var(--text-muted)', lineHeight:1.9, marginBottom:'3rem', fontSize:'1rem' }}>
-                Our office is where we come up with new ideas and make sure every event is perfect. Our team of over 50 experts works hard to make your dreams come true. From big company launches to private parties, we handle everything with care.
+                Whether it's a corporate gala in Chennai, a destination wedding in Madurai, or a private event in our home city of Erode, we bring professional excellence to every corner of the state. Our dedicated team works tirelessly to ensure your vision is realized with a touch of elegance and grandeur.
               </p>
               <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'2rem', marginBottom:'3rem' }}>
                 {[
@@ -161,7 +159,7 @@ const About = () => {
             {[
               { q: 'What types of events do you handle?', a: 'We handle everything from luxury weddings and private parties to big corporate launches and live music concerts.' },
               { q: 'How early should I book my event?', a: 'We recommend booking at least 3-6 months in advance for big events, but we also handle last-minute requests depending on availability.' },
-              { q: 'Do you work outside of Coimbatore?', a: 'Yes, we manage events all across India and are ready to travel to your location.' },
+              { q: 'Do you work outside of Erode?', a: 'Absolutely! While we are based in Erode, we handle high-profile events all over Tamil Nadu, including Chennai, Coimbatore, Madurai, and Trichy.' },
               { q: 'Can you help with the budget planning?', a: 'Absolutely. We work with you to plan an amazing event that fits your budget perfectly.' }
             ].map((f, i) => (
               <div key={i} className="glass-card" style={{ padding:'2rem' }}>
