@@ -32,7 +32,7 @@ public class Inquiry {
 
     private String status; // NEW, IN_PROGRESS, RESOLVED
 
-    @Column(name = "Created_at")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     public Inquiry() {}
