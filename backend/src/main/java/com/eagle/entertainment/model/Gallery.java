@@ -11,17 +11,19 @@ public class Gallery {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "Title")
     private String title;
 
     @Column(name = "image_url")
     private String imageUrl;
 
+    @Column(name = "Category")
     private String category;
 
     @Column(name = "event_date")
     private LocalDate eventDate;
 
-    @Column(name = "created_at")
+    @Column(name = "Created_at")
     private LocalDateTime createdAt;
 
     public Gallery() {}

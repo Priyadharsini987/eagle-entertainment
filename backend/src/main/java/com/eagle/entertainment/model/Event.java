@@ -18,6 +18,7 @@ public class Event {
     @Column(columnDefinition = "TEXT")
     private String description;
 
+    @Column(name = "Category")
     private String category;
 
     @Column(name = "date")
@@ -40,7 +41,7 @@ public class Event {
     @Column(name = "is_upcoming")
     private Boolean isUpcoming;
 
-    @Column(name = "created_at")
+    @Column(name = "Created_at")
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at")

@@ -10,10 +10,10 @@ public class Testimonial {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "client_name", nullable = false)
+    @Column(name = "Client_name", nullable = false)
     private String clientName;
 
-    @Column(name = "client_role")
+    @Column(name = "Client_role")
     private String clientRole;
 
     private String company;
@@ -26,7 +26,7 @@ public class Testimonial {
     @Column(name = "image_url")
     private String imageUrl;
 
-    @Column(name = "created_at")
+    @Column(name = "Created_at")
     private LocalDateTime createdAt;
 
     public Testimonial() {}
