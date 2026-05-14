@@ -134,6 +134,7 @@ const Services = () => {
         </div>
 
         <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(280px, 1fr))', gap:'2rem' }}>
+          {services.map((s, i) => (
             <div key={i} className="glass-card hover-glow" style={{ padding:'3rem 2rem', textAlign:'center' }}>
               <div style={{ 
                 fontSize:'3rem', marginBottom:'1.5rem', 
