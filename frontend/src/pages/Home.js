@@ -30,8 +30,9 @@ const Hero = ({ stats }) => {
           transitionProperty: 'opacity, transform',
         }}>
           <img src={sl.img} alt="" style={{ width:'100%', height:'100%', objectFit:'cover' }} />
-          <div style={{ position:'absolute', inset:0, background:'linear-gradient(to right, rgba(2, 6, 23, 0.95) 0%, rgba(2, 6, 23, 0.4) 50%, transparent 100%)' }} />
-          <div style={{ position:'absolute', inset:0, background:'radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15), transparent 50%)' }} />
+          <div style={{ position:'absolute', inset:0, background:'linear-gradient(to right, rgba(5, 5, 5, 0.95) 0%, rgba(5, 5, 5, 0.4) 50%, transparent 100%)' }} />
+          <div style={{ position:'absolute', inset:0, background:'radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.15), transparent 50%)' }} />
+          <div style={{ position:'absolute', inset:0, background:'radial-gradient(circle at 80% 20%, rgba(255, 77, 109, 0.05), transparent 30%)' }} />
         </div>
       ))}
 
@@ -42,7 +43,7 @@ const Hero = ({ stats }) => {
             <h1 className="section-title" style={{ fontSize:'clamp(3.5rem, 8vw, 6rem)', marginBottom:'0.5rem', lineHeight:0.95 }}>
               {s.title}
             </h1>
-            <h1 className="section-title" style={{ fontSize:'clamp(3.5rem, 8vw, 6rem)', color:'var(--primary)', fontStyle:'italic', lineHeight:1 }}>
+            <h1 className="section-title text-gradient" style={{ fontSize:'clamp(3.5rem, 8vw, 6rem)', fontStyle:'italic', lineHeight:1 }}>
               {s.accent}
             </h1>
           </div>
@@ -133,9 +134,12 @@ const Services = () => {
         </div>
 
         <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(280px, 1fr))', gap:'2rem' }}>
-          {services.map((s, i) => (
-            <div key={i} className="glass-card" style={{ padding:'3rem 2rem' }}>
-              <div style={{ fontSize:'2.5rem', marginBottom:'1.5rem', filter: 'drop-shadow(0 0 10px rgba(99, 102, 241, 0.3))' }}>{s.icon}</div>
+            <div key={i} className="glass-card hover-glow" style={{ padding:'3rem 2rem', textAlign:'center' }}>
+              <div style={{ 
+                fontSize:'3rem', marginBottom:'1.5rem', 
+                animation: `pulse ${2 + i * 0.5}s infinite ease-in-out`,
+                filter: 'drop-shadow(0 0 15px rgba(212, 175, 55, 0.4))' 
+              }}>{s.icon}</div>
               <h3 className="display-font" style={{ fontSize:'1.6rem', color:'#fff', marginBottom:'1rem' }}>{s.title}</h3>
               <p style={{ color:'var(--text-muted)', fontSize:'0.95rem', lineHeight:1.8 }}>{s.desc}</p>
             </div>

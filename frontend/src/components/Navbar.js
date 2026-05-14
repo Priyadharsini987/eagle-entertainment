@@ -32,10 +32,10 @@ const Navbar = () => {
       <nav style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
         transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
-        background: scrolled ? 'rgba(2, 6, 23, 0.85)' : 'transparent',
-        backdropFilter: scrolled ? 'blur(20px)' : 'none',
-        borderBottom: scrolled ? '1px solid rgba(255, 255, 255, 0.08)' : 'none',
-        padding: scrolled ? '0.8rem 0' : '1.5rem 0',
+        background: scrolled ? 'rgba(5, 5, 5, 0.8)' : 'transparent',
+        backdropFilter: scrolled ? 'blur(15px)' : 'none',
+        borderBottom: scrolled ? '1px solid rgba(212, 175, 55, 0.1)' : 'none',
+        padding: scrolled ? '0.7rem 0' : '1.2rem 0',
       }}>
         <div className="container" style={{ display:'flex', alignItems:'center', justifyContent:'space-between' }}>
           <Link to="/" style={{ textDecoration:'none', display:'flex', alignItems:'center', gap:'0.75rem' }}>
@@ -58,15 +58,21 @@ const Navbar = () => {
             {links.map(l => (
               <Link key={l.path} to={l.path} style={{
                 textDecoration:'none',
-                fontSize:'0.85rem', fontWeight:500, letterSpacing:'0.02em',
-                color: isActive(l.path) ? 'var(--primary-light)' : 'rgba(255,255,255,0.6)',
+                fontSize:'0.85rem', fontWeight:600, letterSpacing:'0.03em',
+                color: isActive(l.path) ? '#fff' : 'rgba(255,255,255,0.7)',
                 transition:'var(--transition)',
                 position: 'relative',
+                padding: '0.5rem 0'
               }}>
                 {l.label}
-                {isActive(l.path) && (
-                  <span style={{ position:'absolute', bottom:-6, left:'50%', transform:'translateX(-50%)', width:4, height:4, borderRadius:'50%', background:'var(--primary)' }} />
-                )}
+                <span style={{ 
+                  position:'absolute', bottom:0, left:0, 
+                  width: isActive(l.path) ? '100%' : '0%', 
+                  height: 2, 
+                  background:'var(--primary)',
+                  transition: 'width 0.3s ease',
+                  boxShadow: '0 0 10px var(--primary)'
+                }} />
               </Link>
             ))}
             {user ? (
