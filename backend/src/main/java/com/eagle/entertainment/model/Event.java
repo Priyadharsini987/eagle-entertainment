@@ -37,7 +37,7 @@ public class Event {
     private String status; // UPCOMING, ONGOING, COMPLETED, CANCELLED
 
     @Column(name = "is_upcoming")
-    private boolean isUpcoming;
+    private Boolean isUpcoming;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -47,7 +47,7 @@ public class Event {
 
     public Event() {}
 
-    public Event(Long id, String title, String description, String category, LocalDate eventDate, String eventTime, String venue, String city, Integer capacity, BigDecimal price, String imageUrl, String status, boolean isUpcoming, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Event(Long id, String title, String description, String category, LocalDate eventDate, String eventTime, String venue, String city, Integer capacity, BigDecimal price, String imageUrl, String status, Boolean isUpcoming, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -101,8 +101,8 @@ public class Event {
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
-    public boolean isUpcoming() { return isUpcoming; }
-    public void setUpcoming(boolean upcoming) { isUpcoming = upcoming; }
+    public Boolean isUpcoming() { return isUpcoming; }
+    public void setUpcoming(Boolean upcoming) { isUpcoming = upcoming; }
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
     public LocalDateTime getUpdatedAt() { return updatedAt; }
