@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -33,6 +33,9 @@ const PublicLayout = ({ children }) => (
     <Navbar />
     <main>{children}</main>
     <Footer />
+    <div className="mobile-bottom-bar">
+      <Link to="/contact" className="btn-primary" style={{ padding:'0.75rem 2rem', fontSize:'0.75rem', width:'100%' }}>Book Your Event Now</Link>
+    </div>
   </>
 );
 

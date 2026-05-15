@@ -40,17 +40,6 @@ const Hero = ({ stats }) => {
         <div style={{ maxWidth:750 }}>
           <div style={{ animation:'fadeInUp 0.8s ease' }}>
             <span className="section-label" style={{ color: 'var(--accent)' }}>{s.tag}</span>
-            <h1 className="section-title" style={{ fontSize:'clamp(3.5rem, 8vw, 6rem)', marginBottom:'0.5rem', lineHeight:0.95 }}>
-              {s.title}
-            </h1>
-            <h1 className="section-title text-gradient" style={{ fontSize:'clamp(3.5rem, 8vw, 6rem)', fontStyle:'italic', lineHeight:1 }}>
-              {s.accent}
-            </h1>
-          </div>
-
-          <p style={{ color:'var(--text-muted)', fontSize:'1.2rem', lineHeight:1.8, maxWidth:550, margin:'2rem 0 3rem', animation:'fadeInUp 0.8s ease 0.2s both' }}>
-            {s.sub}
-          </p>
 
           <div style={{ display:'flex', gap:'1.5rem', flexWrap:'wrap', animation:'fadeInUp 0.8s ease 0.4s both' }}>
             <Link to="/contact" className="btn-primary">Contact Us</Link>

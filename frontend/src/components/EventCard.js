@@ -26,14 +26,6 @@ const EventCard = ({ event, compact = false }) => {
     }}>
       {/* Image Container */}
       <div style={{ position: 'relative', height: compact ? 200 : 240, overflow: 'hidden' }}>
-        <img
-          src={event.imageUrl || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600'}
-          alt={event.title}
-          style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'var(--transition)' }}
-          onMouseEnter={e => e.target.style.transform = 'scale(1.1)'}
-          onMouseLeave={e => e.target.style.transform = 'scale(1)'}
-          onError={e => { e.target.src = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600'; }}
-        />
         <div style={{
           position: 'absolute', inset: 0,
           background: 'linear-gradient(to top, var(--bg-main) 0%, transparent 60%)',
