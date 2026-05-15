@@ -17,7 +17,6 @@ public class Gallery {
     @Column(name = "image_url")
     private String imageUrl;
 
-    @Column(name = "Category")
     private String category;
 
     @Column(name = "event_date")

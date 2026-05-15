@@ -21,13 +21,13 @@ public class Event {
     @Column(name = "category")
     private String category;
 
-    @Column(name = "date")
+    @Column(name = "event_date")
     private LocalDate eventDate;
 
     @Column(name = "event_time")
     private String eventTime;
 
-    @Column(name = "location")
+    @Column(name = "venue")
     private String venue;
     private String city;
     private Integer capacity;
