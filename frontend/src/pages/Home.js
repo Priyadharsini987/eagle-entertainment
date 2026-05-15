@@ -318,11 +318,13 @@ const Home = () => {
             label="Don't Miss Out"
             events={upcomingEvents}
           />
-          <EventsRow
-            title="Recent" accent="Highlights"
-            label="What We've Done"
-            events={recentEvents}
-          />
+          <div id="highlights">
+            <EventsRow
+              title="Recent" accent="Highlights"
+              label="What We've Done"
+              events={recentEvents}
+            />
+          </div>
           <div style={{ textAlign:'center', marginTop:'1rem' }}>
             <Link to="/events" className="btn-outline">View All Events</Link>
           </div>

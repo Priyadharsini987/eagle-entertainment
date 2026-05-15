@@ -47,8 +47,10 @@ const Footer = () => {
               {[
                 { label:'Our Events', path:'/events' }, 
                 { label:'Photo Gallery', path:'/gallery' }, 
+                { label:'Recent Highlights', path:'/#highlights' },
                 { label:'About Us', path:'/about' }, 
                 { label:'Contact Us', path:'/contact' },
+                { label:'Admin Portal', path:'/admin/login' },
               ].map((l, i) => (
                 <Link key={i} to={l.path} style={{
                   color:'var(--text-muted)', textDecoration:'none', fontSize:'0.9rem',
@@ -117,11 +119,11 @@ const Footer = () => {
             © {new Date().getFullYear()} Eagle Entertainment. Making every event perfect.
           </p>
           <div style={{ display:'flex', gap:'2rem' }}>
-            {['Privacy Policy', 'Terms of Service', 'Admin Login'].map((t, i) => (
-              t === 'Admin Login' ? (
-                <Link key={i} to="/admin/login" style={{ color:'var(--text-muted)', fontSize:'0.8rem', textDecoration:'none', transition:'var(--transition)' }}
-                onMouseEnter={e => e.currentTarget.style.color='var(--primary)'}
-                onMouseLeave={e => e.currentTarget.style.color='var(--text-muted)'}
+            {['Privacy Policy', 'Terms of Service', 'Executive Login'].map((t, i) => (
+              t === 'Executive Login' ? (
+                <Link key={i} to="/admin/login" style={{ color:'var(--primary)', fontSize:'0.8rem', textDecoration:'none', transition:'var(--transition)', fontWeight:700 }}
+                onMouseEnter={e => e.currentTarget.style.color='var(--primary-light)'}
+                onMouseLeave={e => e.currentTarget.style.color='var(--primary)'}
                 >{t}</Link>
               ) : (
                 <span key={i} style={{ color:'var(--text-muted)', fontSize:'0.8rem', cursor:'default' }}>{t}</span>

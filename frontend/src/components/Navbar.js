@@ -21,6 +21,7 @@ const Navbar = () => {
     { label: 'Home', path: '/' },
     { label: 'Events', path: '/events' },
     { label: 'Gallery', path: '/gallery' },
+    { label: 'Highlights', path: '/#highlights' },
     { label: 'About', path: '/about' },
     { label: 'Contact', path: '/contact' },
   ];
@@ -81,7 +82,9 @@ const Navbar = () => {
                 <button onClick={() => { logout(); navigate('/'); }} className="btn-outline" style={{ padding:'0.6rem 1.5rem', fontSize:'0.8rem' }}>Logout</button>
               </div>
             ) : (
-              <Link to="/admin/login" className="btn-primary" style={{ padding:'0.7rem 1.8rem', fontSize:'0.8rem' }}>Admin Login</Link>
+              <div style={{ display:'flex', gap:'1rem' }}>
+                <Link to="/admin/login" className="btn-primary" style={{ padding:'0.7rem 1.8rem', fontSize:'0.8rem' }}>Admin Access</Link>
+              </div>
             )}
           </div>
 

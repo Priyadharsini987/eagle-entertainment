@@ -1,13 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { publicApi } from '../services/api';
+import EventCard from '../components/EventCard';
 
 const Gallery = () => {
   const [images, setImages] = useState([]);
+  const [recentEvents, setRecentEvents] = useState([]);
   const [filter, setFilter] = useState('ALL');
   const [lightbox, setLightbox] = useState(null);
+  const highlightsRef = useRef(null);
 
   useEffect(() => {
     publicApi.getGallery().then(r => setImages(r.data)).catch(() => {});
+    publicApi.getRecentEvents().then(r => setRecentEvents(r.data)).catch(() => {});
   }, []);
 
   const categories = ['ALL', ...new Set(images.map(img => img.category))];
@@ -86,6 +90,32 @@ const Gallery = () => {
           </div>
         )}
       </div>
+
+      {/* Recent Highlights Section */}
+      <section style={{ background:'var(--bg-surface)', padding:'6rem 0', borderTop:'1px solid var(--border)' }} id="highlights" ref={highlightsRef}>
+        <div className="container">
+          <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end', marginBottom:'3rem' }}>
+            <div>
+              <span className="section-label">Real Moments</span>
+              <h2 className="section-title" style={{ fontSize:'2.5rem', marginBottom:0 }}>Recent <span>Highlights</span></h2>
+            </div>
+            <button onClick={() => highlightsRef.current?.scrollBy({ left: 350, behavior:'smooth' })} className="btn-outline" style={{ display:'none' }}>Next</button>
+          </div>
+          
+          <div style={{ display:'flex', gap:'2rem', overflowX:'auto', paddingBottom:'1.5rem', scrollbarWidth:'none' }}>
+            <style>{`div::-webkit-scrollbar{display:none}`}</style>
+            {recentEvents.length === 0 ? (
+              <div className="glass-card" style={{ padding:'4rem', width:'100%', textAlign:'center', color:'var(--text-muted)' }}>
+                We are adding our latest highlights soon.
+              </div>
+            ) : recentEvents.map(ev => (
+              <div key={ev.id} style={{ minWidth:320, maxWidth:320, flexShrink:0 }}>
+                <EventCard event={ev} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Lightbox */}
       {lightbox && (
