@@ -27,11 +27,18 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
         try {
+            System.out.println("DEBUG: Attempting login for user: " + request.getUsername());
             authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
             );
+            System.out.println("DEBUG: Login successful for user: " + request.getUsername());
         } catch (BadCredentialsException e) {
+            System.out.println("DEBUG: Login failed - Bad Credentials for: " + request.getUsername());
             return ResponseEntity.status(401).body(Map.of("error", "Invalid username or password"));
+        } catch (Exception e) {
+            System.out.println("DEBUG: Unexpected login error: " + e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(Map.of("error", "Internal server error during login"));
         }
 
         final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
