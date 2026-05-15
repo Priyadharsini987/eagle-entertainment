@@ -17,7 +17,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/public")
-@CrossOrigin(origins = "*")
 public class PublicController {
 
     @Autowired private EventRepository eventRepository;
