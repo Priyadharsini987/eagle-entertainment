@@ -29,52 +29,87 @@ const ImageUploadField = ({ label, value, onChange }) => {
   };
 
   return (
-    <div className="form-group" style={{ marginBottom: '1.25rem' }}>
-      <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', color: '#c9a84c', marginBottom: '0.5rem' }}>{label}</label>
+    <div className="form-group" style={{ marginBottom: '1.5rem', gridColumn: '1/-1' }}>
+      <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', color: '#c9a84c', marginBottom: '0.75rem' }}>{label}</label>
       
-      <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
-        {value && (
-          <div style={{ position: 'relative', width: 90, height: 60, borderRadius: '4px', overflow: 'hidden', border: '1px solid rgba(201,168,76,0.2)', flexShrink: 0 }}>
-            <img src={getImageUrl(value)} alt="Preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+      <div style={{ position: 'relative' }}>
+        {value ? (
+          // Uploaded State with Preview
+          <div style={{ 
+            position: 'relative', 
+            width: '100%', 
+            height: '180px', 
+            borderRadius: '6px', 
+            overflow: 'hidden', 
+            border: '1px solid rgba(201,168,76,0.3)',
+            boxShadow: 'var(--shadow-glow)'
+          }}>
+            <img src={getImageUrl(value)} alt="Uploaded item" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             <button 
               type="button" 
               onClick={() => onChange('')} 
-              style={{ position: 'absolute', top: 2, right: 2, background: 'rgba(239, 68, 68, 0.8)', border: 'none', color: '#fff', width: 18, height: 18, borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.65rem' }}
-            >✕</button>
+              style={{ 
+                position: 'absolute', 
+                top: '1rem', 
+                right: '1rem', 
+                background: 'rgba(239, 68, 68, 0.9)', 
+                border: 'none', 
+                color: '#fff', 
+                padding: '0.5rem 1rem', 
+                borderRadius: '4px', 
+                cursor: 'pointer', 
+                fontSize: '0.75rem',
+                fontWeight: 600,
+                transition: 'var(--transition)'
+              }}
+              onMouseEnter={e => e.currentTarget.style.background = '#ef4444'}
+              onMouseLeave={e => e.currentTarget.style.background = 'rgba(239, 68, 68, 0.9)'}
+            >
+              ✕ Remove Photo
+            </button>
+          </div>
+        ) : (
+          // Upload Zone Input
+          <div style={{
+            position: 'relative',
+            width: '100%',
+            height: '140px',
+            borderRadius: '6px',
+            border: '1px dashed rgba(201,168,76,0.3)',
+            background: 'rgba(255,255,255,0.01)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease'
+          }}
+          onMouseEnter={e => { e.currentTarget.style.borderColor = '#c9a84c'; e.currentTarget.style.background = 'rgba(201,168,76,0.02)'; }}
+          onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(201,168,76,0.3)'; e.currentTarget.style.background = 'rgba(255,255,255,0.01)'; }}
+          >
+            <input 
+              type="file" 
+              accept="image/*" 
+              onChange={handleFileChange} 
+              disabled={uploading} 
+              style={{ position: 'absolute', inset: 0, opacity: 0, width: '100%', height: '100%', cursor: 'pointer', zIndex: 2 }} 
+            />
+            {uploading ? (
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ width: 28, height: 28, border: '2px solid rgba(201,168,76,0.1)', borderTopColor: '#c9a84c', borderRadius: '50%', margin: '0 auto 0.75rem', animation: 'spin 1s infinite linear' }} />
+                <span style={{ fontSize: '0.8rem', color: '#c9a84c', fontWeight: 600 }}>Uploading image...</span>
+              </div>
+            ) : (
+              <div style={{ textAlign: 'center', pointerEvents: 'none' }}>
+                <span style={{ fontSize: '2rem', display: 'block', marginBottom: '0.5rem' }}>📷</span>
+                <span style={{ fontSize: '0.82rem', color: '#fff', fontWeight: 500 }}>Click to select photo from device</span>
+                <span style={{ fontSize: '0.68rem', color: 'var(--text-muted)', display: 'block', marginTop: '0.25rem' }}>Supports PNG, JPG, GIF, WebP</span>
+              </div>
+            )}
           </div>
         )}
-
-        <div style={{ flex: 1, minWidth: 200 }}>
-          <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', marginBottom: '0.5rem' }}>
-            <div style={{ position: 'relative', display: 'inline-block' }}>
-              <input 
-                type="file" 
-                accept="image/*" 
-                onChange={handleFileChange} 
-                disabled={uploading} 
-                style={{ position: 'absolute', inset: 0, opacity: 0, width: '100%', height: '100%', cursor: 'pointer' }} 
-              />
-              <button 
-                type="button" 
-                className="btn-outline" 
-                style={{ padding: '0.45rem 1rem', fontSize: '0.72rem', borderRadius: '4px', borderColor: 'rgba(201,168,76,0.25)', background: 'transparent', color: '#fff', cursor: 'pointer' }}
-              >
-                {uploading ? 'Uploading...' : '📁 Upload File'}
-              </button>
-            </div>
-            <span style={{ color: 'var(--text-muted)', fontSize: '0.72rem' }}>or paste direct link below:</span>
-          </div>
-          
-          <input 
-            type="text" 
-            value={value} 
-            onChange={e => onChange(e.target.value)} 
-            placeholder="https://images.unsplash.com/..." 
-            style={{ width: '100%', padding: '0.65rem 1rem', fontSize: '0.8rem' }} 
-          />
-        </div>
       </div>
-      {error && <div style={{ color: '#f87171', fontSize: '0.72rem', marginTop: '0.4rem' }}>{error}</div>}
+      {error && <div style={{ color: '#f87171', fontSize: '0.75rem', marginTop: '0.5rem' }}>{error}</div>}
     </div>
   );
 };
