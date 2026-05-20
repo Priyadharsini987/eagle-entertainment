@@ -68,6 +68,8 @@ export const adminApi = {
   uploadImage: (formData) => api.post('/api/admin/upload', formData, {
     headers: { 'Content-Type': 'multipart/form-data' }
   }),
+  // Clear seeds
+  clearSeeds: () => api.post('/api/admin/clear-seeds'),
 };
 
 export default api;

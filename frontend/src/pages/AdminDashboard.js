@@ -866,6 +866,38 @@ const AdminDashboard = () => {
             <div style={{ color:'var(--text-muted)', fontSize:'0.75rem' }}>{new Date().toLocaleDateString('en-IN', { weekday:'long', year:'numeric', month:'long', day:'numeric' })}</div>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+            <button 
+              onClick={async () => {
+                if (window.confirm("⚠️ WARNING: This will permanently delete ALL mock/seed data (events, gallery items, testimonials, and team members). Your admin account will not be deleted.\n\nAre you sure you want to proceed?")) {
+                  try {
+                    await adminApi.clearSeeds();
+                    alert("✅ All mock seed data has been successfully cleared! You can now upload your own photos.");
+                    window.location.reload();
+                  } catch (err) {
+                    alert("Error clearing mock data: " + (err.response?.data?.error || err.message));
+                  }
+                }
+              }}
+              style={{
+                background: 'rgba(239, 68, 68, 0.1)',
+                border: '1px solid rgba(239, 68, 68, 0.3)',
+                color: '#f87171',
+                padding: '0.5rem 1rem',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                fontSize: '0.75rem',
+                fontWeight: 600,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.4rem',
+                transition: 'all 0.2s ease-in-out',
+                marginRight: '0.5rem'
+              }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(239, 68, 68, 0.2)'; e.currentTarget.style.borderColor = 'rgba(239, 68, 68, 0.5)'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'rgba(239, 68, 68, 0.1)'; e.currentTarget.style.borderColor = 'rgba(239, 68, 68, 0.3)'; }}
+            >
+              🗑️ Clear Mock Data
+            </button>
             <div style={{ textAlign:'right' }}>
               <div style={{ color: '#fff', fontSize: '0.9rem', fontWeight: 600 }}>{user?.username || 'Priya Arjun'}</div>
               <div style={{ color: 'var(--primary)', fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase' }}>Executive Director</div>

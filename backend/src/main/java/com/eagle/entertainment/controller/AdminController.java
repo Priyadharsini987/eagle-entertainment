@@ -166,4 +166,18 @@ public class AdminController {
             return ResponseEntity.status(500).body(Map.of("error", "Failed to upload file: " + e.getMessage()));
         }
     }
+
+    // ---- Clear Seed Data ----
+    @PostMapping("/clear-seeds")
+    public ResponseEntity<?> clearSeeds() {
+        try {
+            eventRepository.deleteAll();
+            galleryRepository.deleteAll();
+            testimonialRepository.deleteAll();
+            teamMemberRepository.deleteAll();
+            return ResponseEntity.ok(Map.of("message", "All mock seed data cleared successfully."));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(Map.of("error", "Failed to clear mock data: " + e.getMessage()));
+        }
+    }
 }
