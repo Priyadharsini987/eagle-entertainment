@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { publicApi } from '../services/api';
 import EventCard from '../components/EventCard';
+import { motion } from 'framer-motion';
 
 const EventDetail = () => {
   const { id } = useParams();
@@ -25,12 +26,21 @@ const EventDetail = () => {
     fetchData();
   }, [id]);
 
-  if (loading) return <div style={{ paddingTop:'8rem', textAlign:'center', color:'#555', minHeight:'100vh' }}>Loading event details...</div>;
+  if (loading) return (
+    <div style={{ minHeight:'100vh', display:'flex', alignItems:'center', justifyContent:'center', background:'var(--bg-main)' }}>
+      <div style={{ textAlign:'center' }}>
+        <div style={{ width:40, height:40, border:'3px solid rgba(212, 175, 55, 0.1)', borderTopColor:'var(--primary)', borderRadius:'50%', margin:'0 auto 1.5rem', animation:'pulse-glow 1.5s infinite linear' }} />
+        <div style={{ color:'var(--text-muted)', fontSize:'0.9rem', letterSpacing:'0.1em' }}>Loading event details...</div>
+      </div>
+    </div>
+  );
+
   if (!event) return (
-    <div style={{ paddingTop:'8rem', textAlign:'center', color:'#555', minHeight:'100vh' }}>
-      <div style={{ fontSize:'3rem', marginBottom:'1rem' }}>🎭</div>
-      <p>Event not found.</p>
-      <Link to="/events" className="btn-primary" style={{ marginTop:'1.5rem', display:'inline-flex' }}>← Back to Events</Link>
+    <div style={{ paddingTop:'10rem', textAlign:'center', color:'var(--text-muted)', minHeight:'100vh' }}>
+      <div style={{ fontSize:'4rem', marginBottom:'1.5rem' }}>🎭</div>
+      <h3 style={{ color: '#fff', fontSize: '1.8rem', fontFamily: 'var(--font-display)', marginBottom: '1rem' }}>Event not found</h3>
+      <p style={{ marginBottom: '2.5rem' }}>The event you are looking for may have been removed or does not exist.</p>
+      <Link to="/events" className="btn-primary">← Back to Events</Link>
     </div>
   );
 
@@ -38,96 +48,147 @@ const EventDetail = () => {
 
   return (
     <div style={{ paddingTop:'6rem', minHeight:'100vh' }}>
-      {/* Hero Image */}
-      <div style={{ position:'relative', height:480, overflow:'hidden' }}>
-        <img src={event.imageUrl || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1600'}
-          alt={event.title} style={{ width:'100%', height:'100%', objectFit:'cover' }}
-          onError={e => e.target.style.display='none'} />
-        <div style={{ position:'absolute', inset:0, background:'linear-gradient(to top, rgba(10,10,10,1) 0%, rgba(10,10,10,0.5) 50%, transparent)' }} />
-        <div style={{ position:'absolute', bottom:0, left:0, right:0, padding:'3rem 2rem' }}>
+      
+      {/* Hero Image Section */}
+      <div style={{ position:'relative', height:520, overflow:'hidden' }}>
+        <motion.img 
+          src={event.imageUrl || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1600'}
+          alt={event.title} 
+          style={{ width:'100%', height:'100%', objectFit:'cover' }}
+          initial={{ scale: 1.08, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          onError={e => e.target.style.display='none'} 
+        />
+        <div style={{ position:'absolute', inset:0, background:'linear-gradient(to top, rgba(5,5,5,1) 0%, rgba(5,5,5,0.45) 60%, transparent)' }} />
+        
+        <div style={{ position:'absolute', bottom:0, left:0, right:0, padding:'4rem 0' }}>
           <div className="container">
-            <Link to="/events" style={{ color:'var(--primary)', textDecoration:'none', fontSize:'0.75rem', fontWeight:700, letterSpacing:'0.2em', textTransform:'uppercase', marginBottom:'1.5rem', display:'inline-block' }}>← Back to Events</Link>
-            <div style={{ display:'flex', gap:'1rem', marginBottom:'1.5rem', flexWrap:'wrap' }}>
-              <span style={{ padding:'4px 12px', background:'rgba(201,168,76,0.2)', border:'1px solid var(--primary)', color:'var(--primary)', borderRadius:'2px', fontSize:'0.65rem', fontWeight:800, textTransform:'uppercase', letterSpacing:'0.1em' }}>{event.category}</span>
-              <span style={{ padding:'4px 12px', background:'rgba(255,255,255,0.05)', border:'1px solid rgba(255,255,255,0.2)', color:'#fff', borderRadius:'2px', fontSize:'0.65rem', fontWeight:800, textTransform:'uppercase', letterSpacing:'0.1em' }}>{event.upcoming ? 'Upcoming' : 'Finished'}</span>
-            </div>
-            <h1 className="display-font" style={{ fontSize:'clamp(2.5rem,6vw,4.5rem)', color:'#fff', fontWeight:600, lineHeight:1.1 }}>{event.title}</h1>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <Link to="/events" style={{ color:'var(--primary-light)', textDecoration:'none', fontSize:'0.75rem', fontWeight:800, letterSpacing:'0.22em', textTransform:'uppercase', marginBottom:'1.8rem', display:'inline-block', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--primary-light)'}>← Back to Events</Link>
+              
+              <div style={{ display:'flex', gap:'0.85rem', marginBottom:'1.8rem', flexWrap:'wrap' }}>
+                <span style={{ padding:'5px 15px', background:'rgba(212, 175, 55, 0.15)', border:'1px solid var(--primary)', color:'var(--primary-light)', borderRadius:'100px', fontSize:'0.65rem', fontWeight:800, textTransform:'uppercase', letterSpacing:'0.12em' }}>{event.category}</span>
+                <span style={{ padding:'5px 15px', background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.15)', color:'#fff', borderRadius:'100px', fontSize:'0.65rem', fontWeight:800, textTransform:'uppercase', letterSpacing:'0.12em' }}>{event.upcoming ? 'Upcoming' : 'Finished'}</span>
+              </div>
+              
+              <h1 className="display-font" style={{ fontSize:'clamp(2.5rem, 5.8vw, 4.4rem)', color:'#fff', fontWeight:700, lineHeight:1.15, letterSpacing: '-0.02em' }}>{event.title}</h1>
+            </motion.div>
           </div>
         </div>
       </div>
 
-      {/* Content */}
-      <div className="container" style={{ padding:'3rem 2rem' }}>
-        <div style={{ display:'grid', gridTemplateColumns:'1fr 340px', gap:'3rem', alignItems:'start' }} className="event-detail-grid">
-          {/* Main */}
-          <div>
-            <h2 className="display-font" style={{ fontSize:'2rem', color:'#fff', marginBottom:'1.5rem' }}>Event Details</h2>
-            <div style={{ width:60, height:2, background:'var(--primary)', marginBottom:'2rem' }} />
-            <p style={{ color:'var(--text-muted)', lineHeight:1.9, fontSize:'1rem' }}>
+      {/* Content grid */}
+      <div className="container" style={{ padding:'4rem 0 6rem' }}>
+        <div style={{ display:'grid', gridTemplateColumns:'1fr 360px', gap:'4.5rem', alignItems:'start' }} className="event-detail-grid">
+          
+          {/* Main Description */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <h2 className="display-font" style={{ fontSize:'2.2rem', color:'#fff', marginBottom:'1rem', fontWeight: 600 }}>Event Details</h2>
+            <div style={{ width:60, height:2, background:'var(--primary)', marginBottom:'2.5rem', boxShadow: '0 0 8px var(--primary)' }} />
+            <p style={{ color:'var(--text-muted)', lineHeight:1.9, fontSize:'1.05rem', whiteSpace: 'pre-wrap' }}>
               {event.description || 'No description available for this event.'}
             </p>
-          </div>
+          </motion.div>
 
-          {/* Sidebar Card */}
-          <div style={{ background:'var(--bg-surface)', border:'1px solid var(--border)', borderRadius:'4px', padding:'2.5rem', position:'sticky', top:'7rem' }}>
-            <h3 className="display-font" style={{ fontSize:'1.6rem', color:'#fff', marginBottom:'2rem' }}>Information</h3>
-            <div style={{ display:'flex', flexDirection:'column', gap:'1.5rem' }}>
+          {/* Sidebar Info Card */}
+          <motion.div 
+            className="glass-card"
+            style={{ 
+              background:'var(--bg-card)', 
+              border:'1px solid var(--border)', 
+              borderRadius:'var(--radius-md)', 
+              padding:'3rem 2.5rem', 
+              position:'sticky', 
+              top:'7rem',
+              boxShadow: 'var(--shadow-glow)'
+            }}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <h3 className="display-font" style={{ fontSize:'1.7rem', color:'#fff', marginBottom:'2.2rem', fontWeight: 600 }}>Information</h3>
+            
+            <div style={{ display:'flex', flexDirection:'column', gap:'1.8rem' }}>
               {[
                 { icon:'📅', label:'Date', val: date ? date.toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'}) : 'TBA' },
                 { icon:'🕐', label:'Time', val: event.eventTime || 'TBA' },
                 { icon:'📍', label:'Venue', val: event.venue || 'TBA' },
-                { icon:'💰', label:'Ticket Price', val: event.price > 0 ? `₹${Number(event.price).toLocaleString('en-IN')}` : 'Free Entry' },
+                { icon:'💰', label:'Admission', val: event.price > 0 ? `₹${Number(event.price).toLocaleString('en-IN')}` : 'Free Entry' },
               ].map((d, i) => (
-                <div key={i} style={{ display:'flex', gap:'1rem', paddingBottom:'1rem', borderBottom:'1px solid var(--border)' }}>
-                  <span style={{ fontSize:'1.1rem', opacity:0.7 }}>{d.icon}</span>
+                <div key={i} style={{ display:'flex', gap:'1.1rem', paddingBottom:'1.4rem', borderBottom:'1px solid var(--border)' }}>
+                  <span style={{ fontSize:'1.3rem', opacity:0.9 }}>{d.icon}</span>
                   <div>
-                    <div style={{ color:'var(--primary)', fontSize:'0.6rem', fontWeight:800, letterSpacing:'0.15em', textTransform:'uppercase' }}>{d.label}</div>
-                    <div style={{ color:'var(--text-main)', fontSize:'0.9rem', marginTop:'4px', fontWeight:500 }}>{d.val}</div>
+                    <div style={{ color:'var(--primary)', fontSize:'0.65rem', fontWeight:800, letterSpacing:'0.18em', textTransform:'uppercase' }}>{d.label}</div>
+                    <div style={{ color:'var(--text-main)', fontSize:'0.95rem', marginTop:'4px', fontWeight:600 }}>{d.val}</div>
                   </div>
                 </div>
               ))}
             </div>
-            <div style={{ marginTop:'2.5rem', display:'flex', flexDirection:'column', gap:'1rem' }}>
-              <Link to="/contact" className="btn-primary" style={{ width:'100%', fontSize:'0.8rem' }}>
+            
+            <div style={{ marginTop:'3rem', display:'flex', flexDirection:'column', gap:'1.2rem' }}>
+              <Link to="/contact" className="btn-primary" style={{ width:'100%', fontSize:'0.82rem', padding: '1rem' }}>
                 Book Now
               </Link>
-              <a href="tel:+919000011111" className="btn-outline" style={{ width:'100%', fontSize:'0.8rem' }}>
-                Call Us
+              <a href="tel:+919790241089" className="btn-outline" style={{ width:'100%', fontSize:'0.82rem', padding: '1rem' }}>
+                Call Operations
               </a>
             </div>
 
             {/* Social Share */}
-            <div style={{ marginTop:'2rem', paddingTop:'2rem', borderTop:'1px solid var(--border)', textAlign:'center' }}>
-              <div style={{ color:'var(--text-muted)', fontSize:'0.6rem', fontWeight:800, textTransform:'uppercase', letterSpacing:'0.15em', marginBottom:'1rem' }}>Share Event</div>
-              <div style={{ display:'flex', justifyContent:'center', gap:'1rem' }}>
-                {['Share','Tweet','Link'].map((s, i) => (
+            <div style={{ marginTop:'2.5rem', paddingTop:'2rem', borderTop:'1px solid var(--border)', textAlign:'center' }}>
+              <div style={{ color:'var(--text-muted)', fontSize:'0.65rem', fontWeight:800, textTransform:'uppercase', letterSpacing:'0.15em', marginBottom:'1.2rem' }}>Share Event</div>
+              <div style={{ display:'flex', justifyContent:'center', gap:'0.85rem' }}>
+                {['Share', 'Tweet', 'Link'].map((s, i) => (
                   <button key={i} style={{ 
-                    background:'none', border:'1px solid var(--border)', color:'#fff', padding:'0.4rem 0.8rem', borderRadius:'2px',
-                    fontSize:'0.7rem', cursor:'pointer', transition:'var(--transition)'
+                    background:'rgba(255,255,255,0.02)', border:'1px solid rgba(212, 175, 55, 0.15)', color:'#fff', padding:'0.5rem 1rem', borderRadius:'100px',
+                    fontSize:'0.72rem', fontWeight: 600, cursor:'pointer', transition:'var(--transition)'
                   }}
-                  onMouseEnter={e => e.currentTarget.style.borderColor='var(--primary)'}
-                  onMouseLeave={e => e.currentTarget.style.borderColor='var(--border)'}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor='var(--primary)'; e.currentTarget.style.background='rgba(212, 175, 55, 0.08)'; e.currentTarget.style.color='var(--primary-light)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor='rgba(212, 175, 55, 0.15)'; e.currentTarget.style.background='rgba(255,255,255,0.02)'; e.currentTarget.style.color='#fff'; }}
                   >{s}</button>
                 ))}
+              </div>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </div>
 
         {/* Related Events */}
         {related.length > 0 && (
-          <div style={{ marginTop:'6rem', paddingTop:'6rem', borderTop:'1px solid var(--border)' }}>
+          <div style={{ marginTop:'8rem', paddingTop:'6rem', borderTop:'1px solid var(--border)' }}>
             <span className="section-label">Suggestions</span>
-            <h2 className="display-font" style={{ fontSize:'2rem', color:'#fff', marginBottom:'3rem' }}>Related <span>Events</span></h2>
-            <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(300px, 1fr))', gap:'2rem' }}>
-              {related.map(r => (
-                <EventCard key={r.id} event={r} />
+            <h2 className="display-font" style={{ fontSize:'2.4rem', color:'#fff', marginBottom:'3.5rem', fontWeight: 700 }}>Related <span>Events</span></h2>
+            
+            <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(320px, 1fr))', gap:'2.5rem' }}>
+              {related.map((r, idx) => (
+                <motion.div
+                  key={r.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1, duration: 0.5 }}
+                >
+                  <EventCard event={r} />
+                </motion.div>
               ))}
             </div>
           </div>
         )}
       </div>
-      <style>{`@media(max-width:900px){.event-detail-grid{grid-template-columns:1fr!important;}}`}</style>
+      
+      <style>{`
+        @media(max-width:900px){
+          .event-detail-grid { grid-template-columns:1fr!important; gap:4rem!important; }
+        }
+      `}</style>
     </div>
   );
 };
