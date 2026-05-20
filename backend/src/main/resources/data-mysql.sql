@@ -42,3 +42,20 @@ INSERT INTO testimonials (client_name, client_role, company, message, rating, im
 ('Vikram Nair', 'Event Attendee', 'Public', 'Attended the Bollywood Night concert — absolute magic!', 5, 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100', NOW()),
 ('Meena Pillai', 'Mother of the Bride', 'Private Client', 'My daughter''s wedding was perfect!', 5, 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100', NOW()),
 ('Arjun Patel', 'Marketing Head', 'Sunrise Brands', 'Creative, professional, and absolutely reliable team!', 5, 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100', NOW());
+
+-- Create team_members table (if not exists)
+CREATE TABLE IF NOT EXISTS team_members (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    role VARCHAR(255) NOT NULL,
+    image_url VARCHAR(255),
+    bio TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Default Team Members
+INSERT INTO team_members (name, role, image_url, bio, created_at, updated_at) VALUES
+('Priya Dharshini', 'Founder & Managing Director', 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500', 'With over a decade of experience, Priya drives the creative vision and execution of premium luxury events.', NOW(), NOW()),
+('Arjun Prasad', 'Co-Founder & Chief Operations Officer', 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500', 'Arjun manages logistics, vendor relations, and production operations, ensuring flawless execution on-site.', NOW(), NOW()),
+('Deepa Raman', 'Lead Wedding Designer', 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500', 'Specializing in floral design and thematic aesthetics, Deepa designs bespoke dream wedding experiences.', NOW(), NOW());

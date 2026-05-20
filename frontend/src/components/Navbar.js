@@ -76,14 +76,43 @@ const Navbar = () => {
                 }} />
               </Link>
             ))}
-            {user ? (
-              <div style={{ display:'flex', gap:'1rem' }}>
-                <Link to="/admin" className="btn-primary" style={{ padding:'0.6rem 1.5rem', fontSize:'0.8rem' }}>Dashboard</Link>
-                <button onClick={() => { logout(); navigate('/'); }} className="btn-outline" style={{ padding:'0.6rem 1.5rem', fontSize:'0.8rem' }}>Logout</button>
-              </div>
-            ) : (
-              <div style={{ display:'flex', gap:'1rem' }}>
-                <Link to="/admin/login" className="btn-primary" style={{ padding:'0.7rem 1.8rem', fontSize:'0.8rem' }}>Admin Access</Link>
+            {user && (
+              <div style={{ display:'flex', alignItems:'center', gap:'1rem' }}>
+                <Link to="/admin" style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                  textDecoration: 'none',
+                  color: 'var(--primary)',
+                  fontWeight: 600,
+                  fontSize: '0.8rem',
+                  background: 'rgba(201, 168, 76, 0.08)',
+                  border: '1px solid rgba(201, 168, 76, 0.25)',
+                  padding: '0.5rem 1rem',
+                  borderRadius: '4px',
+                  transition: 'all 0.2s'
+                }}
+                onMouseEnter={e => e.currentTarget.style.background = 'rgba(201, 168, 76, 0.15)'}
+                onMouseLeave={e => e.currentTarget.style.background = 'rgba(201, 168, 76, 0.08)'}
+                >
+                  ⚙️ Admin Portal
+                </Link>
+                <button onClick={() => { logout(); navigate('/'); }} style={{
+                  background: 'transparent',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  color: 'rgba(255,255,255,0.6)',
+                  cursor: 'pointer',
+                  padding: '0.5rem 1rem',
+                  borderRadius: '4px',
+                  fontSize: '0.8rem',
+                  fontWeight: 600,
+                  transition: 'all 0.2s'
+                }}
+                onMouseEnter={e => { e.currentTarget.style.color = '#f87171'; e.currentTarget.style.borderColor = 'rgba(248, 113, 113, 0.3)'; }}
+                onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.6)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; }}
+                >
+                  Sign Out
+                </button>
               </div>
             )}
           </div>
@@ -107,10 +136,12 @@ const Navbar = () => {
                 fontWeight:500, fontSize:'1.1rem',
               }}>{l.label}</Link>
             ))}
-            {user
-              ? <Link to="/admin" style={{ color:'var(--primary)', textDecoration:'none', fontWeight:600 }}>Admin Dashboard</Link>
-              : <Link to="/admin/login" style={{ color:'var(--primary)', textDecoration:'none', fontWeight:600 }}>Admin Login</Link>
-            }
+            {user && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', borderTop: '1px solid var(--border)', paddingTop: '1.2rem', marginTop: '0.5rem' }}>
+                <Link to="/admin" style={{ color:'var(--primary)', textDecoration:'none', fontWeight:600 }}>⚙️ Admin Portal</Link>
+                <div onClick={() => { logout(); navigate('/'); }} style={{ color:'#f87171', cursor:'pointer', fontWeight:600 }}>🚪 Sign Out</div>
+              </div>
+            )}
           </div>
         )}
       </nav>

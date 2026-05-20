@@ -1,11 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { publicApi } from '../services/api';
+
+const DEFAULT_TEAM = [
+  { name:'Priya Dharshini', role:'Founder & Managing Director', imageUrl:'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500', bio:'With over a decade of experience, Priya drives the creative vision and execution of premium luxury events.' },
+  { name:'Arjun Prasad', role:'Co-Founder & Chief Operations Officer', imageUrl:'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500', bio:'Arjun manages logistics, vendor relations, and production operations, ensuring flawless execution on-site.' },
+  { name:'Deepa Raman', role:'Lead Wedding Designer', imageUrl:'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500', bio:'Specializing in floral design and thematic aesthetics, Deepa designs bespoke dream wedding experiences.' }
+];
 
 const About = () => {
-  const team = [
-    { name:'Arjun', role:'CEO & Founder', img:'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300', bio:'Visionary leader dedicated to setting new benchmarks in the event entertainment industry across Tamil Nadu.' },
-    { name:'Priyaarjun', role:'Website Management & Stuffs', img:'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300', bio:'Driving the digital presence and operational excellence of Eagle Entertainment.' },
-  ];
+  const [team, setTeam] = useState([]);
+
+  useEffect(() => {
+    publicApi.getTeam()
+      .then(res => {
+        if (res.data && res.data.length > 0) {
+          setTeam(res.data);
+        } else {
+          setTeam(DEFAULT_TEAM);
+        }
+      })
+      .catch(() => {
+        setTeam(DEFAULT_TEAM);
+      });
+  }, []);
 
   const milestones = [
     { year:'2014', event:'Inception of Eagle Entertainment in Erode, Tamil Nadu' },
@@ -188,8 +206,8 @@ const About = () => {
               onMouseLeave={e => { e.currentTarget.style.transform='translateY(0)'; }}
               >
                 <div style={{ position:'absolute', top:0, left:0, right:0, height:'4px', background:'var(--primary)' }} />
-                <img src={member.img} alt={member.name} style={{ width:120, height:120, borderRadius:'50%', objectFit:'cover', border:'4px solid var(--glass-border)', marginBottom:'2rem' }}
-                  onError={e => e.target.style.display='none'} />
+                <img src={member.imageUrl || member.img} alt={member.name} style={{ width:120, height:120, borderRadius:'50%', objectFit:'cover', border:'4px solid var(--glass-border)', marginBottom:'2rem' }}
+                  onError={e => { e.target.src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=300'; }} />
                 <h3 className="display-font" style={{ fontSize:'1.5rem', color:'#fff', marginBottom:'0.5rem' }}>{member.name}</h3>
                 <div style={{ color:'var(--primary-light)', fontSize:'0.8rem', fontWeight:700, letterSpacing:'0.15em', textTransform:'uppercase', marginBottom:'1.5rem' }}>{member.role}</div>
                 <p style={{ color:'var(--text-muted)', fontSize:'0.9rem', lineHeight:1.7 }}>{member.bio}</p>

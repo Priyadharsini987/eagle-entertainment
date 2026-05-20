@@ -4,10 +4,12 @@ import com.eagle.entertainment.model.Event;
 import com.eagle.entertainment.model.Gallery;
 import com.eagle.entertainment.model.Inquiry;
 import com.eagle.entertainment.model.Testimonial;
+import com.eagle.entertainment.model.TeamMember;
 import com.eagle.entertainment.repository.EventRepository;
 import com.eagle.entertainment.repository.GalleryRepository;
 import com.eagle.entertainment.repository.InquiryRepository;
 import com.eagle.entertainment.repository.TestimonialRepository;
+import com.eagle.entertainment.repository.TeamMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +25,13 @@ public class PublicController {
     @Autowired private GalleryRepository galleryRepository;
     @Autowired private TestimonialRepository testimonialRepository;
     @Autowired private InquiryRepository inquiryRepository;
+    @Autowired private TeamMemberRepository teamMemberRepository;
+
+    // ---- Team Members ----
+    @GetMapping("/team")
+    public List<TeamMember> getTeamMembers() {
+        return teamMemberRepository.findAllByOrderByIdAsc();
+    }
 
     // ---- Events ----
     @GetMapping("/events/upcoming")

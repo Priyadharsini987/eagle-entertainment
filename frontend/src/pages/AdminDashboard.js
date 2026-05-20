@@ -11,6 +11,7 @@ const Sidebar = ({ active, setActive, onLogout }) => {
     { key: 'gallery', icon: '🖼️', label: 'Gallery' },
     { key: 'testimonials', icon: '💬', label: 'Testimonials' },
     { key: 'inquiries', icon: '📩', label: 'Inquiries' },
+    { key: 'team', icon: '👥', label: 'Team Members' },
   ];
 
   return (
@@ -591,6 +592,118 @@ const InquiriesTab = () => {
   );
 };
 
+// ---- Team Tab ----
+const TeamTab = () => {
+  const [members, setMembers] = useState([]);
+  const [showForm, setShowForm] = useState(false);
+  const [editMember, setEditMember] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const emptyForm = { name: '', role: '', imageUrl: '', bio: '' };
+  const [form, setForm] = useState(emptyForm);
+
+  const load = () => {
+    setLoading(true);
+    adminApi.getTeam().then(r => setMembers(r.data)).catch(() => {}).finally(() => setLoading(false));
+  };
+  useEffect(() => { load(); }, []);
+
+  const handleEdit = (m) => {
+    setEditMember(m);
+    setForm({ name: m.name, role: m.role, imageUrl: m.imageUrl || '', bio: m.bio || '' });
+    setShowForm(true);
+  };
+
+  const handleDelete = async (id) => {
+    if (!window.confirm('Delete this team member?')) return;
+    await adminApi.deleteTeam(id).catch(() => {});
+    load();
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSaving(true);
+    try {
+      if (editMember) {
+        await adminApi.updateTeam(editMember.id, form);
+      } else {
+        await adminApi.addTeam(form);
+      }
+      setShowForm(false);
+      setEditMember(null);
+      setForm(emptyForm);
+      load();
+    } catch {}
+    setSaving(false);
+  };
+
+  return (
+    <div>
+      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'1.5rem' }}>
+        <div>
+          <h2 style={{ fontFamily:'Cormorant Garamond,serif', fontSize:'1.8rem', color:'#fff' }}>Manage Team Members</h2>
+          <p style={{ color:'#555', fontSize:'0.8rem' }}>{members.length} team members total</p>
+        </div>
+        <button className="btn-primary" onClick={() => { setShowForm(true); setEditMember(null); setForm(emptyForm); }} style={{ padding:'0.65rem 1.4rem', fontSize:'0.78rem' }}>+ Add Team Member</button>
+      </div>
+
+      {showForm && (
+        <div style={{ background:'rgba(255,255,255,0.02)', border:'1px solid rgba(201,168,76,0.2)', borderRadius:'6px', padding:'1.5rem', marginBottom:'1.5rem' }}>
+          <h3 style={{ fontFamily:'Cormorant Garamond,serif', color:'#fff', marginBottom:'1.25rem', fontSize:'1.2rem' }}>{editMember ? 'Edit Team Member' : 'Add Team Member'}</h3>
+          <form onSubmit={handleSubmit} style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'1rem' }}>
+            <div className="form-group">
+              <label>Name *</label>
+              <input value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} required placeholder="Priya Dharshini" />
+            </div>
+            <div className="form-group">
+              <label>Role *</label>
+              <input value={form.role} onChange={e => setForm(f => ({ ...f, role: e.target.value }))} required placeholder="Founder & Managing Director" />
+            </div>
+            <div className="form-group" style={{ gridColumn: '1/-1' }}>
+              <label>Photo URL</label>
+              <input value={form.imageUrl} onChange={e => setForm(f => ({ ...f, imageUrl: e.target.value }))} placeholder="https://images.unsplash.com/..." />
+            </div>
+            <div className="form-group" style={{ gridColumn: '1/-1' }}>
+              <label>Bio</label>
+              <textarea rows={3} value={form.bio} onChange={e => setForm(f => ({ ...f, bio: e.target.value }))} placeholder="Brief bio..." />
+            </div>
+            <div style={{ gridColumn: '1/-1', display: 'flex', gap: '0.75rem', justifyContent: 'flex-end' }}>
+              <button type="button" className="btn-outline" onClick={() => setShowForm(false)} style={{ padding: '0.6rem 1.4rem', fontSize: '0.78rem' }}>Cancel</button>
+              <button type="submit" className="btn-primary" disabled={saving} style={{ padding: '0.6rem 1.4rem', fontSize: '0.78rem' }}>{saving ? 'Saving...' : (editMember ? 'Update Member' : 'Add Member')}</button>
+            </div>
+          </form>
+        </div>
+      )}
+
+      {loading ? <div style={{ color:'#555', padding:'3rem 0', textAlign:'center' }}>Loading team members...</div> : (
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.5rem' }}>
+          {members.map(member => (
+            <div key={member.id} style={{ display: 'flex', flexDirection: 'column', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(201,168,76,0.08)', borderRadius: '6px', overflow: 'hidden', transition: 'border-color 0.2s' }}
+              onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(201,168,76,0.25)'}
+              onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(201,168,76,0.08)'}
+            >
+              <div style={{ height: 220, overflow: 'hidden', background: '#222', position: 'relative' }}>
+                <img src={member.imageUrl || 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300'} alt={member.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  onError={e => e.target.src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=300'} />
+              </div>
+              <div style={{ padding: '1.25rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                <h4 style={{ color: '#fff', fontSize: '1rem', fontWeight: 600, margin: '0 0 0.25rem 0' }}>{member.name}</h4>
+                <div style={{ color: 'var(--primary)', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '0.75rem' }}>{member.role}</div>
+                <p style={{ color: '#888', fontSize: '0.78rem', lineHeight: 1.5, margin: '0 0 1.25rem 0', flex: 1 }}>{member.bio || 'No bio provided.'}</p>
+                <div style={{ display: 'flex', gap: '0.5rem', marginTop: 'auto' }}>
+                  <button onClick={() => handleEdit(member)} style={{ flex: 1, background: 'rgba(96,165,250,0.1)', border: '1px solid rgba(96,165,250,0.3)', color: '#60a5fa', padding: '0.4rem', borderRadius: '4px', cursor: 'pointer', fontSize: '0.72rem' }}>Edit</button>
+                  <button onClick={() => handleDelete(member.id)} style={{ flex: 1, background: 'rgba(248,113,113,0.1)', border: '1px solid rgba(248,113,113,0.3)', color: '#f87171', padding: '0.4rem', borderRadius: '4px', cursor: 'pointer', fontSize: '0.72rem' }}>Delete</button>
+                </div>
+              </div>
+            </div>
+          ))}
+          {members.length === 0 && <div style={{ gridColumn: '1/-1', textAlign: 'center', padding: '3rem', color: '#555' }}>No team members added yet.</div>}
+        </div>
+      )}
+    </div>
+  );
+};
+
 // ---- Main Admin Dashboard ----
 const AdminDashboard = () => {
   const [active, setActive] = useState('dashboard');
@@ -609,6 +722,7 @@ const AdminDashboard = () => {
     gallery: <GalleryTab />,
     testimonials: <TestimonialsTab />,
     inquiries: <InquiriesTab />,
+    team: <TeamTab />,
   };
 
   if (!isAdmin) return null;

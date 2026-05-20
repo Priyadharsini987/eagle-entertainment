@@ -24,6 +24,7 @@ export const publicApi = {
   getTestimonials: () => api.get('/api/public/testimonials'),
   getStats: () => api.get('/api/public/stats'),
   submitInquiry: (data) => api.post('/api/public/inquiry', data),
+  getTeam: () => api.get('/api/public/team'),
 };
 
 // Auth APIs
@@ -52,6 +53,11 @@ export const adminApi = {
   getInquiries: () => api.get('/api/admin/inquiries'),
   updateInquiryStatus: (id, status) => api.put(`/api/admin/inquiries/${id}/status`, { status }),
   deleteInquiry: (id) => api.delete(`/api/admin/inquiries/${id}`),
+  // Team Members
+  getTeam: () => api.get('/api/admin/team'),
+  addTeam: (data) => api.post('/api/admin/team', data),
+  updateTeam: (id, data) => api.put(`/api/admin/team/${id}`, data),
+  deleteTeam: (id) => api.delete(`/api/admin/team/${id}`),
 };
 
 export default api;

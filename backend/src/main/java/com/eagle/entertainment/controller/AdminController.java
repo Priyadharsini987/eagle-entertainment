@@ -19,6 +19,7 @@ public class AdminController {
     @Autowired private GalleryRepository galleryRepository;
     @Autowired private TestimonialRepository testimonialRepository;
     @Autowired private InquiryRepository inquiryRepository;
+    @Autowired private TeamMemberRepository teamMemberRepository;
 
     // ---- Dashboard Stats ----
     @GetMapping("/dashboard")
@@ -117,5 +118,30 @@ public class AdminController {
     public ResponseEntity<?> deleteInquiry(@PathVariable Long id) {
         inquiryRepository.deleteById(id);
         return ResponseEntity.ok(Map.of("message", "Inquiry deleted"));
+    }
+
+    // ---- Team Members CRUD ----
+    @GetMapping("/team")
+    public List<TeamMember> getAllTeamMembers() {
+        return teamMemberRepository.findAllByOrderByIdAsc();
+    }
+
+    @PostMapping("/team")
+    public ResponseEntity<TeamMember> createTeamMember(@RequestBody TeamMember member) {
+        return ResponseEntity.ok(teamMemberRepository.save(member));
+    }
+
+    @PutMapping("/team/{id}")
+    public ResponseEntity<TeamMember> updateTeamMember(@PathVariable Long id, @RequestBody TeamMember member) {
+        return teamMemberRepository.findById(id).map(existing -> {
+            member.setId(id);
+            return ResponseEntity.ok(teamMemberRepository.save(member));
+        }).orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/team/{id}")
+    public ResponseEntity<?> deleteTeamMember(@PathVariable Long id) {
+        teamMemberRepository.deleteById(id);
+        return ResponseEntity.ok(Map.of("message", "Team member deleted successfully"));
     }
 }
