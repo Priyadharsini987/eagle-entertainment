@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { getImageUrl } from '../services/api';
 
 const categoryColors = {
   WEDDING: '#d4af37',   // Champagne Gold
@@ -30,7 +31,7 @@ const EventCard = ({ event, compact = false }) => {
       {/* Image Container */}
       <div style={{ position: 'relative', height: compact ? 190 : 230, overflow: 'hidden' }}>
         <img 
-          src={event.imageUrl || 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=500'} 
+          src={getImageUrl(event.imageUrl) || 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=500'} 
           alt={event.title} 
           style={{ 
             width: '100%', 

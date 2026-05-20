@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { publicApi } from '../services/api';
+import { publicApi, getImageUrl } from '../services/api';
 import { motion } from 'framer-motion';
 
 const DEFAULT_TEAM = [
@@ -283,7 +283,7 @@ const About = () => {
                 <div style={{ position:'absolute', top:0, left:0, right:0, height:'4px', background:'var(--primary)' }} />
                 
                 <img 
-                  src={member.imageUrl || member.img} 
+                  src={getImageUrl(member.imageUrl || member.img)} 
                   alt={member.name} 
                   style={{ width:130, height:130, borderRadius:'50%', objectFit:'cover', border:'4px solid var(--border)', marginBottom:'2rem', boxShadow: '0 10px 25px rgba(0,0,0,0.6)' }}
                   onError={e => { e.target.src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=300'; }} 

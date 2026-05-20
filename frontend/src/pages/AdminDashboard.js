@@ -1,7 +1,83 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { adminApi } from '../services/api';
+import { adminApi, getImageUrl } from '../services/api';
+
+// ---- Custom Image Uploader ----
+const ImageUploadField = ({ label, value, onChange }) => {
+  const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setUploading(true);
+    setError(null);
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      const res = await adminApi.uploadImage(formData);
+      onChange(res.data.imageUrl);
+    } catch (err) {
+      setError(err.response?.data?.error || 'Failed to upload image. Make sure server is running.');
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  return (
+    <div className="form-group" style={{ marginBottom: '1.25rem' }}>
+      <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', color: '#c9a84c', marginBottom: '0.5rem' }}>{label}</label>
+      
+      <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
+        {value && (
+          <div style={{ position: 'relative', width: 90, height: 60, borderRadius: '4px', overflow: 'hidden', border: '1px solid rgba(201,168,76,0.2)', flexShrink: 0 }}>
+            <img src={getImageUrl(value)} alt="Preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <button 
+              type="button" 
+              onClick={() => onChange('')} 
+              style={{ position: 'absolute', top: 2, right: 2, background: 'rgba(239, 68, 68, 0.8)', border: 'none', color: '#fff', width: 18, height: 18, borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.65rem' }}
+            >✕</button>
+          </div>
+        )}
+
+        <div style={{ flex: 1, minWidth: 200 }}>
+          <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', marginBottom: '0.5rem' }}>
+            <div style={{ position: 'relative', display: 'inline-block' }}>
+              <input 
+                type="file" 
+                accept="image/*" 
+                onChange={handleFileChange} 
+                disabled={uploading} 
+                style={{ position: 'absolute', inset: 0, opacity: 0, width: '100%', height: '100%', cursor: 'pointer' }} 
+              />
+              <button 
+                type="button" 
+                className="btn-outline" 
+                style={{ padding: '0.45rem 1rem', fontSize: '0.72rem', borderRadius: '4px', borderColor: 'rgba(201,168,76,0.25)', background: 'transparent', color: '#fff', cursor: 'pointer' }}
+              >
+                {uploading ? 'Uploading...' : '📁 Upload File'}
+              </button>
+            </div>
+            <span style={{ color: 'var(--text-muted)', fontSize: '0.72rem' }}>or paste direct link below:</span>
+          </div>
+          
+          <input 
+            type="text" 
+            value={value} 
+            onChange={e => onChange(e.target.value)} 
+            placeholder="https://images.unsplash.com/..." 
+            style={{ width: '100%', padding: '0.65rem 1rem', fontSize: '0.8rem' }} 
+          />
+        </div>
+      </div>
+      {error && <div style={{ color: '#f87171', fontSize: '0.72rem', marginTop: '0.4rem' }}>{error}</div>}
+    </div>
+  );
+};
 
 // ---- Sidebar ----
 const Sidebar = ({ active, setActive, onLogout }) => {
@@ -249,10 +325,11 @@ const EventsTab = () => {
                   <input type="number" value={form.price} onChange={e => setForm(f => ({...f, price:e.target.value}))} placeholder="0 for Free" />
                 </div>
               </div>
-              <div className="form-group">
-                <label>Image URL</label>
-                <input value={form.imageUrl} onChange={e => setForm(f => ({...f, imageUrl:e.target.value}))} placeholder="https://images.unsplash.com/..." />
-              </div>
+              <ImageUploadField 
+                label="Event Image" 
+                value={form.imageUrl} 
+                onChange={url => setForm(f => ({ ...f, imageUrl: url }))} 
+              />
               <div className="form-group">
                 <label>Description</label>
                 <textarea rows={3} value={form.description} onChange={e => setForm(f => ({...f, description:e.target.value}))} placeholder="Event description..." />
@@ -365,9 +442,12 @@ const GalleryTab = () => {
                 {['WEDDING','CORPORATE','CONCERT','CULTURAL','PRIVATE','LAUNCH','FASHION'].map(c=><option key={c}>{c}</option>)}
               </select>
             </div>
-            <div className="form-group" style={{ gridColumn:'1/-1' }}>
-              <label>Image URL</label>
-              <input value={form.imageUrl} onChange={e => setForm(f=>({...f,imageUrl:e.target.value}))} placeholder="https://images.unsplash.com/..." required />
+            <div style={{ gridColumn:'1/-1' }}>
+              <ImageUploadField 
+                label="Gallery Photo" 
+                value={form.imageUrl} 
+                onChange={url => setForm(f => ({ ...f, imageUrl: url }))} 
+              />
             </div>
             <div className="form-group">
               <label>Event Date</label>
@@ -384,7 +464,7 @@ const GalleryTab = () => {
       <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(200px,1fr))', gap:'1rem' }}>
         {items.map(item => (
           <div key={item.id} style={{ position:'relative', borderRadius:'4px', overflow:'hidden', border:'1px solid rgba(201,168,76,0.1)', aspectRatio:'4/3' }}>
-            <img src={item.imageUrl} alt={item.title} style={{ width:'100%', height:'100%', objectFit:'cover' }}
+            <img src={getImageUrl(item.imageUrl)} alt={item.title} style={{ width:'100%', height:'100%', objectFit:'cover' }}
               onError={e => e.target.src='https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400'} />
             <div style={{ position:'absolute', inset:0, background:'rgba(0,0,0,0)', transition:'background 0.3s', display:'flex', alignItems:'flex-end', justifyContent:'space-between', padding:'0.75rem' }}
               onMouseEnter={e => e.currentTarget.style.background='rgba(0,0,0,0.7)'}
@@ -439,7 +519,13 @@ const TestimonialsTab = () => {
             <div className="form-group"><label>Role / Title</label><input value={form.clientRole} onChange={e=>setForm(f=>({...f,clientRole:e.target.value}))} placeholder="Bride / CEO" /></div>
             <div className="form-group"><label>Company</label><input value={form.company} onChange={e=>setForm(f=>({...f,company:e.target.value}))} /></div>
             <div className="form-group"><label>Rating (1-5)</label><input type="number" min="1" max="5" value={form.rating} onChange={e=>setForm(f=>({...f,rating:+e.target.value}))} /></div>
-            <div className="form-group" style={{ gridColumn:'1/-1' }}><label>Photo URL</label><input value={form.imageUrl} onChange={e=>setForm(f=>({...f,imageUrl:e.target.value}))} placeholder="https://images.unsplash.com/..." /></div>
+            <div style={{ gridColumn:'1/-1' }}>
+              <ImageUploadField 
+                label="Photo" 
+                value={form.imageUrl} 
+                onChange={url => setForm(f => ({ ...f, imageUrl: url }))} 
+              />
+            </div>
             <div className="form-group" style={{ gridColumn:'1/-1' }}><label>Review Message *</label><textarea rows={3} value={form.message} onChange={e=>setForm(f=>({...f,message:e.target.value}))} required /></div>
             <div style={{ gridColumn:'1/-1', display:'flex', gap:'0.75rem', justifyContent:'flex-end' }}>
               <button type="button" className="btn-outline" onClick={() => setShowForm(false)} style={{ padding:'0.6rem 1.4rem', fontSize:'0.78rem' }}>Cancel</button>
@@ -452,7 +538,7 @@ const TestimonialsTab = () => {
       <div style={{ display:'flex', flexDirection:'column', gap:'1rem' }}>
         {items.map(item => (
           <div key={item.id} style={{ display:'flex', gap:'1rem', background:'rgba(255,255,255,0.02)', border:'1px solid rgba(201,168,76,0.08)', borderRadius:'6px', padding:'1.25rem', alignItems:'flex-start' }}>
-            <img src={item.imageUrl || ''} alt={item.clientName} style={{ width:48, height:48, borderRadius:'50%', objectFit:'cover', border:'2px solid rgba(201,168,76,0.3)', flexShrink:0 }}
+            <img src={getImageUrl(item.imageUrl) || ''} alt={item.clientName} style={{ width:48, height:48, borderRadius:'50%', objectFit:'cover', border:'2px solid rgba(201,168,76,0.3)', flexShrink:0 }}
               onError={e => { e.target.style.display='none'; }} />
             <div style={{ flex:1 }}>
               <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:'0.5rem' }}>
@@ -659,9 +745,12 @@ const TeamTab = () => {
               <label>Role *</label>
               <input value={form.role} onChange={e => setForm(f => ({ ...f, role: e.target.value }))} required placeholder="Founder & Managing Director" />
             </div>
-            <div className="form-group" style={{ gridColumn: '1/-1' }}>
-              <label>Photo URL</label>
-              <input value={form.imageUrl} onChange={e => setForm(f => ({ ...f, imageUrl: e.target.value }))} placeholder="https://images.unsplash.com/..." />
+            <div style={{ gridColumn: '1/-1' }}>
+              <ImageUploadField 
+                label="Photo" 
+                value={form.imageUrl} 
+                onChange={url => setForm(f => ({ ...f, imageUrl: url }))} 
+              />
             </div>
             <div className="form-group" style={{ gridColumn: '1/-1' }}>
               <label>Bio</label>
@@ -683,7 +772,7 @@ const TeamTab = () => {
               onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(201,168,76,0.08)'}
             >
               <div style={{ height: 220, overflow: 'hidden', background: '#222', position: 'relative' }}>
-                <img src={member.imageUrl || 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300'} alt={member.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                <img src={getImageUrl(member.imageUrl) || 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300'} alt={member.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   onError={e => e.target.src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=300'} />
               </div>
               <div style={{ padding: '1.25rem', flex: 1, display: 'flex', flexDirection: 'column' }}>

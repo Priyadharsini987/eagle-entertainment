@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { publicApi } from '../services/api';
+import { publicApi, getImageUrl } from '../services/api';
 import EventCard from '../components/EventCard';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -284,7 +284,7 @@ const Testimonials = ({ testimonials }) => {
                 </p>
                 <div style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:'1.4rem' }}>
                   <img 
-                    src={t.imageUrl || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150'} 
+                    src={getImageUrl(t.imageUrl) || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150'} 
                     alt={t.clientName} 
                     style={{ width:66, height:66, borderRadius:'50%', objectFit:'cover', border:'2px solid var(--primary)', boxShadow: '0 0 15px rgba(212, 175, 55, 0.2)' }}
                     onError={e => { e.target.style.display='none'; }} 

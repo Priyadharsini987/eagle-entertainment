@@ -1,6 +1,12 @@
 import axios from 'axios';
 
-const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8080';
+export const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8080';
+
+export const getImageUrl = (url) => {
+  if (!url) return '';
+  if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) return url;
+  return `${API_BASE}${url}`;
+};
 
 const api = axios.create({
   baseURL: API_BASE,
@@ -58,6 +64,10 @@ export const adminApi = {
   addTeam: (data) => api.post('/api/admin/team', data),
   updateTeam: (id, data) => api.put(`/api/admin/team/${id}`, data),
   deleteTeam: (id) => api.delete(`/api/admin/team/${id}`),
+  // Image upload
+  uploadImage: (formData) => api.post('/api/admin/upload', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' }
+  }),
 };
 
 export default api;

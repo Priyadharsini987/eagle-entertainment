@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { publicApi } from '../services/api';
+import { publicApi, getImageUrl } from '../services/api';
 import EventCard from '../components/EventCard';
 import { motion } from 'framer-motion';
 
@@ -52,7 +52,7 @@ const EventDetail = () => {
       {/* Hero Image Section */}
       <div style={{ position:'relative', height:520, overflow:'hidden' }}>
         <motion.img 
-          src={event.imageUrl || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1600'}
+          src={getImageUrl(event.imageUrl) || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1600'}
           alt={event.title} 
           style={{ width:'100%', height:'100%', objectFit:'cover' }}
           initial={{ scale: 1.08, opacity: 0 }}

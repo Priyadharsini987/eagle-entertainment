@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { publicApi } from '../services/api';
+import { publicApi, getImageUrl } from '../services/api';
 import EventCard from '../components/EventCard';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -113,7 +113,7 @@ const Gallery = () => {
                 exit={{ opacity: 0, scale: 0.95, y: 10 }}
                 transition={{ duration: 0.5, delay: i * 0.03 }}
               >
-                <img src={img.imageUrl} alt={img.title}
+                <img src={getImageUrl(img.imageUrl)} alt={img.title}
                   style={{ width:'100%', display:'block', objectFit:'cover', transition:'var(--transition)' }}
                   onError={e => { e.target.src = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600'; }}
                 />
@@ -213,7 +213,7 @@ const Gallery = () => {
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             >
               <img 
-                src={lightbox.imageUrl} 
+                src={getImageUrl(lightbox.imageUrl)} 
                 alt={lightbox.title} 
                 style={{ 
                   width:'100%', 
@@ -228,7 +228,7 @@ const Gallery = () => {
                 <h2 className="display-font" style={{ fontSize:'2.4rem', color:'#fff', marginBottom:'0.5rem', fontWeight: 600 }}>{lightbox.title}</h2>
                 <div style={{ color:'var(--primary)', fontSize:'0.75rem', fontWeight:800, letterSpacing:'0.22em', textTransform:'uppercase', marginBottom:'2.2rem' }}>{lightbox.category}</div>
                 <a 
-                  href={lightbox.imageUrl} 
+                  href={getImageUrl(lightbox.imageUrl)} 
                   download 
                   target="_blank" 
                   rel="noreferrer" 

@@ -144,4 +144,26 @@ public class AdminController {
         teamMemberRepository.deleteById(id);
         return ResponseEntity.ok(Map.of("message", "Team member deleted successfully"));
     }
+
+    // ---- File Upload ----
+    @PostMapping("/upload")
+    public ResponseEntity<?> uploadFile(@RequestParam("file") org.springframework.web.multipart.MultipartFile file) {
+        try {
+            if (file.isEmpty()) {
+                return ResponseEntity.badRequest().body(Map.of("error", "Please select a file to upload"));
+            }
+            java.io.File uploadDir = new java.io.File("./uploads");
+            if (!uploadDir.exists()) {
+                uploadDir.mkdirs();
+            }
+            String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+            java.io.File destinationFile = new java.io.File(uploadDir.getAbsolutePath() + java.io.File.separator + fileName);
+            file.transferTo(destinationFile);
+            
+            String fileUrl = "/uploads/" + fileName;
+            return ResponseEntity.ok(Map.of("imageUrl", fileUrl));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(Map.of("error", "Failed to upload file: " + e.getMessage()));
+        }
+    }
 }
