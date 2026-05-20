@@ -5,7 +5,10 @@ export const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8080'
 export const getImageUrl = (url) => {
   if (!url) return '';
   if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) return url;
-  return `${API_BASE}${url}`;
+  
+  const base = API_BASE.endsWith('/') ? API_BASE.slice(0, -1) : API_BASE;
+  const path = url.startsWith('/') ? url : `/${url}`;
+  return `${base}${path}`;
 };
 
 const api = axios.create({
