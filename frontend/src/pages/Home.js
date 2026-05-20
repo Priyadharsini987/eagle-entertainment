@@ -40,6 +40,11 @@ const Hero = ({ stats }) => {
         <div style={{ maxWidth:750 }}>
           <div style={{ animation:'fadeInUp 0.8s ease' }}>
             <span className="section-label" style={{ color: 'var(--accent)' }}>{s.tag}</span>
+            <h1 className="display-font" style={{ fontSize:'clamp(2.5rem, 6vw, 4.5rem)', color:'#fff', lineHeight:1.1, margin:'1.5rem 0' }}>
+              {s.title} <span style={{ color:'var(--primary)' }}>{s.accent}</span>
+            </h1>
+            <p style={{ color:'var(--text-muted)', fontSize:'1.2rem', lineHeight:1.8, marginBottom:'2.5rem' }}>{s.sub}</p>
+          </div>
 
           <div style={{ display:'flex', gap:'1.5rem', flexWrap:'wrap', animation:'fadeInUp 0.8s ease 0.4s both' }}>
             <Link to="/contact" className="btn-primary">Contact Us</Link>

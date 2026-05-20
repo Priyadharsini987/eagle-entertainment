@@ -18,7 +18,13 @@ const AdminLogin = () => {
       await login(form.username, form.password);
       navigate('/admin');
     } catch (err) {
-      setError('Access Denied. Invalid administrative credentials.');
+      if (err.response?.status === 401) {
+        setError('Invalid credentials');
+      } else if (!err.response) {
+        setError('Cannot reach server — it may be starting up, try again in 30s');
+      } else {
+        setError('Login failed: ' + (err.response?.data?.error || err.message || 'Unknown error'));
+      }
     }
     setLoading(false);
   };
@@ -121,6 +127,18 @@ const AdminLogin = () => {
             }}>
               {loading ? 'Authenticating...' : 'Login to Dashboard'}
             </button>
+            {loading && (
+              <div style={{
+                color: 'var(--text-muted)',
+                fontSize: '0.8rem',
+                textAlign: 'center',
+                marginTop: '0.75rem',
+                lineHeight: '1.4',
+                animation: 'pulse 1.5s infinite'
+              }}>
+                Backend waking up, please wait... (If the server has spun down, this may take up to 60 seconds)
+              </div>
+            )}
           </form>
 
           <div style={{ marginTop: '2.5rem', padding: '1rem', borderTop: '1px solid var(--border)', textAlign: 'center' }}>
@@ -142,6 +160,10 @@ const AdminLogin = () => {
           0%, 100% { transform: translateX(0); }
           25% { transform: translateX(-5px); }
           75% { transform: translateX(5px); }
+        }
+        @keyframes pulse {
+          0%, 100% { opacity: 0.6; }
+          50% { opacity: 1; }
         }
       `}</style>
     </div>

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import { publicApi } from '../services/api';
 
 const EventContext = createContext();
 
@@ -9,7 +9,7 @@ export function EventProvider({ children }) {
 
   const fetchEvents = async () => {
     try {
-      const res = await axios.get('/api/events');
+      const res = await publicApi.getAllEvents();
       setEvents(res.data);
     } catch {
       // Use mock data if backend not available
