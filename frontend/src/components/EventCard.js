@@ -26,9 +26,10 @@ const EventCard = ({ event, compact = false }) => {
     }}>
       {/* Image Container */}
       <div style={{ position: 'relative', height: compact ? 200 : 240, overflow: 'hidden' }}>
+        <img src={event.imageUrl || 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=500'} alt={event.title} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'var(--transition)' }} />
         <div style={{
           position: 'absolute', inset: 0,
-          background: 'linear-gradient(to top, var(--bg-main) 0%, transparent 60%)',
+          background: 'linear-gradient(to top, var(--bg-main) 0%, rgba(3,3,3,0.3) 60%, transparent 100%)',
         }} />
         
         {/* Category badge */}
