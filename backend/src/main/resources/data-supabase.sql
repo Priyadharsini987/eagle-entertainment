@@ -1,6 +1,6 @@
 -- Default admin user (password: PriyaArjun1718@Eagle)
 INSERT INTO users (username, password, email, role, created_at) VALUES
-('PriyaArjun', '$2a$10$UqY1fJ8NfN9y/rNf/x5mFeU8QO/Qj8nNfG.f6T5ZpZ9/x5mFeU8QO', 'admin@eagleentertainment.com', 'ADMIN', NOW());
+('PriyaArjun', '$2a$10$nWGvy9RAO82zAQhTLYLMquI06qNUXOeSqrqDcuOEFGSDqaIZgpvcS', 'admin@eagleentertainment.com', 'ADMIN', NOW());
 
 -- Sample Events
 INSERT INTO events (title, description, category, event_date, event_time, venue, city, capacity, price, image_url, status, is_upcoming, created_at) VALUES
