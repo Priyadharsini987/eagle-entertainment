@@ -323,6 +323,7 @@ const EventsTab = () => {
                     {categories.map(c => <option key={c}>{c}</option>)}
                   </select>
                 </div>
+                <div className="form-group">
                   <label>Status</label>
                   <select value={form.status} onChange={e => setForm(f => ({...f, status:e.target.value, upcoming: e.target.value === 'UPCOMING'}))}>
                     {['UPCOMING','ONGOING','COMPLETED','CANCELLED'].map(s => <option key={s}>{s}</option>)}
