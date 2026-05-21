@@ -297,3 +297,80 @@ body::before {
     margin-top: 1rem !important;
   }
 }
+
+@media (max-width: 768px) {
+  .admin-sidebar {
+    width: 100% !important;
+    min-height: auto !important;
+    border-right: none !important;
+    border-bottom: 1px solid rgba(223,178,89,0.12) !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 100 !important;
+    background: var(--bg-surface) !important;
+  }
+  
+  .admin-sidebar > div:first-child {
+    padding: 1rem !important;
+  }
+  
+  .admin-sidebar nav {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    padding: 0 0.5rem 0.5rem 0.5rem !important;
+    gap: 0.5rem !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .admin-sidebar nav::-webkit-scrollbar {
+    height: 3px;
+  }
+  .admin-sidebar nav::-webkit-scrollbar-thumb {
+    background: rgba(223,178,89,0.5);
+    border-radius: 3px;
+  }
+  
+  .admin-sidebar nav button {
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    min-width: 80px !important;
+    width: auto !important;
+    padding: 0.5rem !important;
+    font-size: 0.65rem !important;
+    border-left: none !important;
+    border-bottom: 2px solid transparent !important;
+    text-align: center !important;
+    gap: 0.3rem !important;
+    border-radius: 8px !important;
+    margin-top: 0 !important;
+  }
+  
+  /* Override inline borderLeft to borderBottom for active items */
+  .admin-sidebar nav button[style*="border-left: 3px solid var(--primary)"] {
+    border-left: none !important;
+    border-bottom: 2px solid var(--primary) !important;
+    background: rgba(223,178,89,0.1) !important;
+  }
+  
+  .admin-sidebar > div:last-child {
+    display: none !important;
+  }
+  
+  /* Fix main padding */
+  .admin-main {
+    padding: 1rem !important;
+  }
+  
+  /* Fix Topbar wrap */
+  .admin-topbar {
+    margin-bottom: 2rem !important;
+  }
+  
+  /* Fix the warning alert button wrap */
+  .admin-topbar button {
+    width: 100% !important;
+    margin-bottom: 1rem !important;
+  }
+}
