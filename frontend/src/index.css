@@ -1,23 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
 
 :root {
   --bg-main: #fff0f5;
-  --bg-surface: #ffe4e1;
+  --bg-surface: #f7d9d9;
   --bg-card: rgba(255, 255, 255, 0.65);
-  --primary: #ff69b4; /* Hot Pink */
-  --primary-light: #ffb6c1; /* Light Pink */
-  --primary-dark: #ff1493; /* Deep Pink */
+  --primary: #cf3a82; 
+  --primary-light: #d926d0; 
+  --primary-dark: #db319a; 
   --secondary: #ffffff;
-  --accent: #ff69b4; 
-  --text-main: #4a4a4a;
-  --text-muted: #ff69b4;
-  --border: rgba(255, 105, 180, 0.2);
-  --border-hover: rgba(255, 105, 180, 0.4);
+  --accent: #cf3a82; 
+  --text-main: #5a3a4b;
+  --text-muted: #666666;
+  --border: rgba(238, 59, 142, 0.2);
+  --border-hover: rgba(238, 59, 142, 0.4);
   --glass: rgba(255, 255, 255, 0.75);
-  --glass-border: rgba(255, 105, 180, 0.2);
+  --glass-border: rgba(238, 59, 142, 0.2);
   
-  --font-main: 'Outfit', 'Plus Jakarta Sans', sans-serif;
-  --font-display: 'Playfair Display', serif;
+  --font-main: 'Inter', sans-serif;
+  --font-display: 'Dancing Script', 'Playfair Display', serif;
   
   --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-fast: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -26,8 +26,8 @@
   --radius-md: 16px;
   --radius-lg: 24px;
   --radius-xl: 100px;
-  --shadow-glow: 0 15px 35px -5px rgba(255, 105, 180, 0.18);
-  --shadow-glow-lg: 0 25px 50px -10px rgba(255, 105, 180, 0.3);
+  --shadow-glow: 0 15px 35px -5px rgba(238, 59, 142, 0.18);
+  --shadow-glow-lg: 0 25px 50px -10px rgba(238, 59, 142, 0.3);
 }
 
 *, *::before, *::after { 
