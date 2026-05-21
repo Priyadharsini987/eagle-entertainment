@@ -33,6 +33,7 @@ const Navbar = () => {
   }, [menuOpen]);
 
   const links = [
+    { label: 'Home', path: '/' },
     { label: 'Events', path: '/events' },
     { label: 'Services', path: '/services' },
     { label: 'Contact', path: '/contact' },

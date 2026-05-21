@@ -192,13 +192,13 @@ const Home = () => {
       <section className="section" style={{ paddingBottom:'6rem' }}>
         <div className="container">
           <EventsRow
-            title="Curated" accent="Experiences"
+            title="Upcoming" accent="Events"
             label="Don't Miss Out"
             events={upcomingEvents}
           />
           <div id="highlights">
             <EventsRow
-              title="Recent" accent="Highlights"
+              title="Recent" accent="Events"
               label="Completed Masterpieces"
               events={recentEvents}
             />
