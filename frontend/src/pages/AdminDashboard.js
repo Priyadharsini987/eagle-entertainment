@@ -125,6 +125,8 @@ const Sidebar = ({ active, setActive, onLogout }) => {
     { key: 'testimonials', icon: '💬', label: 'Testimonials' },
     { key: 'inquiries', icon: '📩', label: 'Inquiries' },
     { key: 'team', icon: '👥', label: 'Team Members' },
+    { key: 'view_site', icon: '🌐', label: 'View Website' },
+    { key: 'logout', icon: '🚪', label: 'Sign Out' },
   ];
 
   return (
@@ -155,39 +157,63 @@ const Sidebar = ({ active, setActive, onLogout }) => {
 
       {/* Nav */}
       <nav style={{ flex: 1, padding: '1.5rem 0' }}>
-        {items.map(item => (
-          <button key={item.key} onClick={() => setActive(item.key)} style={{
-            width: '100%', display: 'flex', alignItems: 'center', gap: '1rem',
-            padding: '1rem 1.5rem', background: active === item.key ? 'var(--glass)' : 'transparent',
-            border: 'none', borderLeft: `3px solid ${active === item.key ? 'var(--primary)' : 'transparent'}`,
-            color: active === item.key ? 'var(--primary-light)' : 'var(--text-muted)', cursor: 'pointer',
-            fontFamily: 'inherit', fontSize: '0.85rem', fontWeight: 500,
-            transition: 'var(--transition)', textAlign: 'left',
-          }}
-          onMouseEnter={e => { if (active !== item.key) { e.currentTarget.style.color = '#fff'; e.currentTarget.style.background = 'rgba(255,255,255,0.03)'; }}}
-          onMouseLeave={e => { if (active !== item.key) { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.background = 'transparent'; }}}
-          >
-            <span style={{ fontSize: '1.1rem' }}>{item.icon}</span>
-            {item.label}
-          </button>
-        ))}
+        {items.map(item => {
+          if (item.key === 'view_site') {
+            return (
+              <Link key={item.key} to="/" style={{
+                width: '100%', display: 'flex', alignItems: 'center', gap: '1rem',
+                padding: '1rem 1.5rem', background: 'transparent',
+                border: 'none', borderLeft: '3px solid transparent',
+                color: 'var(--text-muted)', textDecoration: 'none', cursor: 'pointer',
+                fontFamily: 'inherit', fontSize: '0.85rem', fontWeight: 500,
+                transition: 'var(--transition)', textAlign: 'left',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.color = '#fff'; e.currentTarget.style.background = 'rgba(255,255,255,0.03)'; }}
+              onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.background = 'transparent'; }}
+              >
+                <span style={{ fontSize: '1.1rem' }}>{item.icon}</span>
+                {item.label}
+              </Link>
+            );
+          }
+          if (item.key === 'logout') {
+            return (
+              <button key={item.key} onClick={onLogout} style={{
+                width: '100%', display: 'flex', alignItems: 'center', gap: '1rem',
+                padding: '1rem 1.5rem', background: 'transparent',
+                border: 'none', borderLeft: '3px solid transparent',
+                color: 'var(--text-muted)', cursor: 'pointer',
+                fontFamily: 'inherit', fontSize: '0.85rem', fontWeight: 500,
+                transition: 'var(--transition)', textAlign: 'left',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.color = '#f87171'; e.currentTarget.style.background = 'rgba(255,255,255,0.03)'; }}
+              onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.background = 'transparent'; }}
+              >
+                <span style={{ fontSize: '1.1rem' }}>{item.icon}</span>
+                {item.label}
+              </button>
+            );
+          }
+          return (
+            <button key={item.key} onClick={() => setActive(item.key)} style={{
+              width: '100%', display: 'flex', alignItems: 'center', gap: '1rem',
+              padding: '1rem 1.5rem', background: active === item.key ? 'var(--glass)' : 'transparent',
+              border: 'none', borderLeft: `3px solid ${active === item.key ? 'var(--primary)' : 'transparent'}`,
+              color: active === item.key ? 'var(--primary-light)' : 'var(--text-muted)', cursor: 'pointer',
+              fontFamily: 'inherit', fontSize: '0.85rem', fontWeight: 500,
+              transition: 'var(--transition)', textAlign: 'left',
+            }}
+            onMouseEnter={e => { if (active !== item.key) { e.currentTarget.style.color = '#fff'; e.currentTarget.style.background = 'rgba(255,255,255,0.03)'; }}}
+            onMouseLeave={e => { if (active !== item.key) { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.background = 'transparent'; }}}
+            >
+              <span style={{ fontSize: '1.1rem' }}>{item.icon}</span>
+              {item.label}
+            </button>
+          );
+        })}
       </nav>
 
-      {/* Bottom */}
-      <div style={{ padding: '1rem 1.5rem', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
-        <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.78rem', marginBottom: '0.75rem', transition: 'color 0.2s' }}
-          onMouseEnter={e => e.currentTarget.style.color = '#ccc'}
-          onMouseLeave={e => e.currentTarget.style.color = '#555'}
-        >🌐 View Website</Link>
-        <button onClick={onLogout} style={{
-          width: '100%', display: 'flex', alignItems: 'center', gap: '0.6rem',
-          background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer',
-          fontFamily: 'DM Sans, sans-serif', fontSize: '0.78rem', padding: 0, transition: 'color 0.2s',
-        }}
-        onMouseEnter={e => e.currentTarget.style.color = '#f87171'}
-        onMouseLeave={e => e.currentTarget.style.color = '#555'}
-        >🚪 Sign Out</button>
-      </div>
+
     </div>
   );
 };
@@ -227,23 +253,7 @@ const DashboardTab = ({ stats }) => (
       <StatCard icon="💬" label="Testimonials" value={stats?.testimonialCount ?? '—'} color="#f59e0b" />
     </div>
 
-    {/* Quick tips */}
-    <div className="glass-card" style={{ padding: '2.5rem' }}>
-      <h3 className="display-font" style={{ fontSize: '1.4rem', color: 'var(--text-main)', marginBottom: '1.5rem' }}>Rapid Commands</h3>
-      <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-        {[
-          { label: '+ Deploy New Event', action: 'events' },
-          { label: '+ Update Gallery', action: 'gallery' },
-          { label: '+ Add Testimonial', action: 'testimonials' },
-          { label: '📩 Manage Inquiries', action: 'inquiries' },
-        ].map((btn, i) => (
-          <button key={i} className="btn-outline" style={{ padding: '0.8rem 1.8rem', fontSize: '0.75rem', borderRadius: '4px', border: '1px solid var(--border)', background: 'transparent' }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--primary)'; e.currentTarget.style.color = 'var(--primary)'; }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = '#fff'; }}
-          >{btn.label}</button>
-        ))}
-      </div>
-    </div>
+
   </div>
 );
 
