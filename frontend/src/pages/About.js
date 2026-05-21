@@ -12,15 +12,6 @@ const About = () => {
     publicApi.getStats().then(res => setStats(Array.isArray(res.data) ? res.data : [])).catch(() => {});
   }, []);
 
-  const milestones = [
-    { year:'2014', event:'Inception of Eagle Entertainment in Erode, Tamil Nadu' },
-    { year:'2016', event:'Expanded our services to major cities across India' },
-    { year:'2018', event:'Completed over 100 successful company events' },
-    { year:'2020', event:'Started using new digital tools for online events' },
-    { year:'2022', event:'Won the award for the Best Event Company in the region' },
-    { year:'2024', event:'Becoming a top leader in the event planning industry' },
-  ];
-
   return (
     <div style={{ paddingTop:'6rem', minHeight:'100vh' }}>
       
