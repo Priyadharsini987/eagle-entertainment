@@ -83,7 +83,7 @@ const About = () => {
                 Founded in 2014 in Erode, Eagle Entertainment started with a singular vision: to elevate every celebration into an extraordinary masterpiece. Over the past decade, we have evolved into Tamil Nadu's premier event management agency, renowned for our innovative concepts and flawless execution.
               </p>
               <p style={{ color:'var(--text-muted)', lineHeight:1.9, marginBottom:'3.5rem', fontSize:'1.02rem' }}>
-                Whether it's a corporate gala in Chennai, a destination wedding in Madurai, or a private event in our home city of Erode, we bring professional excellence to every corner of the state. Our dedicated team works tirelessly to ensure your vision is realized with a touch of elegance and grandeur.
+                Whether it's a corporate gala in Chennai, a prestigious award ceremony in Madurai, or a grand product launch in our home city of Erode, we bring professional excellence to every corner of the state. Our dedicated team works tirelessly to ensure your vision is realized with a touch of elegance and grandeur.
               </p>
                 <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'2rem', marginBottom:'3rem' }}>
                   {stats.map((s, i) => (
@@ -216,7 +216,7 @@ const About = () => {
           
           <div style={{ maxWidth:850, margin:'0 auto', display:'grid', gap:'1.8rem' }}>
             {[
-              { q: 'What types of events do you handle?', a: 'We handle everything from luxury weddings and private parties to big corporate launches and live music concerts.' },
+              { q: 'What types of events do you handle?', a: 'We handle everything from prestigious award ceremonies and celebrity management, to big corporate launches and live music concerts.' },
               { q: 'How early should I book my event?', a: 'We recommend booking at least 3-6 months in advance for big events, but we also handle last-minute requests depending on availability.' },
               { q: 'Do you work outside of Erode?', a: 'Absolutely! While we are based in Erode, we handle high-profile events all over Tamil Nadu, including Chennai, Coimbatore, Madurai, and Trichy.' },
               { q: 'Can you help with the budget planning?', a: 'Absolutely. We work with you to plan an amazing event that fits your budget perfectly.' }

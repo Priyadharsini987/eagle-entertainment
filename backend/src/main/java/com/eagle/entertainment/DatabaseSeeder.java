@@ -67,9 +67,9 @@ public class DatabaseSeeder implements CommandLineRunner {
 
             TeamMember t3 = new TeamMember();
             t3.setName("Deepa Raman");
-            t3.setRole("Lead Wedding Designer");
+            t3.setRole("Lead Event Designer");
             t3.setImageUrl("https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500");
-            t3.setBio("Specializing in floral design and thematic aesthetics, Deepa designs bespoke dream wedding experiences.");
+            t3.setBio("Specializing in thematic aesthetics and stage design, Deepa designs bespoke corporate and award show experiences.");
             teamMemberRepository.save(t3);
         }
     }

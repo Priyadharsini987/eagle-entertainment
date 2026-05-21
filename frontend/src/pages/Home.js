@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = [
-    { img: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=1600', tag: 'Bespoke Celebrations', title: 'Designing Your', accent: 'Dream Wedding', sub: 'Crafting luxury destination weddings and thematic celebrations across Tamil Nadu with unmatched artistic precision.' },
+    { img: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=1600', tag: 'Exclusive Management', title: 'Celebrity &', accent: 'Award Shows', sub: 'Mastering the art of high-profile celebrity management and executing prestigious award ceremonies.' },
     { img: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=1600', tag: 'Elite Concert Production', title: 'Sensational Live', accent: 'Music & Concerts', sub: 'State-of-the-art concert staging, sound, and visual engineering that creates unforgettable stadium experiences.' },
     { img: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1600', tag: 'Signature Corporate Galas', title: 'Distinguished', accent: 'Company Events', sub: 'Flawless execution of brand launches, corporate galas, and VIP corporate experiences.' },
   ];

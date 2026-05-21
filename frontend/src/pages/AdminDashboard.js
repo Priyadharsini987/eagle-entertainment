@@ -254,7 +254,7 @@ const EventsTab = () => {
   const [editEvent, setEditEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const emptyForm = { title:'', description:'', category:'WEDDING', eventDate:'', eventTime:'', venue:'', city:'', capacity:'', price:'', imageUrl:'', status:'UPCOMING', upcoming: true };
+  const emptyForm = { title:'', description:'', category:'CORPORATE', eventDate:'', eventTime:'', venue:'', city:'', capacity:'', price:'', imageUrl:'', status:'UPCOMING', upcoming: true };
   const [form, setForm] = useState(emptyForm);
 
   const load = () => {
@@ -292,7 +292,7 @@ const EventsTab = () => {
     setSaving(false);
   };
 
-  const categories = ['WEDDING','CORPORATE','CONCERT','CULTURAL','LAUNCH','PRIVATE','FASHION'];
+  const categories = ['CORPORATE','AWARDS','CELEBRITY','CONCERT','LAUNCH','FASHION'];
 
   return (
     <div>
@@ -316,7 +316,7 @@ const EventsTab = () => {
             <form onSubmit={handleSubmit} style={{ display:'grid', gap:'1rem' }}>
               <div className="form-group">
                 <label>Event Title *</label>
-                <input value={form.title} onChange={e => setForm(f => ({...f, title:e.target.value}))} required placeholder="Grand Wedding Ceremony" />
+                <input value={form.title} onChange={e => setForm(f => ({...f, title:e.target.value}))} required placeholder="Grand Award Ceremony" />
               </div>
               <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'1rem' }}>
                 <div className="form-group">
@@ -436,7 +436,7 @@ const EventsTab = () => {
 const GalleryTab = () => {
   const [items, setItems] = useState([]);
   const [showForm, setShowForm] = useState(false);
-  const [form, setForm] = useState({ title:'', imageUrl:'', category:'WEDDING', eventDate:'' });
+  const [form, setForm] = useState({ title:'', imageUrl:'', category:'CORPORATE', eventDate:'' });
   const [saving, setSaving] = useState(false);
 
   const load = () => adminApi.getGallery().then(r => setItems(r.data)).catch(() => {});
@@ -445,7 +445,7 @@ const GalleryTab = () => {
   const handleSubmit = async (e) => {
     e.preventDefault(); setSaving(true);
     await adminApi.addGallery(form).catch(() => {});
-    setShowForm(false); setForm({ title:'', imageUrl:'', category:'WEDDING', eventDate:'' });
+    setShowForm(false); setForm({ title:'', imageUrl:'', category:'CORPORATE', eventDate:'' });
     load(); setSaving(false);
   };
 
@@ -471,12 +471,12 @@ const GalleryTab = () => {
           <form onSubmit={handleSubmit} style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'1rem' }}>
             <div className="form-group">
               <label>Title</label>
-              <input value={form.title} onChange={e => setForm(f=>({...f,title:e.target.value}))} placeholder="Wedding Stage Setup" required />
+              <input value={form.title} onChange={e => setForm(f=>({...f,title:e.target.value}))} placeholder="Award Stage Setup" required />
             </div>
             <div className="form-group">
               <label>Category</label>
               <select value={form.category} onChange={e => setForm(f=>({...f,category:e.target.value}))}>
-                {['WEDDING','CORPORATE','CONCERT','CULTURAL','PRIVATE','LAUNCH','FASHION'].map(c=><option key={c}>{c}</option>)}
+                {['CORPORATE','AWARDS','CELEBRITY','CONCERT','LAUNCH','FASHION'].map(c=><option key={c}>{c}</option>)}
               </select>
             </div>
             <div style={{ gridColumn:'1/-1' }}>

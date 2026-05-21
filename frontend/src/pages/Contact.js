@@ -145,7 +145,7 @@ const Contact = () => {
                   <label>Event Type</label>
                   <select name="eventType" value={form.eventType} onChange={handleChange} style={{ colorScheme: 'dark' }}>
                     <option value="">Select Category</option>
-                    {['Wedding', 'Corporate Summit', 'Concert Production', 'Cultural Festival', 'Private Event', 'Brand Launch', 'Other'].map(t => (
+                    {['Award Show', 'Corporate Summit', 'Concert Production', 'Celebrity Event', 'Private Event', 'Brand Launch', 'Other'].map(t => (
                       <option key={t} value={t} style={{ background: 'var(--bg-surface)', color: 'var(--text-main)' }}>{t}</option>
                     ))}
                   </select>

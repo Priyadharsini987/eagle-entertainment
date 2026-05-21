@@ -3,7 +3,7 @@ import { publicApi } from '../services/api';
 import EventCard from '../components/EventCard';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const categories = ['ALL', 'WEDDING', 'CORPORATE', 'CONCERT', 'CULTURAL', 'LAUNCH', 'PRIVATE', 'FASHION'];
+const categories = ['ALL', 'CORPORATE', 'AWARDS', 'CELEBRITY', 'CONCERT', 'LAUNCH', 'FASHION'];
 
 const Events = () => {
   const [events, setEvents] = useState({ upcoming: [], recent: [] });
