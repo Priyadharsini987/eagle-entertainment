@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { publicApi } from '../services/api';
+import { publicApi, getImageUrl } from '../services/api';
 import EventCard from '../components/EventCard';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -150,10 +150,14 @@ const EventsRow = ({ title, accent, events, label }) => {
 const Home = () => {
   const [upcomingEvents, setUpcomingEvents] = useState([]);
   const [recentEvents, setRecentEvents] = useState([]);
+  const [gallery, setGallery] = useState([]);
+  const [testimonials, setTestimonials] = useState([]);
 
   useEffect(() => {
-    publicApi.getUpcomingEvents().then(r => setUpcomingEvents(r.data)).catch(() => {});
-    publicApi.getRecentEvents().then(r => setRecentEvents(r.data)).catch(() => {});
+    publicApi.getUpcomingEvents().then(r => setUpcomingEvents(Array.isArray(r.data) ? r.data : [])).catch(() => {});
+    publicApi.getRecentEvents().then(r => setRecentEvents(Array.isArray(r.data) ? r.data : [])).catch(() => {});
+    publicApi.getGallery().then(r => setGallery(Array.isArray(r.data) ? r.data.slice(0, 6) : [])).catch(() => {});
+    publicApi.getTestimonials().then(r => setTestimonials(Array.isArray(r.data) ? r.data.slice(0, 3) : [])).catch(() => {});
   }, []);
 
   return (
@@ -209,6 +213,67 @@ const Home = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* Gallery Section Preview */}
+      {gallery.length > 0 && (
+        <section className="section" style={{ background:'var(--bg-card)', borderTop:'1px solid var(--border)', borderBottom:'1px solid var(--border)' }}>
+          <div className="container">
+            <div style={{ textAlign:'center', marginBottom:'4rem' }}>
+              <span className="section-label">A Glimpse of Magic</span>
+              <h2 className="section-title">Explore Our <span>Gallery</span></h2>
+            </div>
+            <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(280px, 1fr))', gap:'1.5rem', marginBottom:'3.5rem' }}>
+              {gallery.map(g => (
+                <div key={g.id} className="glass-card" style={{ height: 260, overflow:'hidden', position:'relative', borderRadius:'var(--radius-md)' }}>
+                  <img src={getImageUrl(g.imageUrl)} alt={g.title} style={{ width:'100%', height:'100%', objectFit:'cover', transition:'transform 0.5s ease' }} />
+                  <div style={{ position:'absolute', inset:0, background:'linear-gradient(to top, rgba(0,0,0,0.8), transparent)', display:'flex', alignItems:'flex-end', padding:'1.5rem' }}>
+                    <div>
+                      <h4 style={{ color:'#fff', margin:0, fontFamily:'var(--font-display)' }}>{g.title}</h4>
+                      <p style={{ color:'var(--primary)', fontSize:'0.75rem', textTransform:'uppercase', letterSpacing:'0.1em', margin:0, marginTop:'4px' }}>{g.category}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div style={{ textAlign:'center' }}>
+              <Link to="/gallery" className="btn-outline">View Full Gallery</Link>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Testimonials Section Preview */}
+      {testimonials.length > 0 && (
+        <section className="section">
+          <div className="container">
+            <div style={{ textAlign:'center', marginBottom:'4rem' }}>
+              <span className="section-label">Client Voices</span>
+              <h2 className="section-title">What They <span>Say</span></h2>
+            </div>
+            <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(300px, 1fr))', gap:'2rem', marginBottom:'3.5rem' }}>
+              {testimonials.map((t, i) => (
+                <div key={t.id} className="glass-card" style={{ padding:'2.5rem', position:'relative' }}>
+                  <div style={{ fontSize:'4rem', color:'var(--primary)', opacity:0.15, position:'absolute', top:20, right:30, fontFamily:'serif', lineHeight:1 }}>"</div>
+                  <p style={{ color:'var(--text-muted)', fontSize:'0.95rem', lineHeight:1.7, fontStyle:'italic', marginBottom:'2rem', position:'relative', zIndex:1 }}>"{t.message}"</p>
+                  <div style={{ display:'flex', alignItems:'center', gap:'1rem' }}>
+                    {t.imageUrl ? (
+                      <img src={getImageUrl(t.imageUrl)} alt={t.clientName} style={{ width:45, height:45, borderRadius:'50%', objectFit:'cover' }} />
+                    ) : (
+                      <div style={{ width:45, height:45, borderRadius:'50%', background:'rgba(223,178,89, 0.1)', border:'1px solid rgba(223,178,89, 0.3)', display:'flex', alignItems:'center', justifyContent:'center', color:'var(--primary)', fontWeight:600 }}>
+                        {t.clientName.charAt(0)}
+                      </div>
+                    )}
+                    <div>
+                      <h4 style={{ color:'var(--text-main)', margin:0, fontSize:'0.95rem' }}>{t.clientName}</h4>
+                      <p style={{ color:'var(--primary)', margin:0, fontSize:'0.75rem', textTransform:'uppercase', letterSpacing:'0.05em' }}>{t.clientRole}, {t.company}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   );
 };
