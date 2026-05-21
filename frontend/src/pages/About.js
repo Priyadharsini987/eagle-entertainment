@@ -8,8 +8,8 @@ const About = () => {
   const [stats, setStats] = useState([]);
 
   useEffect(() => {
-    publicApi.getTeam().then(res => setTeam(res.data)).catch(() => {});
-    publicApi.getStats().then(res => setStats(res.data)).catch(() => {});
+    publicApi.getTeam().then(res => setTeam(Array.isArray(res.data) ? res.data : [])).catch(() => {});
+    publicApi.getStats().then(res => setStats(Array.isArray(res.data) ? res.data : [])).catch(() => {});
   }, []);
 
   const milestones = [

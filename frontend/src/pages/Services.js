@@ -8,7 +8,7 @@ const Services = () => {
 
   useEffect(() => {
     publicApi.getServices().then(res => {
-      setServices(res.data);
+      setServices(Array.isArray(res.data) ? res.data : []);
       setLoading(false);
     }).catch(() => setLoading(false));
   }, []);
