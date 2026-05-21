@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { publicApi } from '../services/api';
 
 const Services = () => {
-  const services = [
-    { title: 'Wedding Planning', icon: '💍', desc: 'Complete end-to-end wedding management, decor, and coordination.' },
-    { title: 'Corporate Events', icon: '🏢', desc: 'Professional conferences, seminars, and corporate offsites.' },
-    { title: 'Concerts & Shows', icon: '🎵', desc: 'Large scale musical concerts and live entertainment shows.' },
-    { title: 'Private Parties', icon: '🎉', desc: 'Birthdays, anniversaries, and exclusive private gatherings.' },
-  ];
+  const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    publicApi.getServices().then(res => {
+      setServices(res.data);
+      setLoading(false);
+    }).catch(() => setLoading(false));
+  }, []);
 
   return (
     <div style={{ paddingTop:'6rem', minHeight:'100vh', background:'var(--bg-main)' }}>
@@ -21,15 +25,41 @@ const Services = () => {
       </div>
 
       <div className="container" style={{ padding:'4rem 2rem' }}>
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(280px, 1fr))', gap:'2rem' }}>
-          {services.map((s, i) => (
-            <motion.div key={i} initial={{opacity:0, scale:0.9}} animate={{opacity:1, scale:1}} transition={{delay: i*0.1}} className="glass-card" style={{ padding:'2rem', textAlign:'center' }}>
-              <div style={{ fontSize:'3rem', marginBottom:'1rem' }}>{s.icon}</div>
-              <h3 style={{ color: 'var(--text-main)', marginBottom:'1rem', fontFamily:'var(--font-display)' }}>{s.title}</h3>
-              <p style={{ color:'var(--text-muted)', fontSize:'0.9rem' }}>{s.desc}</p>
-            </motion.div>
-          ))}
-        </div>
+        {loading ? (
+          <div style={{ textAlign: 'center', color: 'var(--text-muted)' }}>Loading services...</div>
+        ) : services.length === 0 ? (
+          <div style={{ textAlign: 'center', color: 'var(--text-muted)' }}>No service packages available yet.</div>
+        ) : (
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(300px, 1fr))', gap:'2rem' }}>
+            {services.map((s, i) => (
+              <motion.div 
+                key={s.id} 
+                initial={{opacity:0, scale:0.95}} 
+                animate={{opacity:1, scale:1}} 
+                transition={{delay: i*0.1}} 
+                className="glass-card" 
+                style={{ 
+                  padding:'3rem 2rem', 
+                  textAlign:'center',
+                  borderTop: `3px solid ${s.accent}`
+                }}
+              >
+                <h3 style={{ color: 'var(--text-main)', marginBottom:'0.5rem', fontFamily:'var(--font-display)', fontSize: '1.8rem' }}>{s.name}</h3>
+                <div style={{ color: s.accent, fontWeight: 700, marginBottom: '2rem', fontSize: '1.1rem' }}>{s.price}</div>
+                
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
+                  {s.features.split('|').map((feature, idx) => (
+                    <div key={idx} style={{ color: 'var(--text-muted)', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <span style={{ color: s.accent }}>✔</span> {feature}
+                    </div>
+                  ))}
+                </div>
+
+                <a href="/contact" className="btn-outline" style={{ marginTop: '2.5rem', width: '100%' }}>Inquire Now</a>
+              </motion.div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

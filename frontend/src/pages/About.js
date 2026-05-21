@@ -3,27 +3,13 @@ import { Link } from 'react-router-dom';
 import { publicApi, getImageUrl } from '../services/api';
 import { motion } from 'framer-motion';
 
-const DEFAULT_TEAM = [
-  { name:'Priya Dharshini', role:'Founder & Managing Director', imageUrl:'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500', bio:'With over a decade of experience, Priya drives the creative vision and execution of premium luxury events.' },
-  { name:'Arjun Prasad', role:'Co-Founder & Chief Operations Officer', imageUrl:'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500', bio:'Arjun manages logistics, vendor relations, and production operations, ensuring flawless execution on-site.' },
-  { name:'Deepa Raman', role:'Lead Wedding Designer', imageUrl:'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500', bio:'Specializing in floral design and thematic aesthetics, Deepa designs bespoke dream wedding experiences.' }
-];
-
 const About = () => {
   const [team, setTeam] = useState([]);
+  const [stats, setStats] = useState([]);
 
   useEffect(() => {
-    publicApi.getTeam()
-      .then(res => {
-        if (res.data && res.data.length > 0) {
-          setTeam(res.data);
-        } else {
-          setTeam(DEFAULT_TEAM);
-        }
-      })
-      .catch(() => {
-        setTeam(DEFAULT_TEAM);
-      });
+    publicApi.getTeam().then(res => setTeam(res.data)).catch(() => {});
+    publicApi.getStats().then(res => setStats(res.data)).catch(() => {});
   }, []);
 
   const milestones = [
@@ -99,19 +85,14 @@ const About = () => {
               <p style={{ color:'var(--text-muted)', lineHeight:1.9, marginBottom:'3.5rem', fontSize:'1.02rem' }}>
                 Whether it's a corporate gala in Chennai, a destination wedding in Madurai, or a private event in our home city of Erode, we bring professional excellence to every corner of the state. Our dedicated team works tirelessly to ensure your vision is realized with a touch of elegance and grandeur.
               </p>
-              <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'2rem', marginBottom:'3rem' }}>
-                {[
-                  { num:'500+', label:'Events Completed' },
-                  { num:'10+', label:'Years of Experience' },
-                  { num:'50+', label:'Team Members' },
-                  { num:'98%', label:'Satisfied Clients' },
-                ].map((s, i) => (
-                  <div key={i} style={{ padding:'1.8rem', background:'rgba(223,178,89, 0.03)', border:'1px solid rgba(223,178,89, 0.15)', borderRadius:'var(--radius-md)', textAlign:'center', boxShadow: '0 10px 20px rgba(0,0,0,0.4)' }}>
-                    <div style={{ fontSize:'2.6rem', fontWeight:800, color:'var(--primary)', lineHeight:1, marginBottom:'6px', fontFamily: 'var(--font-display)' }}>{s.num}</div>
-                    <div style={{ fontSize:'0.75rem', color:'var(--text-muted)', letterSpacing:'0.18em', textTransform:'uppercase', fontWeight: 700 }}>{s.label}</div>
-                  </div>
-                ))}
-              </div>
+                <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'2rem', marginBottom:'3rem' }}>
+                  {stats.map((s, i) => (
+                    <div key={i} style={{ padding:'1.8rem', background:'rgba(223,178,89, 0.03)', border:'1px solid rgba(223,178,89, 0.15)', borderRadius:'var(--radius-md)', textAlign:'center', boxShadow: '0 10px 20px rgba(0,0,0,0.4)' }}>
+                      <div style={{ fontSize:'2.6rem', fontWeight:800, color:'var(--primary)', lineHeight:1, marginBottom:'6px', fontFamily: 'var(--font-display)' }}>{s.num}</div>
+                      <div style={{ fontSize:'0.75rem', color:'var(--text-muted)', letterSpacing:'0.18em', textTransform:'uppercase', fontWeight: 700 }}>{s.label}</div>
+                    </div>
+                  ))}
+                </div>
               <Link to="/contact" className="btn-primary">Initiate Collaboration</Link>
             </motion.div>
           </div>

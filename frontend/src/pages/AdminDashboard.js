@@ -119,6 +119,8 @@ const Sidebar = ({ active, setActive, onLogout }) => {
   const items = [
     { key: 'dashboard', icon: '📊', label: 'Dashboard' },
     { key: 'events', icon: '🎭', label: 'Events' },
+    { key: 'services', icon: '🛠️', label: 'Services' },
+    { key: 'stats', icon: '📈', label: 'Statistics' },
     { key: 'gallery', icon: '🖼️', label: 'Gallery' },
     { key: 'testimonials', icon: '💬', label: 'Testimonials' },
     { key: 'inquiries', icon: '📩', label: 'Inquiries' },
@@ -828,6 +830,133 @@ const TeamTab = () => {
   );
 };
 
+// ---- Services Tab ----
+const ServicesTab = () => {
+  const [services, setServices] = useState([]);
+  const [showForm, setShowForm] = useState(false);
+  const [editService, setEditService] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  
+  const emptyForm = { name: '', price: '', accent: 'var(--primary)', features: '' };
+  const [form, setForm] = useState(emptyForm);
+
+  useEffect(() => { loadServices(); }, []);
+  const loadServices = () => { adminApi.getServices().then(r => { setServices(r.data); setLoading(false); }).catch(() => setLoading(false)); };
+
+  const handleSave = async (e) => {
+    e.preventDefault();
+    setSaving(true);
+    try {
+      if (editService) await adminApi.updateService(editService.id, form);
+      else await adminApi.createService(form);
+      setShowForm(false); setEditService(null); setForm(emptyForm); loadServices();
+    } catch(err) { alert('Error: ' + err.message); }
+    setSaving(false);
+  };
+
+  const handleEdit = (s) => { setEditService(s); setForm(s); setShowForm(true); };
+  const handleDelete = async (id) => { if (window.confirm('Delete service?')) { await adminApi.deleteService(id); loadServices(); } };
+
+  return (
+    <div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+        <div><h2 className="display-font" style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>Service Packages</h2><p style={{ color: 'var(--text-muted)' }}>Manage pricing and features.</p></div>
+        <button onClick={() => { setEditService(null); setForm(emptyForm); setShowForm(!showForm); }} className="btn-primary">{showForm ? 'Cancel' : '+ Add Service'}</button>
+      </div>
+
+      {showForm && (
+        <form onSubmit={handleSave} className="glass-card" style={{ padding: '2.5rem', marginBottom: '2.5rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
+            <div className="form-group"><label>Package Name</label><input required value={form.name} onChange={e => setForm({...form, name: e.target.value})} /></div>
+            <div className="form-group"><label>Price String (e.g. Starting from ₹50k)</label><input required value={form.price} onChange={e => setForm({...form, price: e.target.value})} /></div>
+            <div className="form-group"><label>Accent Color</label><select value={form.accent} onChange={e => setForm({...form, accent: e.target.value})}><option value="var(--text-muted)">Gray (Essential)</option><option value="var(--primary)">Gold (Premium)</option><option value="var(--primary-light)">Light Gold (Elite)</option></select></div>
+            <div className="form-group"><label>Features (Separate by | )</label><input required value={form.features} onChange={e => setForm({...form, features: e.target.value})} /></div>
+          </div>
+          <button type="submit" className="btn-primary" disabled={saving}>{saving ? 'Saving...' : 'Save Service'}</button>
+        </form>
+      )}
+
+      {loading ? (<div>Loading...</div>) : (
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+          {services.map(s => (
+            <div key={s.id} className="glass-card" style={{ padding: '2rem' }}>
+              <h3>{s.name}</h3><p style={{ color: s.accent }}>{s.price}</p>
+              <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', margin: '1rem 0' }}>{s.features.split('|').join(', ')}</div>
+              <div style={{ display: 'flex', gap: '1rem' }}>
+                <button onClick={() => handleEdit(s)} className="btn-outline" style={{ flex: 1, padding: '0.5rem' }}>Edit</button>
+                <button onClick={() => handleDelete(s.id)} className="btn-outline" style={{ flex: 1, padding: '0.5rem', color: '#f87171' }}>Delete</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+// ---- Stats Tab ----
+const StatsTab = () => {
+  const [stats, setStats] = useState([]);
+  const [showForm, setShowForm] = useState(false);
+  const [editStat, setEditStat] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  
+  const emptyForm = { num: '', label: '' };
+  const [form, setForm] = useState(emptyForm);
+
+  useEffect(() => { loadStats(); }, []);
+  const loadStats = () => { adminApi.getStats().then(r => { setStats(r.data); setLoading(false); }).catch(() => setLoading(false)); };
+
+  const handleSave = async (e) => {
+    e.preventDefault();
+    setSaving(true);
+    try {
+      if (editStat) await adminApi.updateStat(editStat.id, form);
+      else await adminApi.createStat(form);
+      setShowForm(false); setEditStat(null); setForm(emptyForm); loadStats();
+    } catch(err) { alert('Error: ' + err.message); }
+    setSaving(false);
+  };
+
+  const handleEdit = (s) => { setEditStat(s); setForm(s); setShowForm(true); };
+  const handleDelete = async (id) => { if (window.confirm('Delete stat?')) { await adminApi.deleteStat(id); loadStats(); } };
+
+  return (
+    <div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+        <div><h2 className="display-font" style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>Company Statistics</h2><p style={{ color: 'var(--text-muted)' }}>Manage About page metrics.</p></div>
+        <button onClick={() => { setEditStat(null); setForm(emptyForm); setShowForm(!showForm); }} className="btn-primary">{showForm ? 'Cancel' : '+ Add Stat'}</button>
+      </div>
+
+      {showForm && (
+        <form onSubmit={handleSave} className="glass-card" style={{ padding: '2.5rem', marginBottom: '2.5rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
+            <div className="form-group"><label>Number/Value (e.g. 500+)</label><input required value={form.num} onChange={e => setForm({...form, num: e.target.value})} /></div>
+            <div className="form-group"><label>Label (e.g. Events Completed)</label><input required value={form.label} onChange={e => setForm({...form, label: e.target.value})} /></div>
+          </div>
+          <button type="submit" className="btn-primary" disabled={saving}>{saving ? 'Saving...' : 'Save Stat'}</button>
+        </form>
+      )}
+
+      {loading ? (<div>Loading...</div>) : (
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
+          {stats.map(s => (
+            <div key={s.id} className="glass-card" style={{ padding: '2rem', textAlign: 'center' }}>
+              <h3 style={{ color: 'var(--primary)', fontSize: '2rem' }}>{s.num}</h3><p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', textTransform: 'uppercase' }}>{s.label}</p>
+              <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+                <button onClick={() => handleEdit(s)} className="btn-outline" style={{ flex: 1, padding: '0.3rem' }}>Edit</button>
+                <button onClick={() => handleDelete(s.id)} className="btn-outline" style={{ flex: 1, padding: '0.3rem', color: '#f87171' }}>Del</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
 // ---- Main Admin Dashboard ----
 const AdminDashboard = () => {
   const [active, setActive] = useState('dashboard');
@@ -843,6 +972,8 @@ const AdminDashboard = () => {
   const tabs = {
     dashboard: <DashboardTab stats={stats} />,
     events: <EventsTab />,
+    services: <ServicesTab />,
+    stats: <StatsTab />,
     gallery: <GalleryTab />,
     testimonials: <TestimonialsTab />,
     inquiries: <InquiriesTab />,

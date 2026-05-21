@@ -18,6 +18,9 @@ const Navbar = () => {
 
   useEffect(() => {
     setMenuOpen(false);
+  }, [location]);
+
+  useEffect(() => {
     // Disable scrolling when mobile menu is open
     if (menuOpen) {
       document.body.style.overflow = 'hidden';
@@ -27,7 +30,7 @@ const Navbar = () => {
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [location, menuOpen]);
+  }, [menuOpen]);
 
   const links = [
     { label: 'Events', path: '/events' },

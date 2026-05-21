@@ -5,11 +5,15 @@ import com.eagle.entertainment.model.Gallery;
 import com.eagle.entertainment.model.Inquiry;
 import com.eagle.entertainment.model.Testimonial;
 import com.eagle.entertainment.model.TeamMember;
+import com.eagle.entertainment.model.CompanyService;
+import com.eagle.entertainment.model.CompanyStat;
 import com.eagle.entertainment.repository.EventRepository;
 import com.eagle.entertainment.repository.GalleryRepository;
 import com.eagle.entertainment.repository.InquiryRepository;
 import com.eagle.entertainment.repository.TestimonialRepository;
 import com.eagle.entertainment.repository.TeamMemberRepository;
+import com.eagle.entertainment.repository.CompanyServiceRepository;
+import com.eagle.entertainment.repository.CompanyStatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +30,8 @@ public class PublicController {
     @Autowired private TestimonialRepository testimonialRepository;
     @Autowired private InquiryRepository inquiryRepository;
     @Autowired private TeamMemberRepository teamMemberRepository;
+    @Autowired private CompanyServiceRepository companyServiceRepository;
+    @Autowired private CompanyStatRepository companyStatRepository;
 
     // ---- Team Members ----
     @GetMapping("/team")
@@ -34,6 +40,16 @@ public class PublicController {
     }
 
     // ---- Events ----
+    @GetMapping("/services")
+    public List<CompanyService> getServices() {
+        return companyServiceRepository.findAll();
+    }
+
+    @GetMapping("/stats")
+    public List<CompanyStat> getStats() {
+        return companyStatRepository.findAll();
+    }
+
     @GetMapping("/events/upcoming")
     public List<Event> getUpcomingEvents() {
         return eventRepository.findByIsUpcomingTrueOrderByEventDateAsc();

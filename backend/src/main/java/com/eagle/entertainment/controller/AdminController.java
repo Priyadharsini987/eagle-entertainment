@@ -20,6 +20,8 @@ public class AdminController {
     @Autowired private TestimonialRepository testimonialRepository;
     @Autowired private InquiryRepository inquiryRepository;
     @Autowired private TeamMemberRepository teamMemberRepository;
+    @Autowired private CompanyServiceRepository companyServiceRepository;
+    @Autowired private CompanyStatRepository companyStatRepository;
 
     // ---- Dashboard Stats ----
     @GetMapping("/dashboard")
@@ -167,6 +169,56 @@ public class AdminController {
         }
     }
 
+    // ---- Services CRUD ----
+    @GetMapping("/services")
+    public List<CompanyService> getAllServices() {
+        return companyServiceRepository.findAll();
+    }
+
+    @PostMapping("/services")
+    public ResponseEntity<CompanyService> createService(@RequestBody CompanyService service) {
+        return ResponseEntity.ok(companyServiceRepository.save(service));
+    }
+
+    @PutMapping("/services/{id}")
+    public ResponseEntity<CompanyService> updateService(@PathVariable Long id, @RequestBody CompanyService service) {
+        return companyServiceRepository.findById(id).map(existing -> {
+            service.setId(id);
+            return ResponseEntity.ok(companyServiceRepository.save(service));
+        }).orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/services/{id}")
+    public ResponseEntity<?> deleteService(@PathVariable Long id) {
+        companyServiceRepository.deleteById(id);
+        return ResponseEntity.ok(Map.of("message", "Service deleted"));
+    }
+
+    // ---- Stats CRUD ----
+    @GetMapping("/stats")
+    public List<CompanyStat> getAllStats() {
+        return companyStatRepository.findAll();
+    }
+
+    @PostMapping("/stats")
+    public ResponseEntity<CompanyStat> createStat(@RequestBody CompanyStat stat) {
+        return ResponseEntity.ok(companyStatRepository.save(stat));
+    }
+
+    @PutMapping("/stats/{id}")
+    public ResponseEntity<CompanyStat> updateStat(@PathVariable Long id, @RequestBody CompanyStat stat) {
+        return companyStatRepository.findById(id).map(existing -> {
+            stat.setId(id);
+            return ResponseEntity.ok(companyStatRepository.save(stat));
+        }).orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/stats/{id}")
+    public ResponseEntity<?> deleteStat(@PathVariable Long id) {
+        companyStatRepository.deleteById(id);
+        return ResponseEntity.ok(Map.of("message", "Stat deleted"));
+    }
+
     // ---- Clear Seed Data ----
     @PostMapping("/clear-seeds")
     public ResponseEntity<?> clearSeeds() {
@@ -175,6 +227,8 @@ public class AdminController {
             galleryRepository.deleteAll();
             testimonialRepository.deleteAll();
             teamMemberRepository.deleteAll();
+            companyServiceRepository.deleteAll();
+            companyStatRepository.deleteAll();
             return ResponseEntity.ok(Map.of("message", "All mock seed data cleared successfully."));
         } catch (Exception e) {
             return ResponseEntity.status(500).body(Map.of("error", "Failed to clear mock data: " + e.getMessage()));

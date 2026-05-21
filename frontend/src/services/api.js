@@ -34,6 +34,7 @@ export const publicApi = {
   getStats: () => api.get('/api/public/stats'),
   submitInquiry: (data) => api.post('/api/public/inquiry', data),
   getTeam: () => api.get('/api/public/team'),
+  getServices: () => api.get('/api/public/services')
 };
 
 // Auth APIs
@@ -50,6 +51,16 @@ export const adminApi = {
   createEvent: (data) => api.post('/api/admin/events', data),
   updateEvent: (id, data) => api.put(`/api/admin/events/${id}`, data),
   deleteEvent: (id) => api.delete(`/api/admin/events/${id}`),
+  // Services
+  getServices: () => api.get('/api/admin/services'),
+  createService: (data) => api.post('/api/admin/services', data),
+  updateService: (id, data) => api.put(`/api/admin/services/${id}`, data),
+  deleteService: (id) => api.delete(`/api/admin/services/${id}`),
+  // Stats
+  getStats: () => api.get('/api/admin/stats'),
+  createStat: (data) => api.post('/api/admin/stats', data),
+  updateStat: (id, data) => api.put(`/api/admin/stats/${id}`, data),
+  deleteStat: (id) => api.delete(`/api/admin/stats/${id}`),
   // Gallery
   getGallery: () => api.get('/api/admin/gallery'),
   addGallery: (data) => api.post('/api/admin/gallery', data),
