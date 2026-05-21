@@ -77,6 +77,7 @@ const Navbar = () => {
           
           {/* Logo */}
           <Link to="/" style={{ textDecoration:'none', display:'flex', alignItems:'center', gap:'0.75rem' }}>
+            <img src="/logo.png" alt="Eagle Logo" style={{ width: 45, height: 45, objectFit: 'contain' }} />
             <div>
               <div className="display-font" style={{ fontSize:'1.4rem', fontWeight:800, color: 'var(--text-main)', letterSpacing:'-0.02em', lineHeight:1 }}>Eagle</div>
               <div style={{ fontSize:'0.65rem', letterSpacing:'0.15em', color:'var(--primary)', textTransform:'uppercase', fontWeight:600, marginTop: '4px' }}>Entertainment</div>
