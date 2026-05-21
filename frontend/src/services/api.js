@@ -68,7 +68,9 @@ export const adminApi = {
   updateTeam: (id, data) => api.put(`/api/admin/team/${id}`, data),
   deleteTeam: (id) => api.delete(`/api/admin/team/${id}`),
   // Image upload
-  uploadImage: (formData) => api.post('/api/admin/upload', formData),
+  uploadImage: (formData) => api.post('/api/admin/upload', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' }
+  }),
   // Clear seeds
   clearSeeds: () => api.post('/api/admin/clear-seeds'),
 };
