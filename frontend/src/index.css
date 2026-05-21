@@ -264,3 +264,36 @@ body::before {
     padding-bottom: 80px; /* Space for the bottom bar */
   }
 }
+
+/* Admin Dashboard Mobile Fixes */
+@media (max-width: 768px) {
+  .admin-dashboard-container {
+    flex-direction: column !important;
+  }
+  .admin-sidebar {
+    width: 100% !important;
+    min-height: auto !important;
+    border-right: none !important;
+    border-bottom: 1px solid rgba(223,178,89,0.12) !important;
+  }
+  .admin-main {
+    padding: 1.5rem !important;
+  }
+  .admin-topbar {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 1.5rem !important;
+  }
+  
+  /* Fix all inline grid layouts in admin area */
+  .admin-main div[style*="grid-template-columns"], 
+  .admin-main form[style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* Reset form buttons inside admin dashboard */
+  .admin-main button {
+    width: 100% !important;
+    margin-top: 1rem !important;
+  }
+}

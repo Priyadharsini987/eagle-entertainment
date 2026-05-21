@@ -128,7 +128,7 @@ const Sidebar = ({ active, setActive, onLogout }) => {
   ];
 
   return (
-    <div style={{
+    <div className="admin-sidebar" style={{
       width: 240, background: 'var(--bg-surface)', borderRight: '1px solid rgba(223,178,89,0.12)',
       display: 'flex', flexDirection: 'column', minHeight: '100vh', flexShrink: 0,
     }}>
@@ -983,12 +983,12 @@ const AdminDashboard = () => {
   if (!isAdmin) return null;
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--bg-main)' }}>
+    <div className="admin-dashboard-container" style={{ display: 'flex', minHeight: '100vh', background: 'var(--bg-main)', color: 'var(--text-main)' }}>
       <Sidebar active={active} setActive={setActive} onLogout={() => { logout(); navigate('/'); }} />
 
-      <main style={{ flex: 1, padding: '3rem', overflowY: 'auto' }}>
+      <main className="admin-main" style={{ flex: 1, padding: '3rem', overflowY: 'auto' }}>
         {/* Top bar */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4rem', paddingBottom: '1.5rem', borderBottom: '1px solid var(--border)' }}>
+        <div className="admin-topbar" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4rem', paddingBottom: '1.5rem', borderBottom: '1px solid var(--border)' }}>
           <div style={{ display:'flex', alignItems:'center', gap:'2rem' }}>
             <div style={{ display:'flex', alignItems:'center', gap:'0.75rem' }}>
               <div style={{ width:8, height:8, borderRadius:'50%', background:'#10b981', boxShadow:'0 0 10px #10b981' }} />
