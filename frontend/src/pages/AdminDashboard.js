@@ -41,7 +41,7 @@ const ImageUploadField = ({ label, value, onChange }) => {
             height: '180px', 
             borderRadius: '6px', 
             overflow: 'hidden', 
-            border: '1px solid rgba(255,105,180,0.3)',
+            border: '1px solid rgba(223,178,89,0.3)',
             boxShadow: 'var(--shadow-glow)'
           }}>
             <img src={getImageUrl(value)} alt="Uploaded item" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -75,7 +75,7 @@ const ImageUploadField = ({ label, value, onChange }) => {
             width: '100%',
             height: '140px',
             borderRadius: '6px',
-            border: '1px dashed rgba(255,105,180,0.3)',
+            border: '1px dashed rgba(223,178,89,0.3)',
             background: 'rgba(255,255,255,0.01)',
             display: 'flex',
             flexDirection: 'column',
@@ -84,8 +84,8 @@ const ImageUploadField = ({ label, value, onChange }) => {
             cursor: 'pointer',
             transition: 'all 0.3s ease'
           }}
-          onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--primary)'; e.currentTarget.style.background = 'rgba(255,105,180,0.02)'; }}
-          onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,105,180,0.3)'; e.currentTarget.style.background = 'rgba(255,255,255,0.01)'; }}
+          onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--primary)'; e.currentTarget.style.background = 'rgba(223,178,89,0.02)'; }}
+          onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(223,178,89,0.3)'; e.currentTarget.style.background = 'rgba(255,255,255,0.01)'; }}
           >
             <input 
               type="file" 
@@ -96,7 +96,7 @@ const ImageUploadField = ({ label, value, onChange }) => {
             />
             {uploading ? (
               <div style={{ textAlign: 'center' }}>
-                <div style={{ width: 28, height: 28, border: '2px solid rgba(255,105,180,0.1)', borderTopColor: 'var(--primary)', borderRadius: '50%', margin: '0 auto 0.75rem', animation: 'spin 1s infinite linear' }} />
+                <div style={{ width: 28, height: 28, border: '2px solid rgba(223,178,89,0.1)', borderTopColor: 'var(--primary)', borderRadius: '50%', margin: '0 auto 0.75rem', animation: 'spin 1s infinite linear' }} />
                 <span style={{ fontSize: '0.8rem', color: 'var(--primary)', fontWeight: 600 }}>Uploading image...</span>
               </div>
             ) : (
@@ -127,11 +127,11 @@ const Sidebar = ({ active, setActive, onLogout }) => {
 
   return (
     <div style={{
-      width: 240, background: 'var(--bg-surface)', borderRight: '1px solid rgba(255,105,180,0.12)',
+      width: 240, background: 'var(--bg-surface)', borderRight: '1px solid rgba(223,178,89,0.12)',
       display: 'flex', flexDirection: 'column', minHeight: '100vh', flexShrink: 0,
     }}>
       {/* Brand */}
-      <div style={{ padding: '2.5rem 1.5rem', borderBottom: '1px solid var(--border)', background: 'rgba(255,105,180,0.02)' }}>
+      <div style={{ padding: '2.5rem 1.5rem', borderBottom: '1px solid var(--border)', background: 'rgba(223,178,89,0.02)' }}>
         <Link to="/" style={{ textDecoration: 'none', display: 'block' }}>
           <div style={{ display:'flex', alignItems:'center', gap:'0.75rem' }}>
             <div style={{ 
@@ -197,7 +197,7 @@ const StatCard = ({ icon, label, value, color = 'var(--primary)', sub }) => (
     border: '1px solid var(--border)',
     background: 'rgba(255,255,255,0.01)',
   }}
-  onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--primary)'; e.currentTarget.style.background = 'rgba(255,105,180,0.03)'; }}
+  onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--primary)'; e.currentTarget.style.background = 'rgba(223,178,89,0.03)'; }}
   onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.background = 'rgba(255,255,255,0.01)'; }}
   >
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
@@ -306,7 +306,7 @@ const EventsTab = () => {
       {showForm && (
         <div style={{ position:'fixed', inset:0, zIndex:9999, background:'var(--bg-card)', display:'flex', alignItems:'center', justifyContent:'center', padding:'1.5rem' }}
           onClick={e => { if (e.target === e.currentTarget) setShowForm(false); }}>
-          <div style={{ background:'var(--bg-surface)', border:'1px solid rgba(255,105,180,0.2)', borderRadius:'8px', padding:'2rem', width:'100%', maxWidth:640, maxHeight:'90vh', overflowY:'auto' }}>
+          <div style={{ background:'var(--bg-surface)', border:'1px solid rgba(223,178,89,0.2)', borderRadius:'8px', padding:'2rem', width:'100%', maxWidth:640, maxHeight:'90vh', overflowY:'auto' }}>
             <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'1.5rem' }}>
               <h3 style={{ fontFamily:'Cormorant Garamond,serif', fontSize:'1.5rem', color: 'var(--text-main)' }}>{editEvent ? 'Edit Event' : 'Add New Event'}</h3>
               <button onClick={() => setShowForm(false)} style={{ background:'none', border:'none', color: 'var(--text-muted)', fontSize:'1.4rem', cursor:'pointer' }}>✕</button>
@@ -464,7 +464,7 @@ const GalleryTab = () => {
       </div>
 
       {showForm && (
-        <div style={{ background:'rgba(255,255,255,0.02)', border:'1px solid rgba(255,105,180,0.2)', borderRadius:'6px', padding:'1.5rem', marginBottom:'1.5rem' }}>
+        <div style={{ background:'rgba(255,255,255,0.02)', border:'1px solid rgba(223,178,89,0.2)', borderRadius:'6px', padding:'1.5rem', marginBottom:'1.5rem' }}>
           <h3 style={{ fontFamily:'Cormorant Garamond,serif', color: 'var(--text-main)', marginBottom:'1.25rem', fontSize:'1.2rem' }}>Add Gallery Photo</h3>
           <form onSubmit={handleSubmit} style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'1rem' }}>
             <div className="form-group">
@@ -498,7 +498,7 @@ const GalleryTab = () => {
 
       <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(200px,1fr))', gap:'1rem' }}>
         {items.map(item => (
-          <div key={item.id} style={{ position:'relative', borderRadius:'4px', overflow:'hidden', border:'1px solid rgba(255,105,180,0.1)', aspectRatio:'4/3' }}>
+          <div key={item.id} style={{ position:'relative', borderRadius:'4px', overflow:'hidden', border:'1px solid rgba(223,178,89,0.1)', aspectRatio:'4/3' }}>
             <img src={getImageUrl(item.imageUrl)} alt={item.title} style={{ width:'100%', height:'100%', objectFit:'cover' }}
               onError={e => e.target.src='https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400'} />
             <div style={{ position:'absolute', inset:0, background:'rgba(0,0,0,0)', transition:'background 0.3s', display:'flex', alignItems:'flex-end', justifyContent:'space-between', padding:'0.75rem' }}
@@ -547,7 +547,7 @@ const TestimonialsTab = () => {
       </div>
 
       {showForm && (
-        <div style={{ background:'rgba(255,255,255,0.02)', border:'1px solid rgba(255,105,180,0.2)', borderRadius:'6px', padding:'1.5rem', marginBottom:'1.5rem' }}>
+        <div style={{ background:'rgba(255,255,255,0.02)', border:'1px solid rgba(223,178,89,0.2)', borderRadius:'6px', padding:'1.5rem', marginBottom:'1.5rem' }}>
           <h3 style={{ fontFamily:'Cormorant Garamond,serif', color: 'var(--text-main)', marginBottom:'1.25rem', fontSize:'1.2rem' }}>Add Testimonial</h3>
           <form onSubmit={handleSubmit} style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'1rem' }}>
             <div className="form-group"><label>Client Name *</label><input value={form.clientName} onChange={e=>setForm(f=>({...f,clientName:e.target.value}))} required /></div>
@@ -572,8 +572,8 @@ const TestimonialsTab = () => {
 
       <div style={{ display:'flex', flexDirection:'column', gap:'1rem' }}>
         {items.map(item => (
-          <div key={item.id} style={{ display:'flex', gap:'1rem', background:'rgba(255,255,255,0.02)', border:'1px solid rgba(255,105,180,0.08)', borderRadius:'6px', padding:'1.25rem', alignItems:'flex-start' }}>
-            <img src={getImageUrl(item.imageUrl) || ''} alt={item.clientName} style={{ width:48, height:48, borderRadius:'50%', objectFit:'cover', border:'2px solid rgba(255,105,180,0.3)', flexShrink:0 }}
+          <div key={item.id} style={{ display:'flex', gap:'1rem', background:'rgba(255,255,255,0.02)', border:'1px solid rgba(223,178,89,0.08)', borderRadius:'6px', padding:'1.25rem', alignItems:'flex-start' }}>
+            <img src={getImageUrl(item.imageUrl) || ''} alt={item.clientName} style={{ width:48, height:48, borderRadius:'50%', objectFit:'cover', border:'2px solid rgba(223,178,89,0.3)', flexShrink:0 }}
               onError={e => { e.target.style.display='none'; }} />
             <div style={{ flex:1 }}>
               <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:'0.5rem' }}>
@@ -644,8 +644,8 @@ const InquiriesTab = () => {
             filtered.length === 0 ? <div style={{ color: 'var(--text-muted)', textAlign:'center', padding:'2rem' }}>No inquiries found.</div> :
             filtered.map(inq => (
               <div key={inq.id} onClick={() => setSelected(inq)} style={{
-                background: selected?.id===inq.id ? 'rgba(255,105,180,0.06)' : 'rgba(255,255,255,0.02)',
-                border:`1px solid ${selected?.id===inq.id ? 'rgba(255,105,180,0.3)' : 'rgba(255,255,255,0.06)'}`,
+                background: selected?.id===inq.id ? 'rgba(223,178,89,0.06)' : 'rgba(255,255,255,0.02)',
+                border:`1px solid ${selected?.id===inq.id ? 'rgba(223,178,89,0.3)' : 'rgba(255,255,255,0.06)'}`,
                 borderRadius:'6px', padding:'1rem', cursor:'pointer', transition:'all 0.2s',
               }}>
                 <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:'0.4rem' }}>
@@ -662,7 +662,7 @@ const InquiriesTab = () => {
 
         {/* Detail Panel */}
         {selected && (
-          <div style={{ background:'rgba(255,255,255,0.02)', border:'1px solid rgba(255,105,180,0.15)', borderRadius:'6px', padding:'1.5rem', position:'sticky', top:'1rem' }}>
+          <div style={{ background:'rgba(255,255,255,0.02)', border:'1px solid rgba(223,178,89,0.15)', borderRadius:'6px', padding:'1.5rem', position:'sticky', top:'1rem' }}>
             <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'1.25rem' }}>
               <h3 style={{ fontFamily:'Cormorant Garamond,serif', color: 'var(--text-main)', fontSize:'1.3rem' }}>Inquiry Details</h3>
               <button onClick={() => setSelected(null)} style={{ background:'none', border:'none', color: 'var(--text-muted)', fontSize:'1.2rem', cursor:'pointer' }}>✕</button>
@@ -769,7 +769,7 @@ const TeamTab = () => {
       </div>
 
       {showForm && (
-        <div style={{ background:'rgba(255,255,255,0.02)', border:'1px solid rgba(255,105,180,0.2)', borderRadius:'6px', padding:'1.5rem', marginBottom:'1.5rem' }}>
+        <div style={{ background:'rgba(255,255,255,0.02)', border:'1px solid rgba(223,178,89,0.2)', borderRadius:'6px', padding:'1.5rem', marginBottom:'1.5rem' }}>
           <h3 style={{ fontFamily:'Cormorant Garamond,serif', color: 'var(--text-main)', marginBottom:'1.25rem', fontSize:'1.2rem' }}>{editMember ? 'Edit Team Member' : 'Add Team Member'}</h3>
           <form onSubmit={handleSubmit} style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'1rem' }}>
             <div className="form-group">
@@ -802,9 +802,9 @@ const TeamTab = () => {
       {loading ? <div style={{ color: 'var(--text-muted)', padding:'3rem 0', textAlign:'center' }}>Loading team members...</div> : (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.5rem' }}>
           {members.map(member => (
-            <div key={member.id} style={{ display: 'flex', flexDirection: 'column', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,105,180,0.08)', borderRadius: '6px', overflow: 'hidden', transition: 'border-color 0.2s' }}
-              onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(255,105,180,0.25)'}
-              onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(255,105,180,0.08)'}
+            <div key={member.id} style={{ display: 'flex', flexDirection: 'column', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(223,178,89,0.08)', borderRadius: '6px', overflow: 'hidden', transition: 'border-color 0.2s' }}
+              onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(223,178,89,0.25)'}
+              onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(223,178,89,0.08)'}
             >
               <div style={{ height: 220, overflow: 'hidden', background: '#222', position: 'relative' }}>
                 <img src={getImageUrl(member.imageUrl) || 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300'} alt={member.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }}

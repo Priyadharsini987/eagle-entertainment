@@ -7,57 +7,33 @@ const Footer = () => {
 
   return (
     <footer style={{ 
-      background: 'linear-gradient(to bottom, #070707, #020202)', 
-      borderTop: '1px solid var(--border)', 
-      padding: '6rem 0 3rem', 
-      position: 'relative', 
-      overflow: 'hidden' 
+      background: 'var(--bg-main)', 
+      borderTop: '1px solid rgba(255,255,255,0.05)', 
+      padding: '5rem 0 2rem', 
+      position: 'relative'
     }}>
-      {/* Premium ambient light effect */}
-      <div style={{ 
-        position: 'absolute', 
-        bottom: '-50px', 
-        right: '5%', 
-        width: '450px', 
-        height: '450px', 
-        background: 'radial-gradient(circle, rgba(255,105,180, 0.05) 0%, transparent 70%)', 
-        pointerEvents: 'none' 
-      }} />
-
-      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+      <div className="container">
         <div className="footer-grid">
           
           {/* Brand & Socials */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.4rem' }}>
-            <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
-              <div style={{ 
-                width: 48, height: 48, 
-                borderRadius: '50%', 
-                overflow: 'hidden', 
-                border: '2px solid var(--primary)',
-                background: 'url(/logo.png) center center no-repeat',
-                backgroundSize: 'cover',
-                boxShadow: 'var(--shadow-glow)'
-              }} />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
               <div>
-                <div className="display-font" style={{ fontSize: '1.3rem', fontWeight: 700, color: 'var(--text-main)', letterSpacing: '0.05em', lineHeight: 1.1 }}>Eagle</div>
-                <div style={{ fontSize: '0.58rem', letterSpacing: '0.35em', color: 'var(--primary)', textTransform: 'uppercase', fontWeight: 700, marginTop: '2px' }}>Entertainment</div>
+                <div className="display-font" style={{ fontSize: '1.5rem', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1 }}>Eagle</div>
+                <div style={{ fontSize: '0.65rem', letterSpacing: '0.15em', color: 'var(--primary)', textTransform: 'uppercase', fontWeight: 600, marginTop: '4px' }}>Entertainment</div>
               </div>
             </Link>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: 1.7, margin: 0 }}>
-              Tamil Nadu's premier event management agency based in Erode. Designing and delivering extraordinary experiences all over the state.
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', lineHeight: 1.6, margin: '0.5rem 0 1rem', maxWidth: '280px' }}>
+              Crafting extraordinary luxury experiences and unforgettable events.
             </p>
-            <div style={{ display: 'flex', gap: '0.85rem', marginTop: '0.5rem' }}>
-              {['FB', 'IG', 'YT', 'LI'].map((s, i) => (
+            <div style={{ display: 'flex', gap: '1rem' }}>
+              {['Twitter', 'Instagram', 'LinkedIn'].map((s, i) => (
                 <a key={i} href="#/" style={{
-                  width: 38, height: 38, borderRadius: '50%',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: '0.72rem', fontWeight: 700, color: 'var(--text-muted)',
-                  border: '1px solid rgba(255,105,180, 0.15)', background: 'rgba(255,255,255,0.02)',
-                  cursor: 'pointer', textDecoration: 'none', transition: 'var(--transition)'
+                  fontSize: '0.8rem', fontWeight: 500, color: 'var(--text-muted)',
+                  textDecoration: 'none', transition: 'var(--transition)'
                 }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--primary)'; e.currentTarget.style.color = '#000'; e.currentTarget.style.background = 'var(--primary)'; e.currentTarget.style.boxShadow = '0 0 10px rgba(255,105,180, 0.3)'; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,105,180, 0.15)'; e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.background = 'rgba(255,255,255,0.02)'; e.currentTarget.style.boxShadow = 'none'; }}
+                onMouseEnter={e => { e.currentTarget.style.color = '#fff'; }}
+                onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-muted)'; }}
                 >{s}</a>
               ))}
             </div>
@@ -65,8 +41,8 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--text-main)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1.8rem', fontFamily: 'var(--font-main)' }}>Navigation</h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+            <h4 style={{ fontSize: '0.85rem', fontWeight: 600, color: '#fff', marginBottom: '1.25rem' }}>Explore</h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               {[
                 { label: 'Home', path: '/' },
                 { label: 'Our Events', path: '/events' }, 
@@ -75,40 +51,23 @@ const Footer = () => {
                 { label: 'Contact Us', path: '/contact' },
               ].map((l, i) => (
                 <Link key={i} to={l.path} style={{
-                  color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.88rem',
-                  transition: 'var(--transition-fast)', display: 'inline-block', width: 'fit-content'
+                  color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.9rem',
+                  transition: 'var(--transition-fast)', display: 'inline-block'
                 }}
-                onMouseEnter={e => { e.currentTarget.style.color = 'var(--primary)'; e.currentTarget.style.transform = 'translateX(4px)'; }}
-                onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.transform = 'translateX(0)'; }}
+                onMouseEnter={e => { e.currentTarget.style.color = 'var(--primary)'; }}
+                onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-muted)'; }}
                 >{l.label}</Link>
               ))}
             </div>
           </div>
 
-          {/* Offerings */}
+          {/* Specialties */}
           <div>
-            <h4 style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--text-main)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1.8rem', fontFamily: 'var(--font-main)' }}>Specialties</h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-              {['Luxury Weddings', 'Corporate Galas', 'Concerts & Shows', 'Exhibition Stalls', 'Private Celebrations'].map((s, i) => (
-                <div key={i} style={{ color: 'var(--text-muted)', fontSize: '0.88rem', display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                  <span style={{ color: 'var(--primary)', opacity: 0.8, fontSize: '0.9rem' }}>✦</span>{s}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Contact Details */}
-          <div>
-            <h4 style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--text-main)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1.8rem', fontFamily: 'var(--font-main)' }}>Contact Info</h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
-              {[
-                { icon: '📍', val: 'Erode, Tamil Nadu, India' },
-                { icon: '✉️', val: 'contact@eagleentertainment.com' },
-                { icon: '📞', val: '+91 97902 41089' },
-              ].map((c, i) => (
-                <div key={i} style={{ display: 'flex', gap: '0.85rem', alignItems: 'flex-start' }}>
-                  <span style={{ fontSize: '1.1rem', opacity: 0.85 }}>{c.icon}</span>
-                  <div style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: 1.5 }}>{c.val}</div>
+            <h4 style={{ fontSize: '0.85rem', fontWeight: 600, color: '#fff', marginBottom: '1.25rem' }}>Services</h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              {['Corporate Events', 'Luxury Weddings', 'Concerts', 'Exhibitions'].map((s, i) => (
+                <div key={i} style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+                  {s}
                 </div>
               ))}
             </div>
@@ -116,24 +75,24 @@ const Footer = () => {
 
           {/* Newsletter / Join */}
           <div>
-            <h4 style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--text-main)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1.8rem', fontFamily: 'var(--font-main)' }}>Stay Connected</h4>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: 1.6, marginBottom: '1.2rem' }}>
-              Subscribe to get updates on upcoming events and premium packages.
+            <h4 style={{ fontSize: '0.85rem', fontWeight: 600, color: '#fff', marginBottom: '1.25rem' }}>Stay Updated</h4>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', lineHeight: 1.5, marginBottom: '1rem' }}>
+              Get the latest news on premium events.
             </p>
-            <form onSubmit={(e) => { e.preventDefault(); alert('Subscribed successfully!'); }} style={{ display: 'flex', gap: '0.5rem' }}>
+            <form onSubmit={(e) => { e.preventDefault(); alert('Subscribed successfully!'); }} style={{ display: 'flex', gap: '0.5rem', background: 'rgba(255,255,255,0.03)', padding: '0.25rem', borderRadius: '100px', border: '1px solid rgba(255,255,255,0.1)' }}>
               <input 
                 type="email" 
                 placeholder="Email address" 
                 required 
                 style={{
-                  flex: 1, padding: '0.75rem 1rem', background: 'var(--bg-card)',
-                  border: '1px solid rgba(255,105,180, 0.15)', borderRadius: '100px', color: 'var(--text-main)', fontSize: '0.82rem', outline: 'none',
-                  transition: 'var(--transition)'
+                  flex: 1, padding: '0.6rem 1rem', background: 'transparent',
+                  border: 'none', color: '#fff', fontSize: '0.9rem', outline: 'none'
                 }}
-                onFocus={e => { e.currentTarget.style.borderColor = 'var(--primary)'; e.currentTarget.style.boxShadow = '0 0 10px rgba(255,105,180, 0.15)'; }}
-                onBlur={e => { e.currentTarget.style.borderColor = 'rgba(255,105,180, 0.15)'; e.currentTarget.style.boxShadow = 'none'; }}
               />
-              <button type="submit" className="btn-primary" style={{ padding: '0.75rem 1.4rem', fontSize: '0.72rem', minWidth: '80px', borderRadius: '100px' }}>Join</button>
+              <button type="submit" style={{ 
+                background: '#fff', color: '#000', padding: '0.6rem 1.25rem', 
+                fontSize: '0.85rem', fontWeight: 600, borderRadius: '100px', border: 'none', cursor: 'pointer' 
+              }}>Subscribe</button>
             </form>
           </div>
         </div>
@@ -141,49 +100,25 @@ const Footer = () => {
         {/* Divider */}
         <div style={{ 
           height: '1px', 
-          background: 'linear-gradient(to right, rgba(255,105,180, 0), rgba(255,105,180, 0.25), rgba(255,105,180, 0))', 
-          margin: '4rem 0 2.5rem' 
+          background: 'rgba(255,255,255,0.05)', 
+          margin: '4rem 0 2rem' 
         }} />
 
         {/* Footer Bottom Row */}
         <div className="footer-bottom">
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', margin: 0 }}>
-            © {new Date().getFullYear()} <span style={{ color: 'var(--primary)', fontWeight: 600 }}>Eagle Entertainment</span>. All Rights Reserved. Erode, Tamil Nadu.
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', margin: 0 }}>
+            © {new Date().getFullYear()} Eagle Entertainment. All rights reserved.
           </p>
-          <div style={{ display: 'flex', gap: '1.8rem', alignItems: 'center' }}>
-            <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem', cursor: 'pointer' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-muted)'}>Privacy Policy</span>
-            <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem', cursor: 'pointer' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-muted)'}>Terms</span>
+          <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+            <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem', cursor: 'pointer' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-muted)'}>Privacy Policy</span>
+            <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem', cursor: 'pointer' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-muted)'}>Terms of Service</span>
             {user ? (
-              <Link to="/admin" style={{ 
-                color: 'var(--primary)', 
-                fontSize: '0.8rem', 
-                textDecoration: 'none', 
-                fontWeight: 700,
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.35rem',
-                transition: 'color 0.2s'
-              }}
-              onMouseEnter={e => e.currentTarget.style.color = 'var(--primary-light)'}
-              onMouseLeave={e => e.currentTarget.style.color = 'var(--primary)'}
-              >
-                ⚙️ Admin Dashboard
+              <Link to="/admin" style={{ color: 'var(--text-muted)', fontSize: '0.85rem', textDecoration: 'none' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-muted)'}>
+                Admin
               </Link>
             ) : (
-              <Link to="/admin/login" style={{ 
-                color: 'var(--primary)', 
-                fontSize: '0.8rem', 
-                textDecoration: 'none', 
-                fontWeight: 700,
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.35rem',
-                transition: 'all 0.2s'
-              }}
-              onMouseEnter={e => e.currentTarget.style.color = 'var(--primary-light)'}
-              onMouseLeave={e => e.currentTarget.style.color = 'var(--primary)'}
-              >
-                🔐 Executive Access
+              <Link to="/admin/login" style={{ color: 'var(--text-muted)', fontSize: '0.85rem', textDecoration: 'none' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--text-muted)'}>
+                Login
               </Link>
             )}
           </div>
@@ -193,37 +128,30 @@ const Footer = () => {
       <style>{`
         .footer-grid {
           display: grid;
-          grid-template-columns: 2fr 1fr 1fr 1fr 2fr;
-          gap: 3.5rem;
+          grid-template-columns: 2fr 1fr 1fr 2fr;
+          gap: 4rem;
         }
         .footer-bottom {
           display: flex;
           justify-content: space-between;
           align-items: center;
           flex-wrap: wrap;
-          gap: 1.2rem;
+          gap: 1rem;
         }
-        @media(max-width: 1024px) {
+        @media(max-width: 992px) {
           .footer-grid {
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2.5rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
           }
         }
-        @media(max-width: 768px) {
+        @media(max-width: 576px) {
           .footer-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2.5rem;
+            grid-template-columns: 1fr;
+            gap: 2rem;
           }
           .footer-bottom {
             flex-direction: column;
-            align-items: center;
             text-align: center;
-          }
-        }
-        @media(max-width: 480px) {
-          .footer-grid {
-            grid-template-columns: 1fr;
-            gap: 2.5rem;
           }
         }
       `}</style>

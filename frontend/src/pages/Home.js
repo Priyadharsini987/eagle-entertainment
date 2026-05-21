@@ -36,7 +36,7 @@ const Hero = () => {
           >
             <img src={sl.img} alt="" style={{ width:'100%', height:'100%', objectFit:'cover' }} />
             <div style={{ position:'absolute', inset:0, background:'linear-gradient(to right, rgba(3, 3, 3, 0.92) 0%, rgba(3, 3, 3, 0.55) 60%, rgba(3, 3, 3, 0.85) 100%)' }} />
-            <div style={{ position:'absolute', inset:0, background:'radial-gradient(circle at 15% 50%, rgba(255,105,180, 0.15), transparent 55%)' }} />
+            <div style={{ position:'absolute', inset:0, background:'radial-gradient(circle at 15% 50%, rgba(223,178,89, 0.15), transparent 55%)' }} />
           </motion.div>
         ))}
       </AnimatePresence>
@@ -57,8 +57,8 @@ const Hero = () => {
                   display: 'inline-flex', 
                   alignItems: 'center', 
                   gap: '0.6rem', 
-                  background: 'rgba(255,105,180, 0.08)', 
-                  border: '1px solid rgba(255,105,180, 0.3)', 
+                  background: 'rgba(223,178,89, 0.08)', 
+                  border: '1px solid rgba(223,178,89, 0.3)', 
                   padding: '0.5rem 1.2rem', 
                   borderRadius: '100px', 
                   marginBottom: '2rem' 

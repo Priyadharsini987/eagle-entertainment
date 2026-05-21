@@ -67,35 +67,21 @@ const Navbar = () => {
         transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
         background: scrolled ? 'var(--bg-card)' : 'transparent',
         backdropFilter: scrolled ? 'blur(20px)' : 'none',
-        borderBottom: scrolled ? '1px solid rgba(255,105,180, 0.15)' : '1px solid transparent',
+        borderBottom: scrolled ? '1px solid rgba(223,178,89, 0.15)' : '1px solid transparent',
         padding: scrolled ? '0.8rem 0' : '1.5rem 0',
       }}>
         <div className="container" style={{ display:'flex', alignItems:'center', justifyContent:'space-between' }}>
           
           {/* Logo */}
-          <Link to="/" style={{ textDecoration:'none', display:'flex', alignItems:'center', gap:'0.85rem' }}>
-            <div style={{ 
-              width: 48, height: 48, 
-              borderRadius: '50%', 
-              overflow: 'hidden', 
-              border: '2px solid var(--primary)',
-              background: 'url(/logo.png) center center no-repeat',
-              backgroundSize: 'cover',
-              boxShadow: 'var(--shadow-glow)',
-              transition: 'transform 0.5s ease'
-            }} 
-            className="logo-img"
-            onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.08) rotate(5deg)'}
-            onMouseLeave={e => e.currentTarget.style.transform = 'scale(1) rotate(0deg)'}
-            />
+          <Link to="/" style={{ textDecoration:'none', display:'flex', alignItems:'center', gap:'0.75rem' }}>
             <div>
-              <div className="display-font" style={{ fontSize:'1.25rem', fontWeight:700, color: 'var(--text-main)', letterSpacing:'0.05em', lineHeight:1.1 }}>Eagle</div>
-              <div style={{ fontSize:'0.58rem', letterSpacing:'0.35em', color:'var(--primary)', textTransform:'uppercase', fontWeight:700, marginTop: '2px' }}>Entertainment</div>
+              <div className="display-font" style={{ fontSize:'1.4rem', fontWeight:800, color: 'var(--text-main)', letterSpacing:'-0.02em', lineHeight:1 }}>Eagle</div>
+              <div style={{ fontSize:'0.65rem', letterSpacing:'0.15em', color:'var(--primary)', textTransform:'uppercase', fontWeight:600, marginTop: '4px' }}>Entertainment</div>
             </div>
           </Link>
 
           {/* Desktop Nav Links */}
-          <div style={{ display:'flex', alignItems:'center', gap:'2.8rem' }} className="nav-desktop">
+          <div style={{ display:'flex', alignItems:'center', gap:'3rem' }} className="nav-desktop">
             {links.map(l => (
               <Link 
                 key={l.path} 
@@ -103,64 +89,40 @@ const Navbar = () => {
                 onClick={(e) => handleLinkClick(e, l.path)}
                 style={{
                   textDecoration:'none',
-                  fontSize:'0.82rem', 
-                  fontWeight:600, 
-                  letterSpacing:'0.12em',
-                  textTransform: 'uppercase',
-                  color: isActive(l.path) ? 'var(--primary)' : 'rgba(255,255,255,0.7)',
+                  fontSize:'0.85rem', 
+                  fontWeight: 600, 
+                  letterSpacing:'0.02em',
+                  color: isActive(l.path) ? '#fff' : 'var(--text-muted)',
                   transition: 'color 0.3s ease',
                   position: 'relative',
-                  padding: '0.6rem 0'
+                  padding: '0.5rem 0'
                 }}
                 onMouseEnter={e => {
                   if (!isActive(l.path)) e.currentTarget.style.color = '#fff';
                 }}
                 onMouseLeave={e => {
-                  if (!isActive(l.path)) e.currentTarget.style.color = 'rgba(255,255,255,0.7)';
+                  if (!isActive(l.path)) e.currentTarget.style.color = 'var(--text-muted)';
                 }}
               >
                 {l.label}
-                <span style={{ 
-                  position:'absolute', bottom:0, left:0, 
-                  width: isActive(l.path) ? '100%' : '0%', 
-                  height: 1.5, 
-                  background:'var(--primary)',
-                  transition: 'width 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-                  boxShadow: '0 0 8px var(--primary)'
-                }} />
               </Link>
             ))}
             
             {user && (
-              <div style={{ display:'flex', alignItems:'center', gap:'1.2rem' }}>
+              <div style={{ display:'flex', alignItems:'center', gap:'1rem' }}>
                 <Link to="/admin" style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '0.5rem',
                   textDecoration: 'none',
-                  color: 'var(--primary-light)',
-                  fontWeight: 700,
-                  fontSize: '0.78rem',
-                  letterSpacing: '0.05em',
-                  textTransform: 'uppercase',
-                  background: 'rgba(255,105,180, 0.1)',
-                  border: '1px solid rgba(255,105,180, 0.3)',
-                  padding: '0.6rem 1.2rem',
-                  borderRadius: '100px',
+                  color: 'var(--primary)',
+                  fontWeight: 600,
+                  fontSize: '0.85rem',
                   transition: 'var(--transition)'
                 }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.background = 'var(--primary)';
-                  e.currentTarget.style.color = '#000';
-                  e.currentTarget.style.boxShadow = '0 0 15px rgba(255,105,180, 0.3)';
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.background = 'rgba(255,105,180, 0.1)';
-                  e.currentTarget.style.color = 'var(--primary-light)';
-                  e.currentTarget.style.boxShadow = 'none';
-                }}
+                onMouseEnter={e => e.currentTarget.style.color = 'var(--primary-light)'}
+                onMouseLeave={e => e.currentTarget.style.color = 'var(--primary)'}
                 >
-                  ⚙️ Admin
+                  Admin
                 </Link>
                 <button onClick={() => { logout(); navigate('/'); }} style={{
                   background: 'transparent',
@@ -189,8 +151,8 @@ const Navbar = () => {
             onClick={() => setMenuOpen(!menuOpen)} 
             style={{
               display:'none', 
-              background: menuOpen ? 'var(--primary)' : 'rgba(255,105,180, 0.08)', 
-              border:'1px solid rgba(255,105,180, 0.35)', 
+              background: menuOpen ? 'var(--primary)' : 'rgba(223,178,89, 0.08)', 
+              border:'1px solid rgba(223,178,89, 0.35)', 
               cursor:'pointer',
               color: menuOpen ? '#000' : '#fff', 
               fontSize:'0.75rem',

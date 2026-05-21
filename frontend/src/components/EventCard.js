@@ -64,7 +64,7 @@ const EventCard = ({ event, compact = false }) => {
         {event.upcoming !== undefined && (
           <div style={{
             position: 'absolute', top: 16, right: 16,
-            background: event.upcoming ? 'rgba(255,105,180, 0.15)' : 'rgba(255, 255, 255, 0.05)',
+            background: event.upcoming ? 'rgba(223,178,89, 0.15)' : 'rgba(255, 255, 255, 0.05)',
             backdropFilter: 'blur(10px)',
             border: `1px solid ${event.upcoming ? 'var(--primary)' : 'rgba(255,255,255,0.2)'}`,
             color: event.upcoming ? 'var(--primary-light)' : '#fff',
@@ -135,8 +135,8 @@ const EventCard = ({ event, compact = false }) => {
           
           <Link to={`/events/${event.id}`} style={{
             width:42, height:42, borderRadius:'50%', 
-            background:'rgba(255,105,180, 0.05)', 
-            border:'1px solid rgba(255,105,180, 0.25)',
+            background:'rgba(223,178,89, 0.05)', 
+            border:'1px solid rgba(223,178,89, 0.25)',
             display:'flex', alignItems:'center', justifyContent:'center', 
             color: 'var(--text-main)', textDecoration:'none', transition:'var(--transition)',
             fontSize: '1rem',
@@ -146,11 +146,11 @@ const EventCard = ({ event, compact = false }) => {
             e.currentTarget.style.borderColor='var(--primary)'; 
             e.currentTarget.style.background='var(--primary)'; 
             e.currentTarget.style.color='#000';
-            e.currentTarget.style.boxShadow='0 0 10px rgba(255,105,180, 0.3)';
+            e.currentTarget.style.boxShadow='0 0 10px rgba(223,178,89, 0.3)';
           }}
           onMouseLeave={e => { 
-            e.currentTarget.style.borderColor='rgba(255,105,180, 0.25)'; 
-            e.currentTarget.style.background='rgba(255,105,180, 0.05)'; 
+            e.currentTarget.style.borderColor='rgba(223,178,89, 0.25)'; 
+            e.currentTarget.style.background='rgba(223,178,89, 0.05)'; 
             e.currentTarget.style.color='#fff';
             e.currentTarget.style.boxShadow='none';
           }}

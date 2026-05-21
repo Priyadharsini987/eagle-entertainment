@@ -52,7 +52,7 @@ const AdminLogin = () => {
               overflow: 'hidden',
               marginBottom: '1.5rem',
               border: '3px solid var(--primary)',
-              boxShadow: '0 0 40px rgba(255,105,180,0.4)',
+              boxShadow: '0 0 40px rgba(223,178,89,0.4)',
               background: 'url(/logo.png) center center no-repeat',
               backgroundSize: 'cover'
             }} />

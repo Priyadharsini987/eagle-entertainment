@@ -76,7 +76,7 @@ const Contact = () => {
               ].map((c, i) => (
                 <div key={i} style={{ display:'flex', gap:'1.5rem', alignItems:'flex-start' }}>
                   <div style={{ 
-                    width:52, height:52, background:'rgba(255,105,180, 0.05)', border:'1px solid rgba(255,105,180, 0.25)',
+                    width:52, height:52, background:'rgba(223,178,89, 0.05)', border:'1px solid rgba(223,178,89, 0.25)',
                     borderRadius:'14px', display:'flex', alignItems:'center', justifyContent:'center',
                     fontSize:'1.6rem', flexShrink:0, boxShadow: '0 5px 15px rgba(0,0,0,0.3)'
                   }}>{c.icon}</div>
@@ -89,7 +89,7 @@ const Contact = () => {
             </div>
 
             {/* Social */}
-            <div className="glass-card" style={{ padding:'2.2rem', border: '1px solid rgba(255,105,180, 0.12)' }}>
+            <div className="glass-card" style={{ padding:'2.2rem', border: '1px solid rgba(223,178,89, 0.12)' }}>
               <div style={{ color:'var(--text-muted)', fontSize:'0.72rem', fontWeight:800, letterSpacing:'0.18em', textTransform:'uppercase', marginBottom:'1.5rem' }}>Social Connectivity</div>
               <div style={{ display:'flex', gap:'1rem', flexWrap: 'wrap' }}>
                 {['Facebook','Instagram','LinkedIn'].map((s, i) => (
@@ -102,7 +102,7 @@ const Contact = () => {
           {/* Right Column - Contact Form */}
           <motion.div 
             className="glass-card" 
-            style={{ padding:'4rem 3.5rem', border: '1px solid rgba(255,105,180, 0.15)', boxShadow: 'var(--shadow-glow)' }}
+            style={{ padding:'4rem 3.5rem', border: '1px solid rgba(223,178,89, 0.15)', boxShadow: 'var(--shadow-glow)' }}
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}

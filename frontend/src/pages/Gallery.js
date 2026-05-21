@@ -61,8 +61,8 @@ const Gallery = () => {
               onClick={() => setFilter(cat)} 
               style={{
                 padding:'0.75rem 2rem',
-                background: filter === cat ? 'var(--primary)' : 'rgba(255,105,180, 0.04)',
-                border: `1px solid ${filter === cat ? 'var(--primary)' : 'rgba(255,105,180, 0.15)'}`,
+                background: filter === cat ? 'var(--primary)' : 'rgba(223,178,89, 0.04)',
+                border: `1px solid ${filter === cat ? 'var(--primary)' : 'rgba(223,178,89, 0.15)'}`,
                 color: filter === cat ? '#000' : '#fff',
                 borderRadius:'100px', 
                 cursor:'pointer', 
@@ -80,7 +80,7 @@ const Gallery = () => {
               }}
               onMouseLeave={e => {
                 if (filter !== cat) {
-                  e.currentTarget.style.borderColor = 'rgba(255,105,180, 0.15)';
+                  e.currentTarget.style.borderColor = 'rgba(223,178,89, 0.15)';
                   e.currentTarget.style.color = '#fff';
                 }
               }}
@@ -105,7 +105,7 @@ const Gallery = () => {
                   marginBottom:'2rem', breakInside:'avoid',
                   cursor:'pointer', overflow:'hidden', position:'relative',
                   borderRadius:'var(--radius-md)',
-                  border: '1px solid rgba(255,105,180, 0.08)'
+                  border: '1px solid rgba(223,178,89, 0.08)'
                 }}
                 onClick={() => setLightbox(img)}
                 initial={{ opacity: 0, scale: 0.95, y: 15 }}
@@ -192,15 +192,15 @@ const Gallery = () => {
               onClick={() => setLightbox(null)} 
               style={{
                 position:'absolute', top:'2rem', right:'2rem',
-                background:'rgba(255,105,180, 0.08)', 
-                border:'1px solid rgba(255,105,180, 0.3)', 
+                background:'rgba(223,178,89, 0.08)', 
+                border:'1px solid rgba(223,178,89, 0.3)', 
                 color: 'var(--text-main)', 
                 width:50, height:50, borderRadius:'50%', fontSize:'1.2rem', cursor:'pointer',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 transition: 'var(--transition)'
               }}
               onMouseEnter={e => { e.currentTarget.style.borderColor='var(--primary)'; e.currentTarget.style.background='var(--primary)'; e.currentTarget.style.color='#000'; }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor='rgba(255,105,180, 0.3)'; e.currentTarget.style.background='rgba(255,105,180, 0.08)'; e.currentTarget.style.color='#fff'; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor='rgba(223,178,89, 0.3)'; e.currentTarget.style.background='rgba(223,178,89, 0.08)'; e.currentTarget.style.color='#fff'; }}
             >✕</button>
             
             {/* Modal Box */}
@@ -221,7 +221,7 @@ const Gallery = () => {
                   maxHeight:'70vh', 
                   objectFit:'contain', 
                   boxShadow:'0 30px 65px var(--bg-card)',
-                  border: '1px solid rgba(255,105,180, 0.15)'
+                  border: '1px solid rgba(223,178,89, 0.15)'
                 }} 
               />
               <div style={{ marginTop:'2.5rem', textAlign:'center', display:'flex', flexDirection:'column', alignItems:'center' }}>
