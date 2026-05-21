@@ -61,8 +61,8 @@ const Gallery = () => {
               onClick={() => setFilter(cat)} 
               style={{
                 padding:'0.75rem 2rem',
-                background: filter === cat ? 'var(--primary)' : 'rgba(212, 175, 55, 0.04)',
-                border: `1px solid ${filter === cat ? 'var(--primary)' : 'rgba(212, 175, 55, 0.15)'}`,
+                background: filter === cat ? 'var(--primary)' : 'rgba(255,105,180, 0.04)',
+                border: `1px solid ${filter === cat ? 'var(--primary)' : 'rgba(255,105,180, 0.15)'}`,
                 color: filter === cat ? '#000' : '#fff',
                 borderRadius:'100px', 
                 cursor:'pointer', 
@@ -80,7 +80,7 @@ const Gallery = () => {
               }}
               onMouseLeave={e => {
                 if (filter !== cat) {
-                  e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.15)';
+                  e.currentTarget.style.borderColor = 'rgba(255,105,180, 0.15)';
                   e.currentTarget.style.color = '#fff';
                 }
               }}
@@ -105,7 +105,7 @@ const Gallery = () => {
                   marginBottom:'2rem', breakInside:'avoid',
                   cursor:'pointer', overflow:'hidden', position:'relative',
                   borderRadius:'var(--radius-md)',
-                  border: '1px solid rgba(212, 175, 55, 0.08)'
+                  border: '1px solid rgba(255,105,180, 0.08)'
                 }}
                 onClick={() => setLightbox(img)}
                 initial={{ opacity: 0, scale: 0.95, y: 15 }}
@@ -121,14 +121,14 @@ const Gallery = () => {
                 {/* Hover overlay description */}
                 <div style={{
                   position:'absolute', inset:0, 
-                  background:'linear-gradient(to top, rgba(5, 5, 5, 0.92) 0%, rgba(5, 5, 5, 0.4) 60%, transparent 100%)',
+                  background:'linear-gradient(to top, var(--bg-card) 0%, var(--bg-card) 60%, transparent 100%)',
                   opacity:0, transition:'opacity 0.4s ease', 
                   display:'flex', alignItems:'flex-end', padding:'2rem',
                 }}
                 className="gallery-overlay"
                 >
                   <div style={{ transform: 'translateY(10px)', transition: 'transform 0.4s ease' }} className="gallery-overlay-text">
-                    <div style={{ color:'#fff', fontFamily:'var(--font-display)', fontSize:'1.35rem', marginBottom:'0.35rem', fontWeight: 600 }}>{img.title}</div>
+                    <div style={{ color: 'var(--text-main)', fontFamily:'var(--font-display)', fontSize:'1.35rem', marginBottom:'0.35rem', fontWeight: 600 }}>{img.title}</div>
                     <div style={{ color:'var(--primary-light)', fontSize:'0.7rem', fontWeight:800, letterSpacing:'0.15em', textTransform:'uppercase' }}>{img.category}</div>
                   </div>
                 </div>
@@ -140,7 +140,7 @@ const Gallery = () => {
         {filtered.length === 0 && (
           <div className="glass-card" style={{ textAlign:'center', padding:'8rem 2rem', color:'var(--text-muted)' }}>
             <div style={{ fontSize:'4.5rem', marginBottom:'1.5rem', opacity:0.25 }}>📷</div>
-            <h3 style={{ color: '#fff', fontSize: '1.6rem', fontFamily: 'var(--font-display)', marginBottom: '0.5rem' }}>No media found</h3>
+            <h3 style={{ color: 'var(--text-main)', fontSize: '1.6rem', fontFamily: 'var(--font-display)', marginBottom: '0.5rem' }}>No media found</h3>
             <p>We are adding more photos to this category soon.</p>
           </div>
         )}
@@ -192,15 +192,15 @@ const Gallery = () => {
               onClick={() => setLightbox(null)} 
               style={{
                 position:'absolute', top:'2rem', right:'2rem',
-                background:'rgba(212, 175, 55, 0.08)', 
-                border:'1px solid rgba(212, 175, 55, 0.3)', 
-                color:'#fff', 
+                background:'rgba(255,105,180, 0.08)', 
+                border:'1px solid rgba(255,105,180, 0.3)', 
+                color: 'var(--text-main)', 
                 width:50, height:50, borderRadius:'50%', fontSize:'1.2rem', cursor:'pointer',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 transition: 'var(--transition)'
               }}
               onMouseEnter={e => { e.currentTarget.style.borderColor='var(--primary)'; e.currentTarget.style.background='var(--primary)'; e.currentTarget.style.color='#000'; }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor='rgba(212, 175, 55, 0.3)'; e.currentTarget.style.background='rgba(212, 175, 55, 0.08)'; e.currentTarget.style.color='#fff'; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor='rgba(255,105,180, 0.3)'; e.currentTarget.style.background='rgba(255,105,180, 0.08)'; e.currentTarget.style.color='#fff'; }}
             >✕</button>
             
             {/* Modal Box */}
@@ -220,12 +220,12 @@ const Gallery = () => {
                   borderRadius:'var(--radius-sm)', 
                   maxHeight:'70vh', 
                   objectFit:'contain', 
-                  boxShadow:'0 30px 65px rgba(0,0,0,0.85)',
-                  border: '1px solid rgba(212, 175, 55, 0.15)'
+                  boxShadow:'0 30px 65px var(--bg-card)',
+                  border: '1px solid rgba(255,105,180, 0.15)'
                 }} 
               />
               <div style={{ marginTop:'2.5rem', textAlign:'center', display:'flex', flexDirection:'column', alignItems:'center' }}>
-                <h2 className="display-font" style={{ fontSize:'2.4rem', color:'#fff', marginBottom:'0.5rem', fontWeight: 600 }}>{lightbox.title}</h2>
+                <h2 className="display-font" style={{ fontSize:'2.4rem', color: 'var(--text-main)', marginBottom:'0.5rem', fontWeight: 600 }}>{lightbox.title}</h2>
                 <div style={{ color:'var(--primary)', fontSize:'0.75rem', fontWeight:800, letterSpacing:'0.22em', textTransform:'uppercase', marginBottom:'2.2rem' }}>{lightbox.category}</div>
                 <a 
                   href={getImageUrl(lightbox.imageUrl)} 

@@ -86,13 +86,13 @@ const Events = () => {
               onChange={e => setSearch(e.target.value)}
               style={{
                 width:'100%', padding:'1.3rem 1.6rem 1.3rem 3.6rem',
-                background:'rgba(5, 5, 5, 0.75)', 
-                border:'1px solid rgba(212, 175, 55, 0.2)',
-                borderRadius:'100px', color:'#fff', fontSize:'0.92rem', outline:'none',
+                background:'var(--bg-card)', 
+                border:'1px solid rgba(255,105,180, 0.2)',
+                borderRadius:'100px', color: 'var(--text-main)', fontSize:'0.92rem', outline:'none',
                 transition: 'var(--transition)'
               }}
-              onFocus={e => { e.currentTarget.style.borderColor = 'var(--primary)'; e.currentTarget.style.boxShadow = '0 0 20px rgba(212, 175, 55, 0.2)'; }}
-              onBlur={e => { e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.2)'; e.currentTarget.style.boxShadow = 'none'; }}
+              onFocus={e => { e.currentTarget.style.borderColor = 'var(--primary)'; e.currentTarget.style.boxShadow = '0 0 20px rgba(255,105,180, 0.2)'; }}
+              onBlur={e => { e.currentTarget.style.borderColor = 'rgba(255,105,180, 0.2)'; e.currentTarget.style.boxShadow = 'none'; }}
             />
             <span style={{ position:'absolute', left:'1.5rem', top:'50%', transform:'translateY(-50%)', fontSize: '1.1rem', opacity: 0.75 }}>🔍</span>
           </motion.div>
@@ -154,8 +154,8 @@ const Events = () => {
               onClick={() => setFilter(cat)} 
               style={{
                 padding:'0.7rem 1.8rem',
-                background: filter === cat ? 'var(--primary)' : 'rgba(212, 175, 55, 0.04)',
-                border: `1px solid ${filter === cat ? 'var(--primary)' : 'rgba(212, 175, 55, 0.15)'}`,
+                background: filter === cat ? 'var(--primary)' : 'rgba(255,105,180, 0.04)',
+                border: `1px solid ${filter === cat ? 'var(--primary)' : 'rgba(255,105,180, 0.15)'}`,
                 color: filter === cat ? '#000' : '#fff',
                 borderRadius: '100px', 
                 cursor:'pointer', 
@@ -173,7 +173,7 @@ const Events = () => {
               }}
               onMouseLeave={e => {
                 if (filter !== cat) {
-                  e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.15)';
+                  e.currentTarget.style.borderColor = 'rgba(255,105,180, 0.15)';
                   e.currentTarget.style.color = '#fff';
                 }
               }}
@@ -184,7 +184,7 @@ const Events = () => {
         {/* Grid Area with animations */}
         {loading ? (
           <div style={{ textAlign:'center', padding:'8rem 0', color:'var(--text-muted)' }}>
-            <div style={{ width:40, height:40, border:'3px solid rgba(212, 175, 55, 0.1)', borderTopColor:'var(--primary)', borderRadius:'50%', margin:'0 auto 1.8rem', animation:'pulse-glow 1.5s infinite linear' }} />
+            <div style={{ width:40, height:40, border:'3px solid rgba(255,105,180, 0.1)', borderTopColor:'var(--primary)', borderRadius:'50%', margin:'0 auto 1.8rem', animation:'pulse-glow 1.5s infinite linear' }} />
             Loading events...
           </div>
         ) : filtered.length === 0 ? (
@@ -195,7 +195,7 @@ const Events = () => {
             animate={{ opacity: 1 }}
           >
             <div style={{ fontSize:'4.5rem', marginBottom:'1.5rem', opacity:0.3 }}>🎭</div>
-            <h3 style={{ color:'#fff', marginBottom:'0.6rem', fontFamily: 'var(--font-display)', fontSize: '1.6rem' }}>No events here yet</h3>
+            <h3 style={{ color: 'var(--text-main)', marginBottom:'0.6rem', fontFamily: 'var(--font-display)', fontSize: '1.6rem' }}>No events here yet</h3>
             <p>We are planning new events for this category. Check back soon!</p>
           </motion.div>
         ) : (

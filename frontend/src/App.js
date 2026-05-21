@@ -18,7 +18,7 @@ const ProtectedRoute = ({ children }) => {
   if (loading) return (
     <div style={{ minHeight:'100vh', display:'flex', alignItems:'center', justifyContent:'center', background:'var(--bg-main)' }}>
       <div style={{ textAlign:'center' }}>
-        <div className="display-font" style={{ fontSize:'2.5rem', color:'#fff', letterSpacing:'0.2em', marginBottom:'1rem' }}>
+        <div className="display-font" style={{ fontSize:'2.5rem', color: 'var(--text-main)', letterSpacing:'0.2em', marginBottom:'1rem' }}>
           EAGLE <span style={{ color:'var(--primary)' }}>ENTERTAINMENT</span>
         </div>
         <div style={{ color:'var(--text-muted)', fontSize:'0.75rem', letterSpacing:'0.4em', textTransform:'uppercase' }}>Securely Loading</div>

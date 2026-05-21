@@ -62,7 +62,7 @@ const Contact = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <h2 className="display-font" style={{ fontSize:'2.4rem', color:'#fff', marginBottom:'1.8rem', fontWeight: 600 }}>Get the <span style={{ color:'var(--primary)', fontStyle:'italic', fontWeight: 400 }}>Best</span> Service</h2>
+            <h2 className="display-font" style={{ fontSize:'2.4rem', color: 'var(--text-main)', marginBottom:'1.8rem', fontWeight: 600 }}>Get the <span style={{ color:'var(--primary)', fontStyle:'italic', fontWeight: 400 }}>Best</span> Service</h2>
             <p style={{ color:'var(--text-muted)', lineHeight:1.9, marginBottom:'3.5rem', fontSize:'1.05rem' }}>
               At Eagle Entertainment, we take care of everything for you. Our team is ready to help you plan your next big event, no matter where you are.
             </p>
@@ -76,7 +76,7 @@ const Contact = () => {
               ].map((c, i) => (
                 <div key={i} style={{ display:'flex', gap:'1.5rem', alignItems:'flex-start' }}>
                   <div style={{ 
-                    width:52, height:52, background:'rgba(212, 175, 55, 0.05)', border:'1px solid rgba(212, 175, 55, 0.25)',
+                    width:52, height:52, background:'rgba(255,105,180, 0.05)', border:'1px solid rgba(255,105,180, 0.25)',
                     borderRadius:'14px', display:'flex', alignItems:'center', justifyContent:'center',
                     fontSize:'1.6rem', flexShrink:0, boxShadow: '0 5px 15px rgba(0,0,0,0.3)'
                   }}>{c.icon}</div>
@@ -89,7 +89,7 @@ const Contact = () => {
             </div>
 
             {/* Social */}
-            <div className="glass-card" style={{ padding:'2.2rem', border: '1px solid rgba(212, 175, 55, 0.12)' }}>
+            <div className="glass-card" style={{ padding:'2.2rem', border: '1px solid rgba(255,105,180, 0.12)' }}>
               <div style={{ color:'var(--text-muted)', fontSize:'0.72rem', fontWeight:800, letterSpacing:'0.18em', textTransform:'uppercase', marginBottom:'1.5rem' }}>Social Connectivity</div>
               <div style={{ display:'flex', gap:'1rem', flexWrap: 'wrap' }}>
                 {['Facebook','Instagram','LinkedIn'].map((s, i) => (
@@ -102,12 +102,12 @@ const Contact = () => {
           {/* Right Column - Contact Form */}
           <motion.div 
             className="glass-card" 
-            style={{ padding:'4rem 3.5rem', border: '1px solid rgba(212, 175, 55, 0.15)', boxShadow: 'var(--shadow-glow)' }}
+            style={{ padding:'4rem 3.5rem', border: '1px solid rgba(255,105,180, 0.15)', boxShadow: 'var(--shadow-glow)' }}
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            <h3 className="display-font" style={{ fontSize:'2.2rem', color:'#fff', marginBottom:'0.6rem', fontWeight: 600 }}>Send us a Message</h3>
+            <h3 className="display-font" style={{ fontSize:'2.2rem', color: 'var(--text-main)', marginBottom:'0.6rem', fontWeight: 600 }}>Send us a Message</h3>
             <p style={{ color:'var(--text-muted)', fontSize:'0.98rem', marginBottom:'3.5rem' }}>Fill out the form below and we will get back to you soon.</p>
 
             {status && (
@@ -146,7 +146,7 @@ const Contact = () => {
                   <select name="eventType" value={form.eventType} onChange={handleChange} style={{ colorScheme: 'dark' }}>
                     <option value="">Select Category</option>
                     {['Wedding', 'Corporate Summit', 'Concert Production', 'Cultural Festival', 'Private Event', 'Brand Launch', 'Other'].map(t => (
-                      <option key={t} value={t} style={{ background: '#0a0a0a', color: '#fff' }}>{t}</option>
+                      <option key={t} value={t} style={{ background: 'var(--bg-surface)', color: 'var(--text-main)' }}>{t}</option>
                     ))}
                   </select>
                 </div>
@@ -162,7 +162,7 @@ const Contact = () => {
                   <select name="budget" value={form.budget} onChange={handleChange} style={{ colorScheme: 'dark' }}>
                     <option value="">Select Range</option>
                     {['Under ₹1 Lakh', '₹1 Lakh – ₹5 Lakhs', '₹5 Lakhs – ₹20 Lakhs', 'Over ₹20 Lakhs', 'Not decided yet'].map(b => (
-                      <option key={b} value={b} style={{ background: '#0a0a0a', color: '#fff' }}>{b}</option>
+                      <option key={b} value={b} style={{ background: 'var(--bg-surface)', color: 'var(--text-main)' }}>{b}</option>
                     ))}
                   </select>
                 </div>

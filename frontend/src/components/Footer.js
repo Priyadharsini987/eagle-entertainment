@@ -20,7 +20,7 @@ const Footer = () => {
         right: '5%', 
         width: '450px', 
         height: '450px', 
-        background: 'radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%)', 
+        background: 'radial-gradient(circle, rgba(255,105,180, 0.05) 0%, transparent 70%)', 
         pointerEvents: 'none' 
       }} />
 
@@ -40,7 +40,7 @@ const Footer = () => {
                 boxShadow: 'var(--shadow-glow)'
               }} />
               <div>
-                <div className="display-font" style={{ fontSize: '1.3rem', fontWeight: 700, color: '#fff', letterSpacing: '0.05em', lineHeight: 1.1 }}>Eagle</div>
+                <div className="display-font" style={{ fontSize: '1.3rem', fontWeight: 700, color: 'var(--text-main)', letterSpacing: '0.05em', lineHeight: 1.1 }}>Eagle</div>
                 <div style={{ fontSize: '0.58rem', letterSpacing: '0.35em', color: 'var(--primary)', textTransform: 'uppercase', fontWeight: 700, marginTop: '2px' }}>Entertainment</div>
               </div>
             </Link>
@@ -53,11 +53,11 @@ const Footer = () => {
                   width: 38, height: 38, borderRadius: '50%',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   fontSize: '0.72rem', fontWeight: 700, color: 'var(--text-muted)',
-                  border: '1px solid rgba(212, 175, 55, 0.15)', background: 'rgba(255,255,255,0.02)',
+                  border: '1px solid rgba(255,105,180, 0.15)', background: 'rgba(255,255,255,0.02)',
                   cursor: 'pointer', textDecoration: 'none', transition: 'var(--transition)'
                 }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--primary)'; e.currentTarget.style.color = '#000'; e.currentTarget.style.background = 'var(--primary)'; e.currentTarget.style.boxShadow = '0 0 10px rgba(212, 175, 55, 0.3)'; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.15)'; e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.background = 'rgba(255,255,255,0.02)'; e.currentTarget.style.boxShadow = 'none'; }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--primary)'; e.currentTarget.style.color = '#000'; e.currentTarget.style.background = 'var(--primary)'; e.currentTarget.style.boxShadow = '0 0 10px rgba(255,105,180, 0.3)'; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,105,180, 0.15)'; e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.background = 'rgba(255,255,255,0.02)'; e.currentTarget.style.boxShadow = 'none'; }}
                 >{s}</a>
               ))}
             </div>
@@ -65,7 +65,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 style={{ fontSize: '0.8rem', fontWeight: 800, color: '#fff', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1.8rem', fontFamily: 'var(--font-main)' }}>Navigation</h4>
+            <h4 style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--text-main)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1.8rem', fontFamily: 'var(--font-main)' }}>Navigation</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
               {[
                 { label: 'Home', path: '/' },
@@ -87,7 +87,7 @@ const Footer = () => {
 
           {/* Offerings */}
           <div>
-            <h4 style={{ fontSize: '0.8rem', fontWeight: 800, color: '#fff', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1.8rem', fontFamily: 'var(--font-main)' }}>Specialties</h4>
+            <h4 style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--text-main)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1.8rem', fontFamily: 'var(--font-main)' }}>Specialties</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
               {['Luxury Weddings', 'Corporate Galas', 'Concerts & Shows', 'Exhibition Stalls', 'Private Celebrations'].map((s, i) => (
                 <div key={i} style={{ color: 'var(--text-muted)', fontSize: '0.88rem', display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
@@ -99,7 +99,7 @@ const Footer = () => {
 
           {/* Contact Details */}
           <div>
-            <h4 style={{ fontSize: '0.8rem', fontWeight: 800, color: '#fff', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1.8rem', fontFamily: 'var(--font-main)' }}>Contact Info</h4>
+            <h4 style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--text-main)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1.8rem', fontFamily: 'var(--font-main)' }}>Contact Info</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
               {[
                 { icon: '📍', val: 'Erode, Tamil Nadu, India' },
@@ -116,7 +116,7 @@ const Footer = () => {
 
           {/* Newsletter / Join */}
           <div>
-            <h4 style={{ fontSize: '0.8rem', fontWeight: 800, color: '#fff', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1.8rem', fontFamily: 'var(--font-main)' }}>Stay Connected</h4>
+            <h4 style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--text-main)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1.8rem', fontFamily: 'var(--font-main)' }}>Stay Connected</h4>
             <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: 1.6, marginBottom: '1.2rem' }}>
               Subscribe to get updates on upcoming events and premium packages.
             </p>
@@ -126,12 +126,12 @@ const Footer = () => {
                 placeholder="Email address" 
                 required 
                 style={{
-                  flex: 1, padding: '0.75rem 1rem', background: 'rgba(5,5,5,0.7)',
-                  border: '1px solid rgba(212, 175, 55, 0.15)', borderRadius: '100px', color: '#fff', fontSize: '0.82rem', outline: 'none',
+                  flex: 1, padding: '0.75rem 1rem', background: 'var(--bg-card)',
+                  border: '1px solid rgba(255,105,180, 0.15)', borderRadius: '100px', color: 'var(--text-main)', fontSize: '0.82rem', outline: 'none',
                   transition: 'var(--transition)'
                 }}
-                onFocus={e => { e.currentTarget.style.borderColor = 'var(--primary)'; e.currentTarget.style.boxShadow = '0 0 10px rgba(212, 175, 55, 0.15)'; }}
-                onBlur={e => { e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.15)'; e.currentTarget.style.boxShadow = 'none'; }}
+                onFocus={e => { e.currentTarget.style.borderColor = 'var(--primary)'; e.currentTarget.style.boxShadow = '0 0 10px rgba(255,105,180, 0.15)'; }}
+                onBlur={e => { e.currentTarget.style.borderColor = 'rgba(255,105,180, 0.15)'; e.currentTarget.style.boxShadow = 'none'; }}
               />
               <button type="submit" className="btn-primary" style={{ padding: '0.75rem 1.4rem', fontSize: '0.72rem', minWidth: '80px', borderRadius: '100px' }}>Join</button>
             </form>
@@ -141,7 +141,7 @@ const Footer = () => {
         {/* Divider */}
         <div style={{ 
           height: '1px', 
-          background: 'linear-gradient(to right, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.25), rgba(212, 175, 55, 0))', 
+          background: 'linear-gradient(to right, rgba(255,105,180, 0), rgba(255,105,180, 0.25), rgba(255,105,180, 0))', 
           margin: '4rem 0 2.5rem' 
         }} />
 

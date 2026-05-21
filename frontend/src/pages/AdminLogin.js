@@ -52,11 +52,11 @@ const AdminLogin = () => {
               overflow: 'hidden',
               marginBottom: '1.5rem',
               border: '3px solid var(--primary)',
-              boxShadow: '0 0 40px rgba(201,168,76,0.4)',
+              boxShadow: '0 0 40px rgba(255,105,180,0.4)',
               background: 'url(/logo.png) center center no-repeat',
               backgroundSize: 'cover'
             }} />
-            <div className="display-font" style={{ fontSize: '2rem', color: '#fff', letterSpacing: '0.15em', fontWeight: 700 }}>
+            <div className="display-font" style={{ fontSize: '2rem', color: 'var(--text-main)', letterSpacing: '0.15em', fontWeight: 700 }}>
               EAGLE ENTERTAINMENT
             </div>
             <div style={{ fontSize: '0.6rem', color: 'var(--text-muted)', letterSpacing: '0.4em', textTransform: 'uppercase', marginTop: '0.8rem', fontWeight: 600 }}>Executive Access Portal</div>
@@ -66,7 +66,7 @@ const AdminLogin = () => {
         {/* Card */}
         <div className="glass-card" style={{ padding: '3.5rem', borderRadius: '4px', border: '1px solid var(--border)' }}>
           <div style={{ marginBottom: '2.5rem', textAlign: 'center' }}>
-            <h1 className="display-font" style={{ fontSize: '1.8rem', color: '#fff', marginBottom: '0.5rem' }}>
+            <h1 className="display-font" style={{ fontSize: '1.8rem', color: 'var(--text-main)', marginBottom: '0.5rem' }}>
               Executive <span style={{ color: 'var(--primary)' }}>Secure Login</span>
             </h1>
             <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Welcome back, Director.</p>

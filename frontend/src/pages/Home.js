@@ -36,7 +36,7 @@ const Hero = () => {
           >
             <img src={sl.img} alt="" style={{ width:'100%', height:'100%', objectFit:'cover' }} />
             <div style={{ position:'absolute', inset:0, background:'linear-gradient(to right, rgba(3, 3, 3, 0.92) 0%, rgba(3, 3, 3, 0.55) 60%, rgba(3, 3, 3, 0.85) 100%)' }} />
-            <div style={{ position:'absolute', inset:0, background:'radial-gradient(circle at 15% 50%, rgba(212, 175, 55, 0.15), transparent 55%)' }} />
+            <div style={{ position:'absolute', inset:0, background:'radial-gradient(circle at 15% 50%, rgba(255,105,180, 0.15), transparent 55%)' }} />
           </motion.div>
         ))}
       </AnimatePresence>
@@ -57,8 +57,8 @@ const Hero = () => {
                   display: 'inline-flex', 
                   alignItems: 'center', 
                   gap: '0.6rem', 
-                  background: 'rgba(212, 175, 55, 0.08)', 
-                  border: '1px solid rgba(212, 175, 55, 0.3)', 
+                  background: 'rgba(255,105,180, 0.08)', 
+                  border: '1px solid rgba(255,105,180, 0.3)', 
                   padding: '0.5rem 1.2rem', 
                   borderRadius: '100px', 
                   marginBottom: '2rem' 
@@ -68,7 +68,7 @@ const Hero = () => {
                 </div>
                 
                 {/* Title */}
-                <h1 className="display-font" style={{ fontSize:'clamp(2.6rem, 6.2vw, 4.8rem)', color:'#fff', lineHeight:1.1, marginBottom:'1.8rem', fontWeight: 700, letterSpacing: '-0.02em' }}>
+                <h1 className="display-font" style={{ fontSize:'clamp(2.6rem, 6.2vw, 4.8rem)', color: 'var(--text-main)', lineHeight:1.1, marginBottom:'1.8rem', fontWeight: 700, letterSpacing: '-0.02em' }}>
                   {sl.title} <span className="gold-text-shine" style={{ display: 'inline-block', fontStyle: 'italic', fontWeight: 400 }}>{sl.accent}</span>
                 </h1>
                 
@@ -156,7 +156,7 @@ const Services = () => {
   ];
 
   return (
-    <section className="section" style={{ background:'linear-gradient(to bottom, #050505, #0a0a0a)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
+    <section className="section" style={{ background:'linear-gradient(to bottom, var(--bg-main), var(--bg-surface))', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
       <div className="container">
         <div style={{ textAlign:'center', marginBottom:'6.5rem' }}>
           <span className="section-label">Our Capabilities</span>
@@ -179,9 +179,9 @@ const Services = () => {
             >
               <div style={{ 
                 fontSize:'2.8rem', color: 'var(--primary)',
-                filter: 'drop-shadow(0 0 12px rgba(212, 175, 55, 0.25))' 
+                filter: 'drop-shadow(0 0 12px rgba(255,105,180, 0.25))' 
               }}>{s.icon}</div>
-              <h3 className="display-font" style={{ fontSize:'1.55rem', color:'#fff', margin: 0, fontWeight: 600 }}>{s.title}</h3>
+              <h3 className="display-font" style={{ fontSize:'1.55rem', color: 'var(--text-main)', margin: 0, fontWeight: 600 }}>{s.title}</h3>
               <p style={{ color:'var(--text-muted)', fontSize:'0.92rem', lineHeight:1.75, margin: 0 }}>{s.desc}</p>
             </motion.div>
           ))}
@@ -213,7 +213,7 @@ const WhyUs = () => (
           <div className="glass-card" style={{
             position:'absolute', bottom:'-20px', right:'-20px',
             padding:'2rem 2.5rem', zIndex:2, minWidth:230,
-            border: '1px solid rgba(212, 175, 55, 0.25)',
+            border: '1px solid rgba(255,105,180, 0.25)',
             boxShadow: 'var(--shadow-glow)'
           }}>
             <div style={{ fontSize:'3.8rem', fontWeight:700, color:'var(--primary)', lineHeight:1, fontFamily: 'var(--font-display)' }}>10+</div>
@@ -259,7 +259,7 @@ const Testimonials = ({ testimonials }) => {
   if (!testimonials.length) return null;
 
   return (
-    <section className="section" style={{ background:'linear-gradient(to bottom, #0a0a0a, #050505)', borderTop:'1px solid var(--border)' }}>
+    <section className="section" style={{ background:'linear-gradient(to bottom, var(--bg-surface), var(--bg-main))', borderTop:'1px solid var(--border)' }}>
       <div className="container">
         <div style={{ textAlign:'center', marginBottom:'6.5rem' }}>
           <span className="section-label">Testimonials</span>
@@ -279,18 +279,18 @@ const Testimonials = ({ testimonials }) => {
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               >
                 <div style={{ fontSize:'5.5rem', color:'var(--primary)', opacity:0.18, lineHeight:1, marginBottom:'0.5rem', fontFamily:'var(--font-display)', position:'absolute', top:'2.5rem', left:'4rem' }}>“</div>
-                <p className="display-font" style={{ fontSize:'clamp(1.4rem, 2.4vw, 2rem)', color:'#fff', fontStyle:'italic', lineHeight:1.65, marginBottom:'3.5rem', position:'relative', zIndex: 1 }}>
+                <p className="display-font" style={{ fontSize:'clamp(1.4rem, 2.4vw, 2rem)', color: 'var(--text-main)', fontStyle:'italic', lineHeight:1.65, marginBottom:'3.5rem', position:'relative', zIndex: 1 }}>
                   {t.message}
                 </p>
                 <div style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:'1.4rem' }}>
                   <img 
                     src={getImageUrl(t.imageUrl) || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150'} 
                     alt={t.clientName} 
-                    style={{ width:66, height:66, borderRadius:'50%', objectFit:'cover', border:'2px solid var(--primary)', boxShadow: '0 0 15px rgba(212, 175, 55, 0.2)' }}
+                    style={{ width:66, height:66, borderRadius:'50%', objectFit:'cover', border:'2px solid var(--primary)', boxShadow: '0 0 15px rgba(255,105,180, 0.2)' }}
                     onError={e => { e.target.style.display='none'; }} 
                   />
                   <div style={{ textAlign:'left' }}>
-                    <div style={{ color:'#fff', fontWeight:700, fontSize:'1.15rem' }}>{t.clientName}</div>
+                    <div style={{ color: 'var(--text-main)', fontWeight:700, fontSize:'1.15rem' }}>{t.clientName}</div>
                     <div style={{ color:'var(--text-muted)', fontSize:'0.82rem', marginTop: '0.2rem', fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase' }}>{t.clientRole}{t.company ? ` · ${t.company}` : ''}</div>
                   </div>
                 </div>
@@ -324,14 +324,14 @@ const Testimonials = ({ testimonials }) => {
 const CTA = () => (
   <section style={{
     padding:'10rem 0',
-    background:'radial-gradient(circle at center, rgba(212, 175, 55, 0.12) 0%, transparent 65%), #030303',
+    background:'radial-gradient(circle at center, rgba(255,105,180, 0.12) 0%, transparent 65%), #030303',
     borderTop:'1px solid var(--border)', borderBottom:'1px solid var(--border)',
     textAlign:'center',
     position: 'relative', overflow: 'hidden'
   }}>
     <div className="container" style={{ position:'relative', zIndex:1 }}>
       <span className="section-label">Collaboration</span>
-      <h2 className="display-font" style={{ fontSize:'clamp(2.6rem, 5.5vw, 4.8rem)', color:'#fff', marginBottom:'2rem', lineHeight:1.15, fontWeight: 700 }}>
+      <h2 className="display-font" style={{ fontSize:'clamp(2.6rem, 5.5vw, 4.8rem)', color: 'var(--text-main)', marginBottom:'2rem', lineHeight:1.15, fontWeight: 700 }}>
         Let's Plan Your <span className="gold-text-shine" style={{ fontStyle:'italic', fontWeight: 400 }}>Next Milestone</span>
       </h2>
       <p style={{ color:'var(--text-muted)', maxWidth:580, margin:'0 auto 4.5rem', fontSize:'1.1rem', lineHeight:1.85 }}>
@@ -362,7 +362,7 @@ const Home = () => {
       <Hero />
       
       {/* Floating Counter stats */}
-      <div style={{ background:'rgba(5, 5, 5, 0.95)', borderBottom:'1px solid var(--border)', padding:'4.5rem 0' }}>
+      <div style={{ background:'var(--bg-card)', borderBottom:'1px solid var(--border)', padding:'4.5rem 0' }}>
         <div className="container" style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(210px, 1fr))', gap:'3.5rem', textAlign:'center' }}>
           {[
             { n: '500+', l: 'Grand Scale Events' },

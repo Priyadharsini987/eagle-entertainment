@@ -29,7 +29,7 @@ const EventDetail = () => {
   if (loading) return (
     <div style={{ minHeight:'100vh', display:'flex', alignItems:'center', justifyContent:'center', background:'var(--bg-main)' }}>
       <div style={{ textAlign:'center' }}>
-        <div style={{ width:40, height:40, border:'3px solid rgba(212, 175, 55, 0.1)', borderTopColor:'var(--primary)', borderRadius:'50%', margin:'0 auto 1.5rem', animation:'pulse-glow 1.5s infinite linear' }} />
+        <div style={{ width:40, height:40, border:'3px solid rgba(255,105,180, 0.1)', borderTopColor:'var(--primary)', borderRadius:'50%', margin:'0 auto 1.5rem', animation:'pulse-glow 1.5s infinite linear' }} />
         <div style={{ color:'var(--text-muted)', fontSize:'0.9rem', letterSpacing:'0.1em' }}>Loading event details...</div>
       </div>
     </div>
@@ -38,7 +38,7 @@ const EventDetail = () => {
   if (!event) return (
     <div style={{ paddingTop:'10rem', textAlign:'center', color:'var(--text-muted)', minHeight:'100vh' }}>
       <div style={{ fontSize:'4rem', marginBottom:'1.5rem' }}>🎭</div>
-      <h3 style={{ color: '#fff', fontSize: '1.8rem', fontFamily: 'var(--font-display)', marginBottom: '1rem' }}>Event not found</h3>
+      <h3 style={{ color: 'var(--text-main)', fontSize: '1.8rem', fontFamily: 'var(--font-display)', marginBottom: '1rem' }}>Event not found</h3>
       <p style={{ marginBottom: '2.5rem' }}>The event you are looking for may have been removed or does not exist.</p>
       <Link to="/events" className="btn-primary">← Back to Events</Link>
     </div>
@@ -60,7 +60,7 @@ const EventDetail = () => {
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           onError={e => e.target.style.display='none'} 
         />
-        <div style={{ position:'absolute', inset:0, background:'linear-gradient(to top, rgba(5,5,5,1) 0%, rgba(5,5,5,0.45) 60%, transparent)' }} />
+        <div style={{ position:'absolute', inset:0, background:'linear-gradient(to top, rgba(5,5,5,1) 0%, var(--bg-card) 60%, transparent)' }} />
         
         <div style={{ position:'absolute', bottom:0, left:0, right:0, padding:'4rem 0' }}>
           <div className="container">
@@ -72,11 +72,11 @@ const EventDetail = () => {
               <Link to="/events" style={{ color:'var(--primary-light)', textDecoration:'none', fontSize:'0.75rem', fontWeight:800, letterSpacing:'0.22em', textTransform:'uppercase', marginBottom:'1.8rem', display:'inline-block', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--primary-light)'}>← Back to Events</Link>
               
               <div style={{ display:'flex', gap:'0.85rem', marginBottom:'1.8rem', flexWrap:'wrap' }}>
-                <span style={{ padding:'5px 15px', background:'rgba(212, 175, 55, 0.15)', border:'1px solid var(--primary)', color:'var(--primary-light)', borderRadius:'100px', fontSize:'0.65rem', fontWeight:800, textTransform:'uppercase', letterSpacing:'0.12em' }}>{event.category}</span>
-                <span style={{ padding:'5px 15px', background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.15)', color:'#fff', borderRadius:'100px', fontSize:'0.65rem', fontWeight:800, textTransform:'uppercase', letterSpacing:'0.12em' }}>{event.upcoming ? 'Upcoming' : 'Finished'}</span>
+                <span style={{ padding:'5px 15px', background:'rgba(255,105,180, 0.15)', border:'1px solid var(--primary)', color:'var(--primary-light)', borderRadius:'100px', fontSize:'0.65rem', fontWeight:800, textTransform:'uppercase', letterSpacing:'0.12em' }}>{event.category}</span>
+                <span style={{ padding:'5px 15px', background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.15)', color: 'var(--text-main)', borderRadius:'100px', fontSize:'0.65rem', fontWeight:800, textTransform:'uppercase', letterSpacing:'0.12em' }}>{event.upcoming ? 'Upcoming' : 'Finished'}</span>
               </div>
               
-              <h1 className="display-font" style={{ fontSize:'clamp(2.5rem, 5.8vw, 4.4rem)', color:'#fff', fontWeight:700, lineHeight:1.15, letterSpacing: '-0.02em' }}>{event.title}</h1>
+              <h1 className="display-font" style={{ fontSize:'clamp(2.5rem, 5.8vw, 4.4rem)', color: 'var(--text-main)', fontWeight:700, lineHeight:1.15, letterSpacing: '-0.02em' }}>{event.title}</h1>
             </motion.div>
           </div>
         </div>
@@ -92,7 +92,7 @@ const EventDetail = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h2 className="display-font" style={{ fontSize:'2.2rem', color:'#fff', marginBottom:'1rem', fontWeight: 600 }}>Event Details</h2>
+            <h2 className="display-font" style={{ fontSize:'2.2rem', color: 'var(--text-main)', marginBottom:'1rem', fontWeight: 600 }}>Event Details</h2>
             <div style={{ width:60, height:2, background:'var(--primary)', marginBottom:'2.5rem', boxShadow: '0 0 8px var(--primary)' }} />
             <p style={{ color:'var(--text-muted)', lineHeight:1.9, fontSize:'1.05rem', whiteSpace: 'pre-wrap' }}>
               {event.description || 'No description available for this event.'}
@@ -115,7 +115,7 @@ const EventDetail = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <h3 className="display-font" style={{ fontSize:'1.7rem', color:'#fff', marginBottom:'2.2rem', fontWeight: 600 }}>Information</h3>
+            <h3 className="display-font" style={{ fontSize:'1.7rem', color: 'var(--text-main)', marginBottom:'2.2rem', fontWeight: 600 }}>Information</h3>
             
             <div style={{ display:'flex', flexDirection:'column', gap:'1.8rem' }}>
               {[
@@ -149,11 +149,11 @@ const EventDetail = () => {
               <div style={{ display:'flex', justifyContent:'center', gap:'0.85rem' }}>
                 {['Share', 'Tweet', 'Link'].map((s, i) => (
                   <button key={i} style={{ 
-                    background:'rgba(255,255,255,0.02)', border:'1px solid rgba(212, 175, 55, 0.15)', color:'#fff', padding:'0.5rem 1rem', borderRadius:'100px',
+                    background:'rgba(255,255,255,0.02)', border:'1px solid rgba(255,105,180, 0.15)', color: 'var(--text-main)', padding:'0.5rem 1rem', borderRadius:'100px',
                     fontSize:'0.72rem', fontWeight: 600, cursor:'pointer', transition:'var(--transition)'
                   }}
-                  onMouseEnter={e => { e.currentTarget.style.borderColor='var(--primary)'; e.currentTarget.style.background='rgba(212, 175, 55, 0.08)'; e.currentTarget.style.color='var(--primary-light)'; }}
-                  onMouseLeave={e => { e.currentTarget.style.borderColor='rgba(212, 175, 55, 0.15)'; e.currentTarget.style.background='rgba(255,255,255,0.02)'; e.currentTarget.style.color='#fff'; }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor='var(--primary)'; e.currentTarget.style.background='rgba(255,105,180, 0.08)'; e.currentTarget.style.color='var(--primary-light)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor='rgba(255,105,180, 0.15)'; e.currentTarget.style.background='rgba(255,255,255,0.02)'; e.currentTarget.style.color='#fff'; }}
                   >{s}</button>
                 ))}
               </div>
@@ -165,7 +165,7 @@ const EventDetail = () => {
         {related.length > 0 && (
           <div style={{ marginTop:'8rem', paddingTop:'6rem', borderTop:'1px solid var(--border)' }}>
             <span className="section-label">Suggestions</span>
-            <h2 className="display-font" style={{ fontSize:'2.4rem', color:'#fff', marginBottom:'3.5rem', fontWeight: 700 }}>Related <span>Events</span></h2>
+            <h2 className="display-font" style={{ fontSize:'2.4rem', color: 'var(--text-main)', marginBottom:'3.5rem', fontWeight: 700 }}>Related <span>Events</span></h2>
             
             <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(320px, 1fr))', gap:'2.5rem' }}>
               {related.map((r, idx) => (

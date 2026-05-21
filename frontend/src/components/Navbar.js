@@ -65,9 +65,9 @@ const Navbar = () => {
       <nav style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
         transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
-        background: scrolled ? 'rgba(5, 5, 5, 0.85)' : 'transparent',
+        background: scrolled ? 'var(--bg-card)' : 'transparent',
         backdropFilter: scrolled ? 'blur(20px)' : 'none',
-        borderBottom: scrolled ? '1px solid rgba(212, 175, 55, 0.15)' : '1px solid transparent',
+        borderBottom: scrolled ? '1px solid rgba(255,105,180, 0.15)' : '1px solid transparent',
         padding: scrolled ? '0.8rem 0' : '1.5rem 0',
       }}>
         <div className="container" style={{ display:'flex', alignItems:'center', justifyContent:'space-between' }}>
@@ -89,7 +89,7 @@ const Navbar = () => {
             onMouseLeave={e => e.currentTarget.style.transform = 'scale(1) rotate(0deg)'}
             />
             <div>
-              <div className="display-font" style={{ fontSize:'1.25rem', fontWeight:700, color:'#fff', letterSpacing:'0.05em', lineHeight:1.1 }}>Eagle</div>
+              <div className="display-font" style={{ fontSize:'1.25rem', fontWeight:700, color: 'var(--text-main)', letterSpacing:'0.05em', lineHeight:1.1 }}>Eagle</div>
               <div style={{ fontSize:'0.58rem', letterSpacing:'0.35em', color:'var(--primary)', textTransform:'uppercase', fontWeight:700, marginTop: '2px' }}>Entertainment</div>
             </div>
           </Link>
@@ -143,8 +143,8 @@ const Navbar = () => {
                   fontSize: '0.78rem',
                   letterSpacing: '0.05em',
                   textTransform: 'uppercase',
-                  background: 'rgba(212, 175, 55, 0.1)',
-                  border: '1px solid rgba(212, 175, 55, 0.3)',
+                  background: 'rgba(255,105,180, 0.1)',
+                  border: '1px solid rgba(255,105,180, 0.3)',
                   padding: '0.6rem 1.2rem',
                   borderRadius: '100px',
                   transition: 'var(--transition)'
@@ -152,10 +152,10 @@ const Navbar = () => {
                 onMouseEnter={e => {
                   e.currentTarget.style.background = 'var(--primary)';
                   e.currentTarget.style.color = '#000';
-                  e.currentTarget.style.boxShadow = '0 0 15px rgba(212, 175, 55, 0.3)';
+                  e.currentTarget.style.boxShadow = '0 0 15px rgba(255,105,180, 0.3)';
                 }}
                 onMouseLeave={e => {
-                  e.currentTarget.style.background = 'rgba(212, 175, 55, 0.1)';
+                  e.currentTarget.style.background = 'rgba(255,105,180, 0.1)';
                   e.currentTarget.style.color = 'var(--primary-light)';
                   e.currentTarget.style.boxShadow = 'none';
                 }}
@@ -189,8 +189,8 @@ const Navbar = () => {
             onClick={() => setMenuOpen(!menuOpen)} 
             style={{
               display:'none', 
-              background: menuOpen ? 'var(--primary)' : 'rgba(212, 175, 55, 0.08)', 
-              border:'1px solid rgba(212, 175, 55, 0.35)', 
+              background: menuOpen ? 'var(--primary)' : 'rgba(255,105,180, 0.08)', 
+              border:'1px solid rgba(255,105,180, 0.35)', 
               cursor:'pointer',
               color: menuOpen ? '#000' : '#fff', 
               fontSize:'0.75rem',
@@ -250,7 +250,7 @@ const Navbar = () => {
                 position: 'fixed',
                 inset: 0,
                 height: '100vh',
-                background: 'rgba(5, 5, 5, 0.98)',
+                background: 'var(--bg-card)',
                 backdropFilter: 'blur(30px)',
                 zIndex: 1001,
                 display: 'flex',

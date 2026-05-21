@@ -25,7 +25,7 @@ const Services = () => {
           {services.map((s, i) => (
             <motion.div key={i} initial={{opacity:0, scale:0.9}} animate={{opacity:1, scale:1}} transition={{delay: i*0.1}} className="glass-card" style={{ padding:'2rem', textAlign:'center' }}>
               <div style={{ fontSize:'3rem', marginBottom:'1rem' }}>{s.icon}</div>
-              <h3 style={{ color:'#fff', marginBottom:'1rem', fontFamily:'var(--font-display)' }}>{s.title}</h3>
+              <h3 style={{ color: 'var(--text-main)', marginBottom:'1rem', fontFamily:'var(--font-display)' }}>{s.title}</h3>
               <p style={{ color:'var(--text-muted)', fontSize:'0.9rem' }}>{s.desc}</p>
             </motion.div>
           ))}

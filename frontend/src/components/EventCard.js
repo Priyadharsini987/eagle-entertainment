@@ -42,16 +42,16 @@ const EventCard = ({ event, compact = false }) => {
         />
         <div style={{
           position: 'absolute', inset: 0,
-          background: 'linear-gradient(to top, rgba(5,5,5,1) 0%, rgba(5,5,5,0.4) 60%, transparent 100%)',
+          background: 'linear-gradient(to top, rgba(5,5,5,1) 0%, var(--bg-card) 60%, transparent 100%)',
         }} />
         
         {/* Category badge */}
         <div style={{
           position: 'absolute', top: 16, left: 16,
-          background: 'rgba(5, 5, 5, 0.75)',
+          background: 'var(--bg-card)',
           backdropFilter: 'blur(10px)',
           border: `1px solid ${catColor}`,
-          color: '#fff', 
+          color: 'var(--text-main)', 
           padding: '5px 14px', 
           borderRadius: '100px',
           fontSize: '0.62rem', 
@@ -64,7 +64,7 @@ const EventCard = ({ event, compact = false }) => {
         {event.upcoming !== undefined && (
           <div style={{
             position: 'absolute', top: 16, right: 16,
-            background: event.upcoming ? 'rgba(212, 175, 55, 0.15)' : 'rgba(255, 255, 255, 0.05)',
+            background: event.upcoming ? 'rgba(255,105,180, 0.15)' : 'rgba(255, 255, 255, 0.05)',
             backdropFilter: 'blur(10px)',
             border: `1px solid ${event.upcoming ? 'var(--primary)' : 'rgba(255,255,255,0.2)'}`,
             color: event.upcoming ? 'var(--primary-light)' : '#fff',
@@ -97,7 +97,7 @@ const EventCard = ({ event, compact = false }) => {
         <h3 className="display-font" style={{
           fontSize: '1.35rem',
           fontWeight: 700, 
-          color: '#fff', 
+          color: 'var(--text-main)', 
           lineHeight: 1.35,
           marginBottom: '1rem',
           letterSpacing: '-0.01em'
@@ -135,10 +135,10 @@ const EventCard = ({ event, compact = false }) => {
           
           <Link to={`/events/${event.id}`} style={{
             width:42, height:42, borderRadius:'50%', 
-            background:'rgba(212, 175, 55, 0.05)', 
-            border:'1px solid rgba(212, 175, 55, 0.25)',
+            background:'rgba(255,105,180, 0.05)', 
+            border:'1px solid rgba(255,105,180, 0.25)',
             display:'flex', alignItems:'center', justifyContent:'center', 
-            color:'#fff', textDecoration:'none', transition:'var(--transition)',
+            color: 'var(--text-main)', textDecoration:'none', transition:'var(--transition)',
             fontSize: '1rem',
             fontWeight: 'bold'
           }}
@@ -146,11 +146,11 @@ const EventCard = ({ event, compact = false }) => {
             e.currentTarget.style.borderColor='var(--primary)'; 
             e.currentTarget.style.background='var(--primary)'; 
             e.currentTarget.style.color='#000';
-            e.currentTarget.style.boxShadow='0 0 10px rgba(212, 175, 55, 0.3)';
+            e.currentTarget.style.boxShadow='0 0 10px rgba(255,105,180, 0.3)';
           }}
           onMouseLeave={e => { 
-            e.currentTarget.style.borderColor='rgba(212, 175, 55, 0.25)'; 
-            e.currentTarget.style.background='rgba(212, 175, 55, 0.05)'; 
+            e.currentTarget.style.borderColor='rgba(255,105,180, 0.25)'; 
+            e.currentTarget.style.background='rgba(255,105,180, 0.05)'; 
             e.currentTarget.style.color='#fff';
             e.currentTarget.style.boxShadow='none';
           }}
