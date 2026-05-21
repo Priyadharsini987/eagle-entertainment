@@ -410,17 +410,6 @@ const Home = () => {
           </motion.div>
         </div>
       </section>
-
-      <Services />
-      <WhyUs />
-      <Testimonials testimonials={testimonials} />
-      <CTA />
-      
-      <style>{`
-        @media(max-width:900px){
-          .why-us-grid{grid-template-columns:1fr!important; gap:4rem!important;}
-        }
-      `}</style>
     </div>
   );
 };

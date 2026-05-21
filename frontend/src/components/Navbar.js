@@ -30,12 +30,11 @@ const Navbar = () => {
   }, [location, menuOpen]);
 
   const links = [
-    { label: 'Home', path: '/' },
     { label: 'Events', path: '/events' },
-    { label: 'Gallery', path: '/gallery' },
-    { label: 'Highlights', path: '/#highlights' },
-    { label: 'About', path: '/about' },
+    { label: 'Services', path: '/services' },
     { label: 'Contact', path: '/contact' },
+    { label: 'About', path: '/about' },
+    { label: 'Gallery', path: '/gallery' },
   ];
 
   const isActive = (path) => {

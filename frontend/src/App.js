@@ -9,6 +9,7 @@ import EventDetail from './pages/EventDetail';
 import Gallery from './pages/Gallery';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Services from './pages/Services';
 import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
 
@@ -47,6 +48,7 @@ const AppRoutes = () => (
     <Route path="/events/:id" element={<PublicLayout><EventDetail /></PublicLayout>} />
     <Route path="/gallery" element={<PublicLayout><Gallery /></PublicLayout>} />
     <Route path="/about" element={<PublicLayout><About /></PublicLayout>} />
+    <Route path="/services" element={<PublicLayout><Services /></PublicLayout>} />
     <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
 
     {/* Admin Routes */}

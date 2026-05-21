@@ -252,7 +252,7 @@ const EventsTab = () => {
   const [editEvent, setEditEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const emptyForm = { title:'', description:'', category:'WEDDING', eventDate:'', eventTime:'', venue:'', city:'', capacity:'', price:'', imageUrl:'', status:'UPCOMING', isUpcoming: true };
+  const emptyForm = { title:'', description:'', category:'WEDDING', eventDate:'', eventTime:'', venue:'', city:'', capacity:'', price:'', imageUrl:'', status:'UPCOMING', upcoming: true };
   const [form, setForm] = useState(emptyForm);
 
   const load = () => {
@@ -263,7 +263,7 @@ const EventsTab = () => {
 
   const handleEdit = (ev) => {
     setEditEvent(ev);
-    setForm({ ...ev, eventDate: ev.eventDate || '', isUpcoming: ev.upcoming ?? ev.isUpcoming ?? true });
+    setForm({ ...ev, eventDate: ev.eventDate || '', upcoming: ev.upcoming ?? ev.isUpcoming ?? true });
     setShowForm(true);
   };
 
@@ -323,9 +323,8 @@ const EventsTab = () => {
                     {categories.map(c => <option key={c}>{c}</option>)}
                   </select>
                 </div>
-                <div className="form-group">
                   <label>Status</label>
-                  <select value={form.status} onChange={e => setForm(f => ({...f, status:e.target.value, isUpcoming: e.target.value === 'UPCOMING'}))}>
+                  <select value={form.status} onChange={e => setForm(f => ({...f, status:e.target.value, upcoming: e.target.value === 'UPCOMING'}))}>
                     {['UPCOMING','ONGOING','COMPLETED','CANCELLED'].map(s => <option key={s}>{s}</option>)}
                   </select>
                 </div>
