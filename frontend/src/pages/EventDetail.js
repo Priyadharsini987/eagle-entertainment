@@ -221,11 +221,16 @@ const EventDetail = () => {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             className="glass-card"
-            style={{ width: '100%', maxWidth: 500, padding: '3rem', position: 'relative' }}
+            style={{ 
+              width: '100%', maxWidth: 500, 
+              padding: 'clamp(1.5rem, 5vw, 3rem)', 
+              position: 'relative',
+              maxHeight: '90vh', overflowY: 'auto'
+            }}
           >
             <button onClick={handleCloseModal} style={{
-              position: 'absolute', top: 20, right: 20, background: 'transparent', border: 'none',
-              color: 'var(--text-muted)', fontSize: '1.5rem', cursor: 'pointer'
+              position: 'absolute', top: 15, right: 15, background: 'transparent', border: 'none',
+              color: 'var(--text-muted)', fontSize: '1.8rem', cursor: 'pointer', lineHeight: 1
             }}>×</button>
             <h3 className="display-font" style={{ fontSize: '1.8rem', marginBottom: '0.5rem', color: 'var(--text-main)' }}>Confirm Booking</h3>
             <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '2rem' }}>Request booking for <strong>{event.title}</strong>.</p>

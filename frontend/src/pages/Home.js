@@ -324,7 +324,7 @@ const Home = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              style={{ flex: '1 1 350px', maxWidth: '450px' }}
+              style={{ flex: '1 1 300px', maxWidth: '450px' }}
             >
               <div style={{ position: 'relative', borderRadius: 'var(--radius-lg)', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.1)' }}>
                 <img src="/arjun_raja.png" alt="Arjun Raja - CEO & Founder" style={{ width: '100%', height: 'auto', display: 'block' }} />
@@ -337,7 +337,7 @@ const Home = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              style={{ flex: '1 1 400px', maxWidth: '600px' }}
+              style={{ flex: '1 1 300px', maxWidth: '600px' }}
             >
               <h3 className="display-font" style={{ fontSize:'2.2rem', color: 'var(--text-main)', marginBottom:'0.5rem', fontWeight: 700 }}>Arjun Raja</h3>
               <div style={{ color:'var(--primary)', fontSize:'0.9rem', fontWeight:800, letterSpacing:'0.2em', textTransform:'uppercase', marginBottom:'2rem' }}>
