@@ -203,24 +203,23 @@ const Home = () => {
       <Hero />
       
       {/* Floating Counter stats */}
-      <div style={{ background:'var(--bg-card)', borderBottom:'1px solid var(--border)', padding:'4.5rem 0' }}>
-        <div className="container" style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(210px, 1fr))', gap:'3.5rem', textAlign:'center' }}>
+      <div style={{ background:'var(--bg-card)', borderBottom:'1px solid var(--border)', padding:'2.5rem 0' }}>
+        <div className="container" style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(150px, 1fr))', gap:'2rem', textAlign:'center' }}>
           {[
-            { n: '500+', l: 'Grand Scale Events' },
-            { n: '10+', l: 'Years of Artistry' },
+            { n: '5+', l: 'Years of Artistry' },
             { n: '100%', l: 'Satisfaction Index' },
             { n: '24/7', l: 'Dedicated Stewardship' },
           ].map((s, i) => (
             <motion.div 
               key={i} 
-              style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}
+              style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08, duration: 0.5 }}
             >
-              <div style={{ fontSize:'2.8rem', fontWeight: 800, color:'var(--primary)', lineHeight:1, fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}>{s.n}</div>
-              <div style={{ fontSize:'0.72rem', color:'var(--text-muted)', textTransform:'uppercase', letterSpacing:'0.25em', fontWeight: 700 }}>{s.l}</div>
+              <div style={{ fontSize:'2rem', fontWeight: 800, color:'var(--primary)', lineHeight:1, fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}>{s.n}</div>
+              <div style={{ fontSize:'0.65rem', color:'var(--text-muted)', textTransform:'uppercase', letterSpacing:'0.2em', fontWeight: 700 }}>{s.l}</div>
             </motion.div>
           ))}
         </div>

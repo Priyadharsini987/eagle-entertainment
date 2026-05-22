@@ -81,11 +81,11 @@ const Navbar = () => {
         <div className="nav-container" style={{ display:'flex', alignItems:'center', justifyContent:'space-between', width: '100%', maxWidth: 1200, margin: '0 auto' }}>
           
           {/* Logo */}
-          <Link to="/" style={{ textDecoration:'none', display:'flex', alignItems:'center', gap:'0.75rem' }}>
+          <Link to="/" style={{ textDecoration:'none', display:'flex', alignItems:'center', gap:'0.75rem', flexShrink: 0 }}>
             <img src="/logo.png" alt="Eagle Entertainment Logo" style={{ width: 50, height: 50, minWidth: 50, objectFit: 'contain', borderRadius: '50%', flexShrink: 0 }} />
-            <div>
+            <div className="nav-brand-text" style={{ flexShrink: 0, whiteSpace: 'nowrap' }}>
               <div className="display-font" style={{ fontSize:'1.4rem', fontWeight:800, color: 'var(--text-main)', letterSpacing:'-0.02em', lineHeight:1 }}>Eagle</div>
-              <div style={{ fontSize:'0.65rem', letterSpacing:'0.15em', color:'var(--primary)', textTransform:'uppercase', fontWeight:600, marginTop: '4px' }}>Entertainment</div>
+              <div className="nav-brand-sub" style={{ fontSize:'0.65rem', letterSpacing:'0.15em', color:'var(--primary)', textTransform:'uppercase', fontWeight:600, marginTop: '4px' }}>Entertainment</div>
             </div>
           </Link>
 
@@ -177,6 +177,14 @@ const Navbar = () => {
           .nav-desktop a {
             text-align: center;
             font-size: 0.75rem !important;
+          }
+        }
+        @media(max-width: 450px) {
+          .nav-desktop {
+            grid-template-columns: repeat(2, auto);
+          }
+          .nav-brand-sub {
+            display: none;
           }
         }
       `}</style>
