@@ -694,6 +694,19 @@ const InquiriesTab = () => {
                   <span style={{ color: 'var(--text-main)', fontSize:'0.85rem' }}>{v}</span>
                 </div>
               ))}
+              
+              <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.5rem', marginBottom: '0.5rem' }}>
+                {selected.phone && (
+                  <a href={`tel:${selected.phone}`} className="btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.75rem', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.4rem', borderRadius: '4px' }}>
+                    📞 Call Now
+                  </a>
+                )}
+                {selected.email && (
+                  <a href={`mailto:${selected.email}`} className="btn-outline" style={{ padding: '0.5rem 1rem', fontSize: '0.75rem', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.4rem', borderRadius: '4px' }}>
+                    ✉️ Email Client
+                  </a>
+                )}
+              </div>
               {selected.message && (
                 <div>
                   <div style={{ color: 'var(--text-muted)', fontSize:'0.72rem', fontWeight:700, letterSpacing:'0.1em', textTransform:'uppercase', marginBottom:'0.4rem' }}>Message</div>

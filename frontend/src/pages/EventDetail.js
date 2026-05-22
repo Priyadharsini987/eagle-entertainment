@@ -235,36 +235,53 @@ const EventDetail = () => {
             <h3 className="display-font" style={{ fontSize: '1.8rem', marginBottom: '0.5rem', color: 'var(--text-main)' }}>Confirm Booking</h3>
             <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '2rem' }}>Request booking for <strong>{event.title}</strong>.</p>
             
-            {formStatus && (
-              <div style={{
-                padding:'1rem', borderRadius:'6px', marginBottom:'1.5rem',
-                background: formStatus.type==='success' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)',
-                color: formStatus.type==='success' ? '#10b981' : '#ef4444',
-                fontSize:'0.9rem', border: `1px solid ${formStatus.type==='success' ? '#10b981' : '#ef4444'}`
-              }}>{formStatus.msg}</div>
+            {formStatus && formStatus.type === 'success' ? (
+              <div style={{ textAlign: 'center', padding: '2rem 0' }}>
+                <motion.div 
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ type: 'spring', stiffness: 200, damping: 15 }}
+                  style={{ width: 80, height: 80, borderRadius: '50%', background: 'rgba(16, 185, 129, 0.1)', border: '2px solid #10b981', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.5rem', color: '#10b981', margin: '0 auto 1.5rem' }}
+                >
+                  ✓
+                </motion.div>
+                <h4 className="display-font" style={{ fontSize: '1.8rem', color: 'var(--text-main)', marginBottom: '1rem' }}>Booking Confirmed</h4>
+                <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>We have received your request and will contact you shortly.</p>
+                <button onClick={handleCloseModal} className="btn-outline" style={{ padding: '0.8rem 2.5rem' }}>Close</button>
+              </div>
+            ) : (
+              <>
+                {formStatus && formStatus.type === 'error' && (
+                  <div style={{
+                    padding:'1rem', borderRadius:'6px', marginBottom:'1.5rem',
+                    background: 'rgba(239, 68, 68, 0.1)',
+                    color: '#ef4444',
+                    fontSize:'0.9rem', border: '1px solid #ef4444'
+                  }}>{formStatus.msg}</div>
+                )}
+                <form onSubmit={handleBookingSubmit} style={{ display: 'grid', gap: '1.2rem' }}>
+                  <div className="form-group" style={{ marginBottom: 0 }}>
+                    <label>Name</label>
+                    <input required value={form.name} onChange={e => setForm({...form, name: e.target.value})} style={{ background: 'var(--bg-main)' }} />
+                  </div>
+                  <div className="form-group" style={{ marginBottom: 0 }}>
+                    <label>Email</label>
+                    <input required type="email" value={form.email} onChange={e => setForm({...form, email: e.target.value})} style={{ background: 'var(--bg-main)' }} />
+                  </div>
+                  <div className="form-group" style={{ marginBottom: 0 }}>
+                    <label>Phone</label>
+                    <input required value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} style={{ background: 'var(--bg-main)' }} />
+                  </div>
+                  <div className="form-group" style={{ marginBottom: 0 }}>
+                    <label>Message</label>
+                    <textarea rows={3} value={form.message} onChange={e => setForm({...form, message: e.target.value})} placeholder="Any specific requirements?" style={{ background: 'var(--bg-main)' }} />
+                  </div>
+                  <button type="submit" className="btn-primary" disabled={formLoading} style={{ marginTop: '1rem', width: '100%', padding: '1rem', border: 'none', cursor: formLoading ? 'not-allowed' : 'pointer', opacity: formLoading ? 0.7 : 1 }}>
+                    {formLoading ? 'Sending...' : 'Confirm Request'}
+                  </button>
+                </form>
+              </>
             )}
-            
-            <form onSubmit={handleBookingSubmit} style={{ display: 'grid', gap: '1.2rem' }}>
-              <div className="form-group" style={{ marginBottom: 0 }}>
-                <label>Name</label>
-                <input required value={form.name} onChange={e => setForm({...form, name: e.target.value})} style={{ background: 'var(--bg-main)' }} />
-              </div>
-              <div className="form-group" style={{ marginBottom: 0 }}>
-                <label>Email</label>
-                <input required type="email" value={form.email} onChange={e => setForm({...form, email: e.target.value})} style={{ background: 'var(--bg-main)' }} />
-              </div>
-              <div className="form-group" style={{ marginBottom: 0 }}>
-                <label>Phone</label>
-                <input required value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} style={{ background: 'var(--bg-main)' }} />
-              </div>
-              <div className="form-group" style={{ marginBottom: 0 }}>
-                <label>Message</label>
-                <textarea rows={3} value={form.message} onChange={e => setForm({...form, message: e.target.value})} placeholder="Any specific requirements?" style={{ background: 'var(--bg-main)' }} />
-              </div>
-              <button type="submit" className="btn-primary" disabled={formLoading} style={{ marginTop: '1rem', width: '100%', padding: '1rem', border: 'none', cursor: formLoading ? 'not-allowed' : 'pointer', opacity: formLoading ? 0.7 : 1 }}>
-                {formLoading ? 'Sending...' : 'Confirm Request'}
-              </button>
-            </form>
           </motion.div>
         </div>
       )}
