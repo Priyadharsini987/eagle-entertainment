@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { publicApi, getImageUrl } from '../services/api';
 import EventCard from '../components/EventCard';
