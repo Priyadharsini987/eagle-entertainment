@@ -81,8 +81,8 @@ const Navbar = () => {
         <div className="nav-container" style={{ display:'flex', alignItems:'center', justifyContent:'space-between', width: '100%', maxWidth: 1200, margin: '0 auto' }}>
           
           {/* Logo */}
-          <Link to="/" style={{ textDecoration:'none', display:'flex', alignItems:'center', gap:'0.75rem', flexShrink: 0 }}>
-            <img src="/logo.png" alt="Eagle Entertainment Logo" style={{ width: 50, height: 50, minWidth: 50, objectFit: 'contain', borderRadius: '50%', flexShrink: 0 }} />
+          <Link to="/" style={{ textDecoration:'none', display:'flex', alignItems:'center', gap:'0.6rem', flexShrink: 0 }}>
+            <img src="/logo.png" className="nav-logo-img" alt="Eagle Entertainment Logo" style={{ width: 50, height: 50, minWidth: 50, objectFit: 'contain', borderRadius: '50%', flexShrink: 0 }} />
             <div className="nav-brand-text" style={{ flexShrink: 0, whiteSpace: 'nowrap' }}>
               <div className="display-font" style={{ fontSize:'1.4rem', fontWeight:800, color: 'var(--text-main)', letterSpacing:'-0.02em', lineHeight:1 }}>Eagle</div>
               <div className="nav-brand-sub" style={{ fontSize:'0.65rem', letterSpacing:'0.15em', color:'var(--primary)', textTransform:'uppercase', fontWeight:600, marginTop: '4px' }}>Entertainment</div>
@@ -183,8 +183,16 @@ const Navbar = () => {
           .nav-desktop {
             grid-template-columns: repeat(2, auto);
           }
+          .nav-brand-text .display-font {
+            font-size: 1.15rem !important;
+          }
           .nav-brand-sub {
-            display: none;
+            font-size: 0.55rem !important;
+          }
+          .nav-logo-img {
+            width: 42px !important;
+            height: 42px !important;
+            min-width: 42px !important;
           }
         }
       `}</style>
