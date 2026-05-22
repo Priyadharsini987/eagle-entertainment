@@ -67,18 +67,23 @@ const Navbar = () => {
   return (
     <>
       <nav style={{
-        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
+        position: 'fixed', 
+        top: 0, 
+        left: 0,
+        width: '100%',
+        zIndex: 1000,
         transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
-        background: scrolled ? 'var(--bg-card)' : 'transparent',
-        backdropFilter: scrolled ? 'blur(20px)' : 'none',
-        borderBottom: scrolled ? '1px solid rgba(223,178,89, 0.15)' : '1px solid transparent',
-        padding: scrolled ? '0.8rem 0' : '1.5rem 0',
+        background: scrolled ? 'rgba(15, 23, 42, 0.95)' : 'rgba(15, 23, 42, 0.6)',
+        backdropFilter: 'blur(20px)',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+        padding: '0.8rem 2rem',
+        boxShadow: scrolled ? '0 10px 30px rgba(0,0,0,0.4)' : 'none',
       }}>
-        <div className="container" style={{ display:'flex', alignItems:'center', justifyContent:'space-between' }}>
+        <div className="nav-container" style={{ display:'flex', alignItems:'center', justifyContent:'space-between', width: '100%', maxWidth: 1200, margin: '0 auto' }}>
           
           {/* Logo */}
           <Link to="/" style={{ textDecoration:'none', display:'flex', alignItems:'center', gap:'0.75rem' }}>
-            <img src="/logo.png" alt="Eagle Logo" style={{ width: 45, height: 45, objectFit: 'contain' }} />
+            <img src="/logo.png" alt="Eagle Entertainment Logo" style={{ width: 50, height: 50, minWidth: 50, objectFit: 'contain', borderRadius: '50%', flexShrink: 0 }} />
             <div>
               <div className="display-font" style={{ fontSize:'1.4rem', fontWeight:800, color: 'var(--text-main)', letterSpacing:'-0.02em', lineHeight:1 }}>Eagle</div>
               <div style={{ fontSize:'0.65rem', letterSpacing:'0.15em', color:'var(--primary)', textTransform:'uppercase', fontWeight:600, marginTop: '4px' }}>Entertainment</div>
@@ -86,7 +91,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Nav Links */}
-          <div style={{ display:'flex', alignItems:'center', gap:'3rem' }} className="nav-desktop">
+          <div style={{ display:'flex', alignItems:'center', gap:'1.5rem', overflowX: 'auto', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch', paddingBottom: '2px' }} className="nav-desktop">
             {links.map(l => (
               <Link 
                 key={l.path} 
@@ -98,15 +103,23 @@ const Navbar = () => {
                   fontWeight: 600, 
                   letterSpacing:'0.02em',
                   color: isActive(l.path) ? '#fff' : 'var(--text-muted)',
-                  transition: 'color 0.3s ease',
+                  background: isActive(l.path) ? 'var(--primary)' : 'transparent',
+                  borderRadius: '6px',
+                  transition: 'all 0.3s ease',
                   position: 'relative',
-                  padding: '0.5rem 0'
+                  padding: '0.35rem 0.75rem'
                 }}
                 onMouseEnter={e => {
-                  if (!isActive(l.path)) e.currentTarget.style.color = '#fff';
+                  if (!isActive(l.path)) {
+                    e.currentTarget.style.color = '#fff';
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                  }
                 }}
                 onMouseLeave={e => {
-                  if (!isActive(l.path)) e.currentTarget.style.color = 'var(--text-muted)';
+                  if (!isActive(l.path)) {
+                    e.currentTarget.style.color = 'var(--text-muted)';
+                    e.currentTarget.style.background = 'transparent';
+                  }
                 }}
               >
                 {l.label}
@@ -132,159 +145,40 @@ const Navbar = () => {
                 <button onClick={() => { logout(); navigate('/'); }} style={{
                   background: 'transparent',
                   border: '1px solid rgba(255,255,255,0.15)',
-                  color: 'rgba(255,255,255,0.6)',
+                  color: 'var(--text-muted)',
                   cursor: 'pointer',
                   padding: '0.6rem 1.2rem',
-                  borderRadius: '100px',
+                  borderRadius: '6px',
                   fontSize: '0.78rem',
                   fontWeight: 700,
                   letterSpacing: '0.05em',
                   textTransform: 'uppercase',
                   transition: 'var(--transition)'
                 }}
-                onMouseEnter={e => { e.currentTarget.style.color = '#f87171'; e.currentTarget.style.borderColor = '#ef4444'; e.currentTarget.style.background = 'rgba(239, 68, 68, 0.05)'; }}
-                onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.6)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)'; e.currentTarget.style.background = 'transparent'; }}
+                onMouseEnter={e => { e.currentTarget.style.color = '#ef4444'; e.currentTarget.style.borderColor = '#ef4444'; e.currentTarget.style.background = 'rgba(239, 68, 68, 0.05)'; }}
+                onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)'; e.currentTarget.style.background = 'transparent'; }}
                 >
                   Sign Out
                 </button>
               </div>
             )}
           </div>
-
-          {/* Mobile Hamburguer */}
-          <button 
-            onClick={() => setMenuOpen(!menuOpen)} 
-            style={{
-              display:'none', 
-              background: menuOpen ? 'var(--primary)' : 'rgba(223,178,89, 0.08)', 
-              border:'1px solid rgba(223,178,89, 0.35)', 
-              cursor:'pointer',
-              color: menuOpen ? '#000' : '#fff', 
-              fontSize:'0.75rem',
-              fontWeight: 800,
-              textTransform: 'uppercase',
-              letterSpacing: '0.15em',
-              padding: '0.6rem 1.2rem',
-              borderRadius: '100px',
-              alignItems: 'center',
-              gap: '0.5rem',
-              outline: 'none',
-              transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-              zIndex: 1002
-            }} 
-            className="nav-hamburger"
-          >
-            <span>{menuOpen ? 'Close' : 'Menu'}</span>
-            <div style={{
-              width: 14,
-              height: 10,
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              position: 'relative'
-            }}>
-              <span style={{
-                width: '100%', height: 1.5,
-                background: menuOpen ? '#000' : '#fff',
-                transform: menuOpen ? 'rotate(45deg) translate(3px, 3px)' : 'none',
-                transition: 'transform 0.3s ease'
-              }} />
-              <span style={{
-                width: '100%', height: 1.5,
-                background: menuOpen ? '#000' : '#fff',
-                opacity: menuOpen ? 0 : 1,
-                transition: 'opacity 0.2s ease'
-              }} />
-              <span style={{
-                width: '100%', height: 1.5,
-                background: menuOpen ? '#000' : '#fff',
-                transform: menuOpen ? 'rotate(-45deg) translate(3px, -3px)' : 'none',
-                transition: 'transform 0.3s ease'
-              }} />
-            </div>
-          </button>
         </div>
-
-        {/* Mobile Overlay Menu */}
-        <AnimatePresence>
-          {menuOpen && (
-            <motion.div 
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              style={{
-                position: 'fixed',
-                inset: 0,
-                height: '100vh',
-                background: 'var(--bg-card)',
-                backdropFilter: 'blur(30px)',
-                zIndex: 1001,
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                padding: '3rem',
-                gap: '2.2rem'
-              }}
-            >
-              {links.map((l, idx) => (
-                <motion.div
-                  key={l.path}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 + idx * 0.05, duration: 0.5 }}
-                >
-                  <Link 
-                    to={l.path} 
-                    onClick={(e) => {
-                      if (l.path.startsWith('/#')) {
-                        handleLinkClick(e, l.path);
-                      } else {
-                        setMenuOpen(false);
-                      }
-                    }}
-                    style={{
-                      textDecoration:'none', 
-                      color: isActive(l.path) ? 'var(--primary)' : '#fff',
-                      fontWeight: 700, 
-                      fontSize: '1.8rem',
-                      fontFamily: 'var(--font-display)',
-                      letterSpacing: '0.04em',
-                      position: 'relative',
-                      display: 'block',
-                      textAlign: 'center',
-                      transition: 'color 0.3s ease'
-                    }}
-                  >
-                    {l.label}
-                  </Link>
-                </motion.div>
-              ))}
-              
-              {user && (
-                <motion.div
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 + links.length * 0.05, duration: 0.5 }}
-                  style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', width: '100%', maxWidth: '250px', marginTop: '1.5rem' }}
-                >
-                  <Link to="/admin" onClick={() => setMenuOpen(false)} className="btn-primary" style={{ width: '100%', fontSize: '0.8rem' }}>
-                    ⚙️ Admin Portal
-                  </Link>
-                  <button onClick={() => { logout(); navigate('/'); setMenuOpen(false); }} className="btn-outline" style={{ width: '100%', fontSize: '0.8rem' }}>
-                    🚪 Sign Out
-                  </button>
-                </motion.div>
-              )}
-            </motion.div>
-          )}
-        </AnimatePresence>
       </nav>
       <style>{`
-        @media(max-width:900px){
-          .nav-desktop{display:none!important;}
-          .nav-hamburger{display:inline-flex!important;}
+        .nav-desktop::-webkit-scrollbar { display: none; }
+        
+        @media(max-width: 900px) {
+          .nav-desktop {
+            display: grid !important;
+            grid-template-columns: repeat(3, auto);
+            gap: 0.4rem 0.6rem !important;
+            justify-content: end;
+          }
+          .nav-desktop a {
+            text-align: center;
+            font-size: 0.75rem !important;
+          }
         }
       `}</style>
     </>

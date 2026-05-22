@@ -13,10 +13,13 @@ const Hero = () => {
     { img: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1600', tag: 'Business Events', title: 'Corporate', accent: 'Meetings & Launches', sub: 'From product launches to company parties, we handle your business events perfectly.' },
   ];
 
+  const nextSlide = () => setCurrentSlide(p => (p + 1) % slides.length);
+  const prevSlide = () => setCurrentSlide(p => (p - 1 + slides.length) % slides.length);
+
   useEffect(() => {
-    const t = setInterval(() => setCurrentSlide(p => (p + 1) % slides.length), 6500);
+    const t = setInterval(nextSlide, 6500);
     return () => clearInterval(t);
-  }, [slides.length]);
+  }, [slides.length, currentSlide]);
 
   return (
     <section style={{ position: 'relative', height: '100vh', minHeight: 750, overflow: 'hidden', display: 'flex', alignItems: 'center' }}>
@@ -35,8 +38,8 @@ const Hero = () => {
             }}
           >
             <img src={sl.img} alt="" style={{ width:'100%', height:'100%', objectFit:'cover' }} />
-            <div style={{ position:'absolute', inset:0, background:'linear-gradient(to right, rgba(3, 3, 3, 0.92) 0%, rgba(3, 3, 3, 0.55) 60%, rgba(3, 3, 3, 0.85) 100%)' }} />
-            <div style={{ position:'absolute', inset:0, background:'radial-gradient(circle at 15% 50%, rgba(223,178,89, 0.15), transparent 55%)' }} />
+            <div style={{ position:'absolute', inset:0, background:'linear-gradient(to right, rgba(2, 6, 23, 0.95) 0%, rgba(2, 6, 23, 0.6) 60%, rgba(2, 6, 23, 0.8) 100%)' }} />
+            <div style={{ position:'absolute', inset:0, background:'radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.25), transparent 55%)' }} />
           </motion.div>
         ))}
       </AnimatePresence>
@@ -57,14 +60,14 @@ const Hero = () => {
                   display: 'inline-flex', 
                   alignItems: 'center', 
                   gap: '0.6rem', 
-                  background: 'rgba(223,178,89, 0.08)', 
-                  border: '1px solid rgba(223,178,89, 0.3)', 
+                  background: 'rgba(99, 102, 241, 0.15)', 
+                  border: '1px solid rgba(99, 102, 241, 0.4)', 
                   padding: '0.5rem 1.2rem', 
                   borderRadius: '100px', 
                   marginBottom: '2rem' 
                 }}>
                   <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--primary)', boxShadow: '0 0 10px var(--primary)' }} />
-                  <span style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.22em', color: 'var(--primary-light)' }}>{sl.tag}</span>
+                  <span style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.22em', color: 'var(--primary-dark)' }}>{sl.tag}</span>
                 </div>
                 
                 {/* Title */}
@@ -90,16 +93,33 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Slide Navigation Dots */}
+      {/* Manual Navigation Arrows */}
+      <button 
+        onClick={prevSlide}
+        style={{ position:'absolute', left:'1.5%', top:'50%', transform:'translateY(-50%)', zIndex:10, background:'rgba(15,23,42,0.3)', border:'1px solid rgba(255,255,255,0.15)', color:'#fff', width:36, height:36, borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', cursor:'pointer', backdropFilter:'blur(10px)', fontSize:'0.9rem', transition:'var(--transition-fast)' }}
+        onMouseOver={e => { e.currentTarget.style.background = 'rgba(99,102,241,0.6)'; e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)'; }}
+        onMouseOut={e => { e.currentTarget.style.background = 'rgba(15,23,42,0.3)'; e.currentTarget.style.transform = 'translateY(-50%) scale(1)'; }}
+      >
+        &#10094;
+      </button>
+      <button 
+        onClick={nextSlide}
+        style={{ position:'absolute', right:'1.5%', top:'50%', transform:'translateY(-50%)', zIndex:10, background:'rgba(15,23,42,0.3)', border:'1px solid rgba(255,255,255,0.15)', color:'#fff', width:36, height:36, borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', cursor:'pointer', backdropFilter:'blur(10px)', fontSize:'0.9rem', transition:'var(--transition-fast)' }}
+        onMouseOver={e => { e.currentTarget.style.background = 'rgba(99,102,241,0.6)'; e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)'; }}
+        onMouseOut={e => { e.currentTarget.style.background = 'rgba(15,23,42,0.3)'; e.currentTarget.style.transform = 'translateY(-50%) scale(1)'; }}
+      >
+        &#10095;
+      </button>
+
       <div style={{ position:'absolute', bottom:'3.5rem', right:'5%', display:'flex', gap:'0.85rem', zIndex:3 }}>
         {slides.map((_, i) => (
           <div key={i} onClick={() => setCurrentSlide(i)} style={{
             width: i === currentSlide ? 40 : 8, height:8,
             borderRadius:4, cursor:'pointer',
-            background: i === currentSlide ? 'var(--primary)' : 'rgba(255,255,255,0.25)',
-            border: '1px solid rgba(0,0,0,0.6)',
+            background: i === currentSlide ? 'var(--primary)' : 'rgba(0,0,0,0.2)',
+            border: i === currentSlide ? 'none' : '1px solid rgba(0,0,0,0.3)',
             transition:'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
-            boxShadow: i === currentSlide ? '0 0 10px var(--primary)' : 'none'
+            boxShadow: i === currentSlide ? '0 0 10px rgba(99, 102, 241, 0.6)' : 'none'
           }} />
         ))}
       </div>
@@ -127,7 +147,17 @@ const EventsRow = ({ title, accent, events, label }) => {
         </div>
       </div>
 
-      <div ref={scrollRef} style={{
+      <motion.div 
+        ref={scrollRef} 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+        variants={{
+          visible: {
+            transition: { staggerChildren: 0.1 }
+          }
+        }}
+        style={{
         display:'flex', gap:'2.2rem', overflowX:'auto',
         paddingBottom:'2rem', scrollbarWidth:'none', msOverflowStyle:'none',
       }}>
@@ -137,11 +167,18 @@ const EventsRow = ({ title, accent, events, label }) => {
             Currently prepping future masterpieces. Reach out to schedule yours!
           </div>
         ) : events.map(ev => (
-          <div key={ev.id} style={{ minWidth:350, maxWidth:350, flexShrink:0 }}>
+          <motion.div 
+            key={ev.id} 
+            variants={{
+              hidden: { opacity: 0, x: 50 },
+              visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } }
+            }}
+            style={{ minWidth:350, maxWidth:350, flexShrink:0 }}
+          >
             <EventCard event={ev} />
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };
@@ -222,9 +259,24 @@ const Home = () => {
               <span className="section-label">A Glimpse of Magic</span>
               <h2 className="section-title">Explore Our <span>Gallery</span></h2>
             </div>
-            <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(280px, 1fr))', gap:'1.5rem', marginBottom:'3.5rem' }}>
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              variants={{
+                visible: { transition: { staggerChildren: 0.1 } }
+              }}
+              style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(280px, 1fr))', gap:'1.5rem', marginBottom:'3.5rem' }}
+            >
               {gallery.map(g => (
-                <div key={g.id} className="glass-card" style={{ height: 260, overflow:'hidden', position:'relative', borderRadius:'var(--radius-md)' }}>
+                <motion.div 
+                  key={g.id} 
+                  variants={{
+                    hidden: { opacity: 0, scale: 0.9 },
+                    visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } }
+                  }}
+                  className="glass-card" style={{ height: 260, overflow:'hidden', position:'relative', borderRadius:'var(--radius-md)' }}
+                >
                   <img src={getImageUrl(g.imageUrl)} alt={g.title} style={{ width:'100%', height:'100%', objectFit:'cover', transition:'transform 0.5s ease' }} />
                   <div style={{ position:'absolute', inset:0, background:'linear-gradient(to top, rgba(0,0,0,0.8), transparent)', display:'flex', alignItems:'flex-end', padding:'1.5rem' }}>
                     <div>
@@ -232,9 +284,9 @@ const Home = () => {
                       <p style={{ color:'var(--primary)', fontSize:'0.75rem', textTransform:'uppercase', letterSpacing:'0.1em', margin:0, marginTop:'4px' }}>{g.category}</p>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
             <div style={{ textAlign:'center' }}>
               <Link to="/gallery" className="btn-outline">View Full Gallery</Link>
             </div>
@@ -250,9 +302,24 @@ const Home = () => {
               <span className="section-label">Client Voices</span>
               <h2 className="section-title">What They <span>Say</span></h2>
             </div>
-            <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(300px, 1fr))', gap:'2rem', marginBottom:'3.5rem' }}>
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              variants={{
+                visible: { transition: { staggerChildren: 0.15 } }
+              }}
+              style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(300px, 1fr))', gap:'2rem', marginBottom:'3.5rem' }}
+            >
               {testimonials.map((t, i) => (
-                <div key={t.id} className="glass-card" style={{ padding:'2.5rem', position:'relative' }}>
+                <motion.div 
+                  key={t.id} 
+                  variants={{
+                    hidden: { opacity: 0, y: 30 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+                  }}
+                  className="glass-card" style={{ padding:'2.5rem', position:'relative' }}
+                >
                   <div style={{ fontSize:'4rem', color:'var(--primary)', opacity:0.15, position:'absolute', top:20, right:30, fontFamily:'serif', lineHeight:1 }}>"</div>
                   <p style={{ color:'var(--text-muted)', fontSize:'0.95rem', lineHeight:1.7, fontStyle:'italic', marginBottom:'2rem', position:'relative', zIndex:1 }}>"{t.message}"</p>
                   <div style={{ display:'flex', alignItems:'center', gap:'1rem' }}>
@@ -268,9 +335,9 @@ const Home = () => {
                       <p style={{ color:'var(--primary)', margin:0, fontSize:'0.75rem', textTransform:'uppercase', letterSpacing:'0.05em' }}>{t.clientRole}, {t.company}</p>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
       )}

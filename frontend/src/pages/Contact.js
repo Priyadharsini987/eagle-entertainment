@@ -70,13 +70,13 @@ const Contact = () => {
             <div style={{ display:'flex', flexDirection:'column', gap:'2.2rem', marginBottom:'3.5rem' }}>
               {[
                 { icon:'📍', label:'Our Office', val:'Erode, Tamil Nadu\n(Serving All Over Tamil Nadu)' },
-                { icon:'📞', label:'Direct Contact', val:'+91 97902 41089 / +91 70100 72474' },
-                { icon:'✉️', label:'Email Address', val:'contact@eagleentertainment.com' },
-                { icon:'⏰', label:'Business Hours', val:'Mon – Sat: 10:00 AM – 8:00 PM\nSunday: Appointment Only' },
+                { icon:'📞', label:'Direct Contact', val:'+91 97902 41089' },
+                { icon:'✉️', label:'Email Address', val:'eagleentertainment.events@gmail.com' },
+                { icon:'📱', label:'Instagram', val:'@eagle_entertainment_' },
               ].map((c, i) => (
                 <div key={i} style={{ display:'flex', gap:'1.5rem', alignItems:'flex-start' }}>
                   <div style={{ 
-                    width:52, height:52, background:'rgba(223,178,89, 0.05)', border:'1px solid rgba(223,178,89, 0.25)',
+                    width:52, height:52, background:'rgba(255,255,255, 0.05)', border:'1px solid rgba(255,255,255, 0.15)',
                     borderRadius:'14px', display:'flex', alignItems:'center', justifyContent:'center',
                     fontSize:'1.6rem', flexShrink:0, boxShadow: '0 5px 15px rgba(0,0,0,0.3)'
                   }}>{c.icon}</div>
@@ -89,11 +89,15 @@ const Contact = () => {
             </div>
 
             {/* Social */}
-            <div className="glass-card" style={{ padding:'2.2rem', border: '1px solid rgba(223,178,89, 0.12)' }}>
+            <div className="glass-card" style={{ padding:'2.2rem', border: '1px solid rgba(255,255,255, 0.12)' }}>
               <div style={{ color:'var(--text-muted)', fontSize:'0.72rem', fontWeight:800, letterSpacing:'0.18em', textTransform:'uppercase', marginBottom:'1.5rem' }}>Social Connectivity</div>
               <div style={{ display:'flex', gap:'1rem', flexWrap: 'wrap' }}>
-                {['Facebook','Instagram','LinkedIn'].map((s, i) => (
-                  <button key={i} className="btn-outline" style={{ padding:'0.75rem 1.6rem', fontSize:'0.75rem', background:'rgba(255,255,255,0.02)', cursor:'pointer' }}>{s}</button>
+                {[
+                  { name: 'WhatsApp', url: 'https://wa.me/919790241089' },
+                  { name: 'Instagram', url: 'https://instagram.com/eagle_entertainment__' },
+                  { name: 'LinkedIn', url: '#/' }
+                ].map((s, i) => (
+                  <a key={i} href={s.url} target="_blank" rel="noreferrer" className="btn-outline" style={{ padding:'0.75rem 1.6rem', fontSize:'0.75rem', background:'rgba(255,255,255,0.02)', cursor:'pointer', textDecoration: 'none' }}>{s.name}</a>
                 ))}
               </div>
             </div>
@@ -102,7 +106,7 @@ const Contact = () => {
           {/* Right Column - Contact Form */}
           <motion.div 
             className="glass-card" 
-            style={{ padding:'4rem 3.5rem', border: '1px solid rgba(223,178,89, 0.15)', boxShadow: 'var(--shadow-glow)' }}
+            style={{ padding:'4rem 3.5rem', border: '1px solid rgba(255,255,255, 0.15)', boxShadow: 'var(--shadow-glow)' }}
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
