@@ -165,7 +165,7 @@ const EventDetail = () => {
                 Book Now
               </button>
               <a href="tel:+919790241089" className="btn-outline" style={{ width:'100%', fontSize:'0.82rem', padding: '1rem' }}>
-                Call Operations
+                Call for Enquiry
               </a>
             </div>
 
@@ -173,13 +173,22 @@ const EventDetail = () => {
             <div style={{ marginTop:'2.5rem', paddingTop:'2rem', borderTop:'1px solid var(--border)', textAlign:'center' }}>
               <div style={{ color:'var(--text-muted)', fontSize:'0.65rem', fontWeight:800, textTransform:'uppercase', letterSpacing:'0.15em', marginBottom:'1.2rem' }}>Share Event</div>
               <div style={{ display:'flex', justifyContent:'center', gap:'0.85rem' }}>
-                {['Share', 'Tweet', 'Link'].map((s, i) => (
+                {['Share', 'Link'].map((s, i) => (
                   <button key={i} style={{ 
                     background:'rgba(255,255,255,0.02)', border:'1px solid rgba(255,255,255, 0.15)', color: 'var(--text-main)', padding:'0.5rem 1rem', borderRadius:'100px',
                     fontSize:'0.72rem', fontWeight: 600, cursor:'pointer', transition:'var(--transition)'
                   }}
                   onMouseEnter={e => { e.currentTarget.style.borderColor='var(--primary)'; e.currentTarget.style.background='rgba(99, 102, 241, 0.08)'; e.currentTarget.style.color='var(--primary-light)'; }}
                   onMouseLeave={e => { e.currentTarget.style.borderColor='rgba(255,255,255, 0.15)'; e.currentTarget.style.background='rgba(255,255,255,0.02)'; e.currentTarget.style.color='#fff'; }}
+                  onClick={() => {
+                    const url = window.location.href;
+                    if (s === 'Share' && navigator.share) {
+                      navigator.share({ title: event.title, url }).catch(() => {});
+                    } else {
+                      navigator.clipboard.writeText(url);
+                      alert('Link copied to clipboard!');
+                    }
+                  }}
                   >{s}</button>
                 ))}
               </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { publicApi, getImageUrl } from '../services/api';
+import { useEvents } from '../context/EventContext';
 import EventCard from '../components/EventCard';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -174,14 +175,11 @@ const EventsRow = ({ title, accent, events, label }) => {
 
 // ---- Main Home ----
 const Home = () => {
-  const [upcomingEvents, setUpcomingEvents] = useState([]);
-  const [recentEvents, setRecentEvents] = useState([]);
+  const { upcomingEvents, recentEvents, loading } = useEvents();
   const [gallery, setGallery] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
 
   useEffect(() => {
-    publicApi.getUpcomingEvents().then(r => setUpcomingEvents(Array.isArray(r.data) ? r.data : [])).catch(() => {});
-    publicApi.getRecentEvents().then(r => setRecentEvents(Array.isArray(r.data) ? r.data : [])).catch(() => {});
     publicApi.getGallery().then(r => setGallery(Array.isArray(r.data) ? r.data.slice(0, 6) : [])).catch(() => {});
     publicApi.getTestimonials().then(r => setTestimonials(Array.isArray(r.data) ? r.data.slice(0, 3) : [])).catch(() => {});
   }, []);

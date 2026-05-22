@@ -46,37 +46,38 @@ const Footer = () => {
             </div>
           </motion.div>
 
-          {/* Quick Links */}
-          <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }}>
-            <h4 style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-main)', marginBottom: '1.25rem' }}>Explore</h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              {[
-                { label: 'Home', path: '/' },
-                { label: 'Our Events', path: '/events' }, 
-                { label: 'Photo Gallery', path: '/gallery' }, 
-                { label: 'About Us', path: '/about' }, 
-                { label: 'Contact Us', path: '/contact' },
-              ].map((l, i) => (
-                <Link key={i} to={l.path} style={{
-                  color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.9rem',
-                  transition: 'var(--transition-fast)', display: 'inline-block'
-                }}
-                onMouseEnter={e => { e.currentTarget.style.color = 'var(--primary)'; }}
-                onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-muted)'; }}
-                >{l.label}</Link>
-              ))}
+          {/* Quick Links & Services */}
+          <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }} style={{ display: 'flex', gap: '3rem' }}>
+            <div>
+              <h4 style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-main)', marginBottom: '1.25rem' }}>Explore</h4>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                {[
+                  { label: 'Home', path: '/' },
+                  { label: 'Our Events', path: '/events' }, 
+                  { label: 'Photo Gallery', path: '/gallery' }, 
+                  { label: 'About Us', path: '/about' }, 
+                  { label: 'Contact Us', path: '/contact' },
+                ].map((l, i) => (
+                  <Link key={i} to={l.path} style={{
+                    color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.9rem',
+                    transition: 'var(--transition-fast)', display: 'inline-block'
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.color = 'var(--primary)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-muted)'; }}
+                  >{l.label}</Link>
+                ))}
+              </div>
             </div>
-          </motion.div>
 
-          {/* Specialties */}
-          <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }}>
-            <h4 style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-main)', marginBottom: '1.25rem' }}>Services</h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              {['Corporate Events', 'Luxury Weddings', 'Concerts', 'Exhibitions'].map((s, i) => (
-                <div key={i} style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-                  {s}
-                </div>
-              ))}
+            <div>
+              <h4 style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-main)', marginBottom: '1.25rem' }}>Services</h4>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                {['Corporate Events', 'Luxury Weddings', 'Concerts', 'Exhibitions'].map((s, i) => (
+                  <div key={i} style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+                    {s}
+                  </div>
+                ))}
+              </div>
             </div>
           </motion.div>
 
@@ -147,8 +148,7 @@ const Footer = () => {
             © {new Date().getFullYear()} Eagle Entertainment. All rights reserved.
           </p>
           <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
-            <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem', cursor: 'pointer' }} onMouseEnter={e => e.target.style.color = 'var(--primary)'} onMouseLeave={e => e.target.style.color = 'var(--text-muted)'}>Privacy Policy</span>
-            <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem', cursor: 'pointer' }} onMouseEnter={e => e.target.style.color = 'var(--primary)'} onMouseLeave={e => e.target.style.color = 'var(--text-muted)'}>Terms of Service</span>
+
             {user ? (
               <Link to="/admin" style={{ color: 'var(--text-muted)', fontSize: '0.85rem', textDecoration: 'none' }} onMouseEnter={e => e.target.style.color = 'var(--primary)'} onMouseLeave={e => e.target.style.color = 'var(--text-muted)'}>
                 Admin
@@ -163,14 +163,14 @@ const Footer = () => {
 
         {/* Developer Credits */}
         <div style={{ textAlign: 'center', marginTop: '2.5rem', paddingTop: '1.5rem', borderTop: '1px dashed rgba(255,255,255,0.05)', fontSize: '0.75rem', color: 'var(--text-muted)', letterSpacing: '0.05em' }}>
-          Website by <span style={{ color: 'var(--primary)', fontWeight: 600 }}>PriyaArjun</span> &nbsp;|&nbsp; Contact: <a href="tel:+917010072474" style={{ color: 'var(--text-muted)', textDecoration: 'none', transition: 'var(--transition-fast)' }} onMouseEnter={e => e.target.style.color='var(--primary)'} onMouseLeave={e => e.target.style.color='var(--text-muted)'}>+91 7010072474</a>
+          Website by <span style={{ color: 'var(--primary)', fontWeight: 600 }}>Priya</span> &nbsp;|&nbsp; Contact: <a href="tel:+917010072474" style={{ color: 'var(--text-muted)', textDecoration: 'none', transition: 'var(--transition-fast)' }} onMouseEnter={e => e.target.style.color='var(--primary)'} onMouseLeave={e => e.target.style.color='var(--text-muted)'}>+91 7010072474</a>
         </div>
       </div>
 
       <style>{`
         .footer-grid {
           display: grid;
-          grid-template-columns: 2fr 1fr 1fr 2fr;
+          grid-template-columns: 2fr 2fr 2fr;
           gap: 4rem;
         }
         .footer-bottom {

@@ -1,33 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { publicApi } from '../services/api';
+import { useEvents } from '../context/EventContext';
 import EventCard from '../components/EventCard';
 import { motion, AnimatePresence } from 'framer-motion';
 
 
 const Events = () => {
-  const [events, setEvents] = useState({ upcoming: [], recent: [] });
+  const { upcomingEvents, recentEvents, loading } = useEvents();
+  const events = { upcoming: upcomingEvents, recent: recentEvents };
   const [filter, setFilter] = useState('ALL');
   const [tab, setTab] = useState('upcoming');
-  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
-
-  useEffect(() => {
-    const fetchEvents = async () => {
-      setLoading(true);
-      try {
-        const [upcoming, recent] = await Promise.all([
-          publicApi.getUpcomingEvents(),
-          publicApi.getRecentEvents(),
-        ]);
-        setEvents({
-          upcoming: upcoming.data,
-          recent: recent.data,
-        });
-      } catch (e) {}
-      setLoading(false);
-    };
-    fetchEvents();
-  }, []);
 
   const dynamicCategories = ['ALL', ...Array.from(new Set([...events.upcoming, ...events.recent].map(e => e.category).filter(Boolean)))];
 

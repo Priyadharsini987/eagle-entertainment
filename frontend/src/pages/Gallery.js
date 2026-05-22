@@ -88,31 +88,23 @@ const Gallery = () => {
           ))}
         </div>
 
-        {/* Masonry-style grid with animation */}
-        <motion.div 
-          layout
-          style={{
-            columns: '320px 4', columnGap:'2rem',
-          }}
-        >
-          <AnimatePresence mode="popLayout">
-            {filtered.map((img, i) => (
-              <motion.div 
-                layout
-                key={img.id} 
-                className="glass-card gallery-item" 
-                style={{
-                  marginBottom:'2rem', breakInside:'avoid',
-                  cursor:'pointer', overflow:'hidden', position:'relative',
-                  borderRadius:'var(--radius-md)',
-                  border: '1px solid rgba(255,255,255, 0.08)'
-                }}
-                onClick={() => setLightbox(img)}
-                initial={{ opacity: 0, scale: 0.95, y: 15 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95, y: 10 }}
-                transition={{ duration: 0.5, delay: i * 0.03 }}
-              >
+        {/* Masonry-style grid with simple fade animation */}
+        <div style={{ columns: '320px 4', columnGap:'2rem' }}>
+          {filtered.map((img, i) => (
+            <motion.div 
+              key={img.id} 
+              className="glass-card gallery-item" 
+              style={{
+                marginBottom:'2rem', breakInside:'avoid',
+                cursor:'pointer', overflow:'hidden', position:'relative',
+                borderRadius:'var(--radius-md)',
+                border: '1px solid rgba(255,255,255, 0.08)'
+              }}
+              onClick={() => setLightbox(img)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: i * 0.03 }}
+            >
                 <img src={getImageUrl(img.imageUrl)} alt={img.title}
                   style={{ width:'100%', display:'block', objectFit:'cover', transition:'var(--transition)' }}
                   onError={e => { e.target.src = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600'; }}
@@ -132,10 +124,9 @@ const Gallery = () => {
                     <div style={{ color:'var(--primary-light)', fontSize:'0.7rem', fontWeight:800, letterSpacing:'0.15em', textTransform:'uppercase' }}>{img.category}</div>
                   </div>
                 </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
+            </motion.div>
+          ))}
+        </div>
 
         {filtered.length === 0 && (
           <div className="glass-card" style={{ textAlign:'center', padding:'8rem 2rem', color:'var(--text-muted)' }}>

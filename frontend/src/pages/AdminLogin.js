@@ -89,7 +89,7 @@ const AdminLogin = () => {
               <input
                 name="username" value={form.username}
                 onChange={e => setForm(f => ({ ...f, username: e.target.value }))}
-                required placeholder="Enter Executive Username"
+                required placeholder="Username"
                 autoComplete="username"
               />
             </div>
@@ -102,7 +102,7 @@ const AdminLogin = () => {
                   value={form.password}
                   onChange={e => setForm(f => ({ ...f, password: e.target.value }))}
                   required 
-                  placeholder="Enter Executive Password"
+                  placeholder="Password"
                   autoComplete="current-password"
                   style={{ paddingRight: '3.5rem' }}
                 />
