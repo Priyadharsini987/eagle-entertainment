@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, Link, useLocation } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { EventProvider } from './context/EventContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -75,10 +76,12 @@ const AppRoutes = () => (
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <ScrollToTop />
-        <AppRoutes />
-      </Router>
+      <EventProvider>
+        <Router>
+          <ScrollToTop />
+          <AppRoutes />
+        </Router>
+      </EventProvider>
     </AuthProvider>
   );
 }

@@ -10,7 +10,7 @@ export function EventProvider({ children }) {
   const fetchEvents = async () => {
     try {
       const res = await publicApi.getAllEvents();
-      setEvents(res.data);
+      setEvents(Array.isArray(res.data) ? res.data : []);
     } catch {
       // Use mock data if backend not available
       setEvents(getMockEvents());
