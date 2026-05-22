@@ -130,26 +130,16 @@ const Hero = () => {
 
 // ---- Horizontal Scroll Events Row ----
 const EventsRow = ({ title, accent, events, label }) => {
-  const scrollRef = useRef(null);
-  const scroll = (dir) => {
-    if (scrollRef.current) scrollRef.current.scrollBy({ left: dir * 370, behavior: 'smooth' });
-  };
-
   return (
-    <div style={{ marginBottom:'6.5rem' }}>
-      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end', marginBottom:'3.5rem', flexWrap:'wrap', gap: '1.5rem' }}>
+    <div style={{ marginBottom:'4.5rem' }}>
+      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end', marginBottom:'2.5rem', flexWrap:'wrap', gap: '1.5rem' }}>
         <div>
           <span className="section-label">{label}</span>
           <h2 className="section-title" style={{ fontSize:'clamp(2rem, 4vw, 2.8rem)', marginBottom:0 }}>{title} <span>{accent}</span></h2>
         </div>
-        <div style={{ display:'flex', gap:'0.85rem' }}>
-          <button onClick={() => scroll(-1)} className="btn-outline" style={{ width:50, height:50, padding:0, borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', fontSize: '1.2rem' }}>←</button>
-          <button onClick={() => scroll(1)} className="btn-outline" style={{ width:50, height:50, padding:0, borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', fontSize: '1.2rem' }}>→</button>
-        </div>
       </div>
 
       <motion.div 
-        ref={scrollRef} 
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-50px" }}
@@ -159,10 +149,8 @@ const EventsRow = ({ title, accent, events, label }) => {
           }
         }}
         style={{
-        display:'flex', gap:'2.2rem', overflowX:'auto',
-        paddingBottom:'2rem', scrollbarWidth:'none', msOverflowStyle:'none',
+        display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(320px,1fr))', gap:'2.5rem',
       }}>
-        <style>{`div::-webkit-scrollbar{display:none}`}</style>
         {events.length === 0 ? (
           <div className="glass-card" style={{ padding:'6rem', width:'100%', textAlign:'center', color:'var(--text-muted)', borderStyle: 'dashed', borderColor: 'var(--border)' }}>
             Currently prepping future masterpieces. Reach out to schedule yours!
@@ -174,7 +162,7 @@ const EventsRow = ({ title, accent, events, label }) => {
               hidden: { opacity: 0, x: 50 },
               visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } }
             }}
-            style={{ minWidth:350, maxWidth:350, flexShrink:0 }}
+            style={{ width: '100%' }}
           >
             <EventCard event={ev} />
           </motion.div>
@@ -247,13 +235,13 @@ const Home = () => {
           <EventsRow
             title="Upcoming" accent="Events"
             label="Don't Miss Out"
-            events={upcomingEvents}
+            events={upcomingEvents.slice(0, 3)}
           />
           <div id="highlights">
             <EventsRow
               title="Recent" accent="Events"
               label="Completed Masterpieces"
-              events={recentEvents}
+              events={recentEvents.slice(0, 3)}
             />
           </div>
           <motion.div 
