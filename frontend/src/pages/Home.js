@@ -19,6 +19,7 @@ const Hero = () => {
   useEffect(() => {
     const t = setInterval(nextSlide, 6500);
     return () => clearInterval(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slides.length, currentSlide]);
 
   return (
