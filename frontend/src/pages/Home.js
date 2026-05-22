@@ -242,7 +242,7 @@ const Home = () => {
       </div>
 
       {/* Events Section */}
-      <section className="section" style={{ paddingBottom:'6rem' }}>
+      <section className="section" style={{ paddingBottom:'3rem' }}>
         <div className="container">
           <EventsRow
             title="Upcoming" accent="Events"
@@ -260,7 +260,7 @@ const Home = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            style={{ textAlign:'center', marginTop:'2.5rem' }}
+            style={{ textAlign:'center', marginTop:'1.5rem' }}
           >
             <Link to="/events" className="btn-outline">Browse Full Catalogue</Link>
           </motion.div>
@@ -271,7 +271,7 @@ const Home = () => {
       {gallery.length > 0 && (
         <section className="section" style={{ background:'var(--bg-card)', borderTop:'1px solid var(--border)', borderBottom:'1px solid var(--border)' }}>
           <div className="container">
-            <div style={{ textAlign:'center', marginBottom:'4rem' }}>
+            <div style={{ textAlign:'center', marginBottom:'2.5rem' }}>
               <span className="section-label">A Glimpse of Magic</span>
               <h2 className="section-title">Explore Our <span>Gallery</span></h2>
             </div>
@@ -282,7 +282,7 @@ const Home = () => {
               variants={{
                 visible: { transition: { staggerChildren: 0.1 } }
               }}
-              style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(280px, 1fr))', gap:'1.5rem', marginBottom:'3.5rem' }}
+              style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(280px, 1fr))', gap:'1.5rem', marginBottom:'2rem' }}
             >
               {gallery.map(g => (
                 <motion.div 
@@ -313,12 +313,12 @@ const Home = () => {
       {/* Visionary Section */}
       <section className="section" style={{ background:'var(--bg-surface)', borderTop:'1px solid var(--border)', borderBottom: testimonials.length > 0 ? 'none' : '1px solid var(--border)' }}>
         <div className="container">
-          <div style={{ textAlign:'center', marginBottom:'4rem' }}>
+          <div style={{ textAlign:'center', marginBottom:'2.5rem' }}>
             <span className="section-label">Leadership</span>
             <h2 className="section-title">Visionary Behind <span>Eagle Entertainment</span></h2>
           </div>
           
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4rem', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2rem', alignItems: 'center', justifyContent: 'center' }}>
             <motion.div 
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}

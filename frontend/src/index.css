@@ -88,7 +88,7 @@ body::before {
 }
 
 .section {
-  padding: 10rem 0; /* Lots of spacing */
+  padding: 6rem 0; /* Optimized spacing */
   position: relative;
 }
 
@@ -103,7 +103,7 @@ body::before {
 }
 
 .section-title {
-  font-size: clamp(3rem, 5vw, 4.5rem); /* Large headings */
+  font-size: clamp(2.4rem, 4vw, 3.6rem); /* Reduced Large headings */
   font-family: var(--font-display);
   font-weight: 800;
   letter-spacing: -0.04em;
@@ -252,15 +252,16 @@ body::before {
 
 /* Responsive Design */
 @media (max-width: 992px) {
-  .section-title { font-size: 3rem !important; }
-  .section { padding: 6rem 0 !important; }
+  .section-title { font-size: 2.6rem !important; }
+  .section { padding: 4.5rem 0 !important; }
   .about-grid, .contact-grid { grid-template-columns: 1fr !important; gap: 3rem !important; }
 }
 
 @media (max-width: 768px) {
   
   .container { padding: 0 1.5rem !important; }
-  .section-title { font-size: 2.2rem !important; }
+  .section-title { font-size: 2rem !important; }
+  .section { padding: 3.5rem 0 !important; }
   .btn-primary, .btn-outline { padding: 0.8rem 1.8rem !important; font-size: 0.9rem !important; }
   
   .stats-grid { grid-template-columns: 1fr !important; }
