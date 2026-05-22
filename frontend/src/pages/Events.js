@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { publicApi } from '../services/api';
+import React, { useState } from 'react';
 import { useEvents } from '../context/EventContext';
 import EventCard from '../components/EventCard';
 import { motion, AnimatePresence } from 'framer-motion';

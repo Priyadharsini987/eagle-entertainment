@@ -175,7 +175,7 @@ const EventsRow = ({ title, accent, events, label }) => {
 
 // ---- Main Home ----
 const Home = () => {
-  const { upcomingEvents, recentEvents, loading } = useEvents();
+  const { upcomingEvents, recentEvents } = useEvents();
   const [gallery, setGallery] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
 
