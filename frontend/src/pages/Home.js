@@ -202,25 +202,41 @@ const Home = () => {
     <div>
       <Hero />
       
-      {/* Floating Counter stats */}
-      <div style={{ background:'var(--bg-card)', borderBottom:'1px solid var(--border)', padding:'2.5rem 0' }}>
-        <div className="container" style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(150px, 1fr))', gap:'2rem', textAlign:'center' }}>
-          {[
-            { n: '5+', l: 'Years of Artistry' },
-            { n: '100%', l: 'Satisfaction Index' },
-            { n: '24/7', l: 'Dedicated Stewardship' },
-          ].map((s, i) => (
-            <motion.div 
-              key={i} 
-              style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08, duration: 0.5 }}
-            >
-              <div style={{ fontSize:'2rem', fontWeight: 800, color:'var(--primary)', lineHeight:1, fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}>{s.n}</div>
-              <div style={{ fontSize:'0.65rem', color:'var(--text-muted)', textTransform:'uppercase', letterSpacing:'0.2em', fontWeight: 700 }}>{s.l}</div>
-            </motion.div>
+      {/* Scrolling Marquee Stats */}
+      <div style={{ background:'var(--bg-card)', borderBottom:'1px solid var(--border)', padding:'2.5rem 0', overflow: 'hidden', whiteSpace: 'nowrap', display: 'flex' }}>
+        <style>{`
+          @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          .marquee-content {
+            display: flex;
+            animation: marquee 20s linear infinite;
+            gap: 8rem;
+            padding-right: 8rem;
+          }
+          .marquee-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            text-align: center;
+            align-items: center;
+          }
+        `}</style>
+        <div className="marquee-content">
+          {[...Array(4)].map((_, groupIdx) => (
+            <React.Fragment key={groupIdx}>
+              {[
+                { n: '5+', l: 'Years of Artistry' },
+                { n: '100%', l: 'Satisfaction Index' },
+                { n: '24/7', l: 'Dedicated Stewardship' },
+              ].map((s, i) => (
+                <div key={i} className="marquee-item">
+                  <div style={{ fontSize:'2rem', fontWeight: 800, color:'var(--primary)', lineHeight:1, fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}>{s.n}</div>
+                  <div style={{ fontSize:'0.65rem', color:'var(--text-muted)', textTransform:'uppercase', letterSpacing:'0.2em', fontWeight: 700 }}>{s.l}</div>
+                </div>
+              ))}
+            </React.Fragment>
           ))}
         </div>
       </div>

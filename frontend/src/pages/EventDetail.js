@@ -9,6 +9,32 @@ const EventDetail = () => {
   const [event, setEvent] = useState(null);
   const [related, setRelated] = useState([]);
   const [loading, setLoading] = useState(true);
+  
+  const [showModal, setShowModal] = useState(false);
+  const [form, setForm] = useState({ name:'', email:'', phone:'', message:'' });
+  const [formStatus, setFormStatus] = useState(null);
+  const [formLoading, setFormLoading] = useState(false);
+
+  const handleBookNow = () => setShowModal(true);
+  const handleCloseModal = () => { setShowModal(false); setFormStatus(null); };
+  
+  const handleBookingSubmit = async (e) => {
+    e.preventDefault();
+    setFormLoading(true);
+    setFormStatus(null);
+    try {
+      await publicApi.submitInquiry({
+        ...form,
+        eventType: event.category || 'Event Booking',
+        message: `[Booking Request for Event: ${event.title}]\n\n${form.message}`
+      });
+      setFormStatus({ type:'success', msg: 'Booking request sent successfully! We will contact you soon.' });
+      setForm({ name:'', email:'', phone:'', message:'' });
+    } catch {
+      setFormStatus({ type:'error', msg: 'Failed to send request. Please try again.' });
+    }
+    setFormLoading(false);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -122,7 +148,7 @@ const EventDetail = () => {
                 { icon:'📅', label:'Date', val: date ? date.toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'}) : 'TBA' },
                 { icon:'🕐', label:'Time', val: event.eventTime || 'TBA' },
                 { icon:'📍', label:'Venue', val: event.venue || 'TBA' },
-                { icon:'💰', label:'Admission', val: event.price > 0 ? `₹${Number(event.price).toLocaleString('en-IN')}` : 'Free Entry' },
+                ...(event.price ? [{ icon:'💰', label:'Admission', val: !isNaN(Number(event.price)) && Number(event.price) > 0 ? `₹${Number(event.price).toLocaleString('en-IN')}` : event.price }] : []),
               ].map((d, i) => (
                 <div key={i} style={{ display:'flex', gap:'1.1rem', paddingBottom:'1.4rem', borderBottom:'1px solid var(--border)' }}>
                   <span style={{ fontSize:'1.3rem', opacity:0.9 }}>{d.icon}</span>
@@ -135,9 +161,9 @@ const EventDetail = () => {
             </div>
             
             <div style={{ marginTop:'3rem', display:'flex', flexDirection:'column', gap:'1.2rem' }}>
-              <Link to="/contact" className="btn-primary" style={{ width:'100%', fontSize:'0.82rem', padding: '1rem' }}>
+              <button onClick={handleBookNow} className="btn-primary" style={{ width:'100%', fontSize:'0.82rem', padding: '1rem', border: 'none', cursor: 'pointer' }}>
                 Book Now
-              </Link>
+              </button>
               <a href="tel:+919790241089" className="btn-outline" style={{ width:'100%', fontSize:'0.82rem', padding: '1rem' }}>
                 Call Operations
               </a>
@@ -184,6 +210,60 @@ const EventDetail = () => {
         )}
       </div>
       
+      {/* Booking Modal */}
+      {showModal && (
+        <div style={{
+          position: 'fixed', inset: 0, zIndex: 9999,
+          background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(10px)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1.5rem'
+        }}>
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            className="glass-card"
+            style={{ width: '100%', maxWidth: 500, padding: '3rem', position: 'relative' }}
+          >
+            <button onClick={handleCloseModal} style={{
+              position: 'absolute', top: 20, right: 20, background: 'transparent', border: 'none',
+              color: 'var(--text-muted)', fontSize: '1.5rem', cursor: 'pointer'
+            }}>×</button>
+            <h3 className="display-font" style={{ fontSize: '1.8rem', marginBottom: '0.5rem', color: 'var(--text-main)' }}>Confirm Booking</h3>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '2rem' }}>Request booking for <strong>{event.title}</strong>.</p>
+            
+            {formStatus && (
+              <div style={{
+                padding:'1rem', borderRadius:'6px', marginBottom:'1.5rem',
+                background: formStatus.type==='success' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)',
+                color: formStatus.type==='success' ? '#10b981' : '#ef4444',
+                fontSize:'0.9rem', border: `1px solid ${formStatus.type==='success' ? '#10b981' : '#ef4444'}`
+              }}>{formStatus.msg}</div>
+            )}
+            
+            <form onSubmit={handleBookingSubmit} style={{ display: 'grid', gap: '1.2rem' }}>
+              <div className="form-group" style={{ marginBottom: 0 }}>
+                <label>Name</label>
+                <input required value={form.name} onChange={e => setForm({...form, name: e.target.value})} style={{ background: 'var(--bg-main)' }} />
+              </div>
+              <div className="form-group" style={{ marginBottom: 0 }}>
+                <label>Email</label>
+                <input required type="email" value={form.email} onChange={e => setForm({...form, email: e.target.value})} style={{ background: 'var(--bg-main)' }} />
+              </div>
+              <div className="form-group" style={{ marginBottom: 0 }}>
+                <label>Phone</label>
+                <input required value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} style={{ background: 'var(--bg-main)' }} />
+              </div>
+              <div className="form-group" style={{ marginBottom: 0 }}>
+                <label>Message</label>
+                <textarea rows={3} value={form.message} onChange={e => setForm({...form, message: e.target.value})} placeholder="Any specific requirements?" style={{ background: 'var(--bg-main)' }} />
+              </div>
+              <button type="submit" className="btn-primary" disabled={formLoading} style={{ marginTop: '1rem', width: '100%', padding: '1rem', border: 'none', cursor: formLoading ? 'not-allowed' : 'pointer', opacity: formLoading ? 0.7 : 1 }}>
+                {formLoading ? 'Sending...' : 'Confirm Request'}
+              </button>
+            </form>
+          </motion.div>
+        </div>
+      )}
+
       <style>{`
         @media(max-width:900px){
           .event-detail-grid { grid-template-columns:1fr!important; gap:4rem!important; }

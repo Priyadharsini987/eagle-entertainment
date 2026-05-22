@@ -130,17 +130,19 @@ const EventCard = ({ event, compact = false }) => {
         <div style={{ 
           marginTop: 'auto', 
           display:'flex', 
-          justifyContent:'space-between', 
+          justifyContent: event.price ? 'space-between' : 'flex-end', 
           alignItems:'center', 
           paddingTop:'1.4rem', 
           borderTop:'1px solid var(--border)' 
         }}>
-          <div>
-            <div style={{ fontSize:'0.65rem', color:'var(--text-muted)', textTransform:'uppercase', letterSpacing:'0.1em', marginBottom:'3px', fontWeight: 600 }}>Admission</div>
-            <div style={{ color: 'var(--text-main)', fontWeight: 800, fontSize: '1.15rem', fontFamily: 'var(--font-main)' }}>
-              {event.price > 0 ? `₹${Number(event.price).toLocaleString('en-IN')}` : 'Free Entry'}
+          {event.price && (
+            <div>
+              <div style={{ fontSize:'0.65rem', color:'var(--text-muted)', textTransform:'uppercase', letterSpacing:'0.1em', marginBottom:'3px', fontWeight: 600 }}>Admission</div>
+              <div style={{ color: 'var(--text-main)', fontWeight: 800, fontSize: '1.15rem', fontFamily: 'var(--font-main)' }}>
+                {!isNaN(Number(event.price)) && Number(event.price) > 0 ? `₹${Number(event.price).toLocaleString('en-IN')}` : event.price}
+              </div>
             </div>
-          </div>
+          )}
           
           <Link to={`/events/${event.id}`} style={{
             width:42, height:42, borderRadius:'50%', 

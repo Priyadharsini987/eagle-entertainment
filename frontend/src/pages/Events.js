@@ -3,7 +3,6 @@ import { publicApi } from '../services/api';
 import EventCard from '../components/EventCard';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const categories = ['ALL', 'CORPORATE', 'AWARDS', 'CELEBRITY', 'CONCERT', 'LAUNCH', 'FASHION'];
 
 const Events = () => {
   const [events, setEvents] = useState({ upcoming: [], recent: [] });
@@ -29,6 +28,8 @@ const Events = () => {
     };
     fetchEvents();
   }, []);
+
+  const dynamicCategories = ['ALL', ...Array.from(new Set([...events.upcoming, ...events.recent].map(e => e.category).filter(Boolean)))];
 
   const currentEvents = events[tab] || [];
   const filtered = currentEvents.filter(e => {
@@ -148,7 +149,7 @@ const Events = () => {
 
         {/* Category filters */}
         <div style={{ display:'flex', gap:'0.85rem', flexWrap:'wrap', marginBottom:'4.5rem', justifyContent:'center' }}>
-          {categories.map(cat => (
+          {dynamicCategories.map(cat => (
             <button 
               key={cat} 
               onClick={() => setFilter(cat)} 

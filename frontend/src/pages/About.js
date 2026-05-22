@@ -40,7 +40,7 @@ const About = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.2 }}
           >
-            Over 10 years of mastery in transforming events into legendary experiences. From our base in Erode, we serve the entire state of Tamil Nadu with unmatched passion and precision.
+            Over 5+ years of mastery in transforming events into legendary experiences. From our base in Erode, we serve the entire state of Tamil Nadu with unmatched passion and precision.
           </motion.p>
         </div>
       </div>
@@ -71,7 +71,7 @@ const About = () => {
               <span className="section-label">Who We Are</span>
               <h2 className="section-title" style={{ marginBottom:'2rem' }}>We Create <span>Amazing</span> Memories</h2>
               <p style={{ color:'var(--text-muted)', lineHeight:1.9, marginBottom:'1.5rem', fontSize:'1.02rem' }}>
-                Founded in 2014 in Erode, Eagle Entertainment started with a singular vision: to elevate every celebration into an extraordinary masterpiece. Over the past decade, we have evolved into Tamil Nadu's premier event management agency, renowned for our innovative concepts and flawless execution.
+                Founded in Erode, Eagle Entertainment started with a singular vision: to elevate every celebration into an extraordinary masterpiece. Over the past 5+ years, we have evolved into Tamil Nadu's premier event management agency, renowned for our innovative concepts and flawless execution.
               </p>
               <p style={{ color:'var(--text-muted)', lineHeight:1.9, marginBottom:'3.5rem', fontSize:'1.02rem' }}>
                 Whether it's a corporate gala in Chennai, a prestigious award ceremony in Madurai, or a grand product launch in our home city of Erode, we bring professional excellence to every corner of the state. Our dedicated team works tirelessly to ensure your vision is realized with a touch of elegance and grandeur.
@@ -94,40 +94,8 @@ const About = () => {
 
 
 
-      {/* FAQ Accordion Grid */}
-      <section className="section" style={{ background:'var(--bg-surface)', borderTop:'1px solid var(--border)' }}>
-        <div className="container">
-          <div style={{ textAlign:'center', marginBottom:'6rem' }}>
-            <span className="section-label">Support</span>
-            <h2 className="section-title">Common <span>Questions</span></h2>
-          </div>
-          
-          <div style={{ maxWidth:850, margin:'0 auto', display:'grid', gap:'1.8rem' }}>
-            {[
-              { q: 'What types of events do you handle?', a: 'We handle everything from prestigious award ceremonies and celebrity management, to big corporate launches and live music concerts.' },
-              { q: 'How early should I book my event?', a: 'We recommend booking at least 3-6 months in advance for big events, but we also handle last-minute requests depending on availability.' },
-              { q: 'Do you work outside of Erode?', a: 'Absolutely! While we are based in Erode, we handle high-profile events all over Tamil Nadu, including Chennai, Coimbatore, Madurai, and Trichy.' },
-              { q: 'Can you help with the budget planning?', a: 'Absolutely. We work with you to plan an amazing event that fits your budget perfectly.' }
-            ].map((f, i) => (
-              <motion.div 
-                key={i} 
-                className="glass-card" 
-                style={{ padding:'2.2rem 2.5rem', border: '1px solid rgba(255,255,255, 0.12)' }}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08, duration: 0.5 }}
-              >
-                <h4 style={{ color:'var(--primary)', fontSize:'1.2rem', marginBottom:'1.1rem', fontWeight:600, fontFamily: 'var(--font-display)' }}>✦ {f.q}</h4>
-                <p style={{ color:'var(--text-muted)', fontSize:'0.98rem', lineHeight:1.75 }}>{f.a}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Team Leaders */}
-      <section className="section">
+      <section className="section" style={{ background:'var(--bg-surface)', borderTop:'1px solid var(--border)' }}>
         <div className="container">
           <div style={{ textAlign:'center', marginBottom:'6rem' }}>
             <span className="section-label">Our Team</span>
@@ -165,6 +133,38 @@ const About = () => {
                 </div>
                 
                 <p style={{ color:'var(--text-muted)', fontSize:'0.92rem', lineHeight:1.75 }}>{member.bio}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Accordion Grid */}
+      <section className="section">
+        <div className="container">
+          <div style={{ textAlign:'center', marginBottom:'6rem' }}>
+            <span className="section-label">Support</span>
+            <h2 className="section-title">Common <span>Questions</span></h2>
+          </div>
+          
+          <div style={{ maxWidth:850, margin:'0 auto', display:'grid', gap:'1.8rem' }}>
+            {[
+              { q: 'What types of events do you handle?', a: 'We handle everything from prestigious award ceremonies and celebrity management, to big corporate launches and live music concerts.' },
+              { q: 'How early should I book my event?', a: 'We recommend booking at least 3-6 months in advance for big events, but we also handle last-minute requests depending on availability.' },
+              { q: 'Do you work outside of Erode?', a: 'Absolutely! While we are based in Erode, we handle high-profile events all over Tamil Nadu, including Chennai, Coimbatore, Madurai, and Trichy.' },
+              { q: 'Can you help with the budget planning?', a: 'Absolutely. We work with you to plan an amazing event that fits your budget perfectly.' }
+            ].map((f, i) => (
+              <motion.div 
+                key={i} 
+                className="glass-card" 
+                style={{ padding:'2.2rem 2.5rem', border: '1px solid rgba(255,255,255, 0.12)' }}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08, duration: 0.5 }}
+              >
+                <h4 style={{ color:'var(--primary)', fontSize:'1.2rem', marginBottom:'1.1rem', fontWeight:600, fontFamily: 'var(--font-display)' }}>✦ {f.q}</h4>
+                <p style={{ color:'var(--text-muted)', fontSize:'0.98rem', lineHeight:1.75 }}>{f.a}</p>
               </motion.div>
             ))}
           </div>

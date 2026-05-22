@@ -75,17 +75,17 @@ const Navbar = () => {
         background: scrolled ? 'rgba(15, 23, 42, 0.95)' : 'rgba(15, 23, 42, 0.6)',
         backdropFilter: 'blur(20px)',
         borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-        padding: '0.8rem 2rem',
+        padding: scrolled ? '0.3rem 2rem' : '0.5rem 2rem',
         boxShadow: scrolled ? '0 10px 30px rgba(0,0,0,0.4)' : 'none',
       }}>
         <div className="nav-container" style={{ display:'flex', alignItems:'center', justifyContent:'space-between', width: '100%', maxWidth: 1200, margin: '0 auto' }}>
           
           {/* Logo */}
           <Link to="/" style={{ textDecoration:'none', display:'flex', alignItems:'center', gap:'0.6rem', flexShrink: 0 }}>
-            <img src="/logo.png" className="nav-logo-img" alt="Eagle Entertainment Logo" style={{ width: 50, height: 50, minWidth: 50, objectFit: 'contain', borderRadius: '50%', flexShrink: 0 }} />
+            <img src="/logo.png" className="nav-logo-img" alt="Eagle Entertainment Logo" style={{ width: 44, height: 44, minWidth: 44, objectFit: 'contain', borderRadius: '50%', flexShrink: 0 }} />
             <div className="nav-brand-text" style={{ flexShrink: 0, whiteSpace: 'nowrap' }}>
-              <div className="display-font" style={{ fontSize:'1.4rem', fontWeight:800, color: 'var(--text-main)', letterSpacing:'-0.02em', lineHeight:1 }}>Eagle</div>
-              <div className="nav-brand-sub" style={{ fontSize:'0.65rem', letterSpacing:'0.15em', color:'var(--primary)', textTransform:'uppercase', fontWeight:600, marginTop: '4px' }}>Entertainment</div>
+              <div className="display-font" style={{ fontSize:'1.25rem', fontWeight:800, color: 'var(--text-main)', letterSpacing:'-0.02em', lineHeight:1 }}>Eagle</div>
+              <div className="nav-brand-sub" style={{ fontSize:'0.6rem', letterSpacing:'0.15em', color:'var(--primary)', textTransform:'uppercase', fontWeight:600, marginTop: '2px' }}>Entertainment</div>
             </div>
           </Link>
 

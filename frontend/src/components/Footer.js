@@ -155,7 +155,7 @@ const Footer = () => {
               </Link>
             ) : (
               <Link to="/admin/login" style={{ color: 'var(--text-muted)', fontSize: '0.85rem', textDecoration: 'none' }} onMouseEnter={e => e.target.style.color = 'var(--primary)'} onMouseLeave={e => e.target.style.color = 'var(--text-muted)'}>
-                Login
+                Executive Login
               </Link>
             )}
           </div>
