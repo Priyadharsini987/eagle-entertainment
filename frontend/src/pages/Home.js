@@ -310,6 +310,52 @@ const Home = () => {
         </section>
       )}
 
+      {/* Visionary Section */}
+      <section className="section" style={{ background:'var(--bg-surface)', borderTop:'1px solid var(--border)', borderBottom: testimonials.length > 0 ? 'none' : '1px solid var(--border)' }}>
+        <div className="container">
+          <div style={{ textAlign:'center', marginBottom:'4rem' }}>
+            <span className="section-label">Leadership</span>
+            <h2 className="section-title">Visionary Behind <span>Eagle Entertainment</span></h2>
+          </div>
+          
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4rem', alignItems: 'center', justifyContent: 'center' }}>
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              style={{ flex: '1 1 350px', maxWidth: '450px' }}
+            >
+              <div style={{ position: 'relative', borderRadius: 'var(--radius-lg)', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                <img src="/arjun_raja.png" alt="Arjun Raja - CEO & Founder" style={{ width: '100%', height: 'auto', display: 'block' }} />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 40%)' }} />
+              </div>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              style={{ flex: '1 1 400px', maxWidth: '600px' }}
+            >
+              <h3 className="display-font" style={{ fontSize:'2.2rem', color: 'var(--text-main)', marginBottom:'0.5rem', fontWeight: 700 }}>Arjun Raja</h3>
+              <div style={{ color:'var(--primary)', fontSize:'0.9rem', fontWeight:800, letterSpacing:'0.2em', textTransform:'uppercase', marginBottom:'2rem' }}>
+                CEO & Founder
+              </div>
+              <p style={{ color:'var(--text-muted)', fontSize:'1.1rem', lineHeight:1.8, marginBottom:'1.5rem' }}>
+                With a profound passion for creating unforgettable experiences, Arjun Raja founded Eagle Entertainment to redefine the standards of event management in Tamil Nadu. His visionary approach and meticulous attention to detail have transformed countless concepts into spectacular realities.
+              </p>
+              <p style={{ color:'var(--text-muted)', fontSize:'1.1rem', lineHeight:1.8, marginBottom:'2.5rem' }}>
+                Under his leadership, the agency has grown exponentially, setting new benchmarks in the industry and continually surpassing client expectations through innovation and excellence.
+              </p>
+              
+              <Link to="/about" className="btn-outline">More About Us</Link>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials Section Preview */}
       {testimonials.length > 0 && (
         <section className="section">
