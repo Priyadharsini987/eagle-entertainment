@@ -169,7 +169,7 @@ const Sidebar = ({ active, setActive, onLogout }) => {
                 fontFamily: 'inherit', fontSize: '0.85rem', fontWeight: 500,
                 transition: 'var(--transition)', textAlign: 'left',
               }}
-              onMouseEnter={e => { e.currentTarget.style.color = '#fff'; e.currentTarget.style.background = 'rgba(255,255,255,0.03)'; }}
+              onMouseEnter={e => { e.currentTarget.style.color = '#fff'; e.currentTarget.style.background = 'rgba(0,0,0,0.03)'; }}
               onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.background = 'transparent'; }}
               >
                 <span style={{ fontSize: '1.1rem' }}>{item.icon}</span>
@@ -187,7 +187,7 @@ const Sidebar = ({ active, setActive, onLogout }) => {
                 fontFamily: 'inherit', fontSize: '0.85rem', fontWeight: 500,
                 transition: 'var(--transition)', textAlign: 'left',
               }}
-              onMouseEnter={e => { e.currentTarget.style.color = '#f87171'; e.currentTarget.style.background = 'rgba(255,255,255,0.03)'; }}
+              onMouseEnter={e => { e.currentTarget.style.color = '#f87171'; e.currentTarget.style.background = 'rgba(0,0,0,0.03)'; }}
               onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.background = 'transparent'; }}
               >
                 <span style={{ fontSize: '1.1rem' }}>{item.icon}</span>
@@ -204,7 +204,7 @@ const Sidebar = ({ active, setActive, onLogout }) => {
               fontFamily: 'inherit', fontSize: '0.85rem', fontWeight: 500,
               transition: 'var(--transition)', textAlign: 'left',
             }}
-            onMouseEnter={e => { if (active !== item.key) { e.currentTarget.style.color = '#fff'; e.currentTarget.style.background = 'rgba(255,255,255,0.03)'; }}}
+            onMouseEnter={e => { if (active !== item.key) { e.currentTarget.style.color = '#fff'; e.currentTarget.style.background = 'rgba(0,0,0,0.03)'; }}}
             onMouseLeave={e => { if (active !== item.key) { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.background = 'transparent'; }}}
             >
               <span style={{ fontSize: '1.1rem' }}>{item.icon}</span>
@@ -406,7 +406,7 @@ const EventsTab = () => {
             <tbody>
               {events.map(ev => (
                 <tr key={ev.id} style={{ borderBottom:'1px solid rgba(255,255,255,0.04)', transition:'background 0.2s' }}
-                  onMouseEnter={e => e.currentTarget.style.background='rgba(255,255,255,0.02)'}
+                  onMouseEnter={e => e.currentTarget.style.background='rgba(0,0,0,0.02)'}
                   onMouseLeave={e => e.currentTarget.style.background='transparent'}
                 >
                   <td style={{ padding:'0.85rem 1rem' }}>
@@ -478,7 +478,7 @@ const GalleryTab = () => {
       </div>
 
       {showForm && (
-        <div style={{ background:'rgba(255,255,255,0.02)', border:'1px solid rgba(223,178,89,0.2)', borderRadius:'6px', padding:'1.5rem', marginBottom:'1.5rem' }}>
+        <div style={{ background:'rgba(0,0,0,0.02)', border:'1px solid rgba(223,178,89,0.2)', borderRadius:'6px', padding:'1.5rem', marginBottom:'1.5rem' }}>
           <h3 style={{ fontFamily:'Cormorant Garamond,serif', color: 'var(--text-main)', marginBottom:'1.25rem', fontSize:'1.2rem' }}>Add Gallery Photo</h3>
           <form onSubmit={handleSubmit} style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'1rem' }}>
             <div className="form-group">
@@ -561,7 +561,7 @@ const TestimonialsTab = () => {
       </div>
 
       {showForm && (
-        <div style={{ background:'rgba(255,255,255,0.02)', border:'1px solid rgba(223,178,89,0.2)', borderRadius:'6px', padding:'1.5rem', marginBottom:'1.5rem' }}>
+        <div style={{ background:'rgba(0,0,0,0.02)', border:'1px solid rgba(223,178,89,0.2)', borderRadius:'6px', padding:'1.5rem', marginBottom:'1.5rem' }}>
           <h3 style={{ fontFamily:'Cormorant Garamond,serif', color: 'var(--text-main)', marginBottom:'1.25rem', fontSize:'1.2rem' }}>Add Testimonial</h3>
           <form onSubmit={handleSubmit} style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'1rem' }}>
             <div className="form-group"><label>Client Name *</label><input value={form.clientName} onChange={e=>setForm(f=>({...f,clientName:e.target.value}))} required /></div>
@@ -586,7 +586,7 @@ const TestimonialsTab = () => {
 
       <div style={{ display:'flex', flexDirection:'column', gap:'1rem' }}>
         {items.map(item => (
-          <div key={item.id} style={{ display:'flex', gap:'1rem', background:'rgba(255,255,255,0.02)', border:'1px solid rgba(223,178,89,0.08)', borderRadius:'6px', padding:'1.25rem', alignItems:'flex-start' }}>
+          <div key={item.id} style={{ display:'flex', gap:'1rem', background:'rgba(0,0,0,0.02)', border:'1px solid rgba(223,178,89,0.08)', borderRadius:'6px', padding:'1.25rem', alignItems:'flex-start' }}>
             <img src={getImageUrl(item.imageUrl) || ''} alt={item.clientName} style={{ width:48, height:48, borderRadius:'50%', objectFit:'cover', border:'2px solid rgba(223,178,89,0.3)', flexShrink:0 }}
               onError={e => { e.target.style.display='none'; }} />
             <div style={{ flex:1 }}>
@@ -643,7 +643,7 @@ const InquiriesTab = () => {
             <button key={s} onClick={() => setFilterStatus(s)} style={{
               padding:'0.4rem 0.85rem', borderRadius:100,
               background: filterStatus===s ? 'var(--primary)' : 'rgba(255,255,255,0.04)',
-              border:`1px solid ${filterStatus===s ? 'var(--primary)' : 'rgba(255,255,255,0.1)'}`,
+              border:`1px solid ${filterStatus===s ? 'var(--primary)' : 'rgba(0,0,0,0.1)'}`,
               color: filterStatus===s ? '#000' : '#888',
               fontSize:'0.65rem', fontWeight:700, letterSpacing:'0.1em', textTransform:'uppercase', cursor:'pointer', transition:'all 0.2s',
             }}>{s}</button>
@@ -658,7 +658,7 @@ const InquiriesTab = () => {
             filtered.length === 0 ? <div style={{ color: 'var(--text-muted)', textAlign:'center', padding:'2rem' }}>No inquiries found.</div> :
             filtered.map(inq => (
               <div key={inq.id} onClick={() => setSelected(inq)} style={{
-                background: selected?.id===inq.id ? 'rgba(223,178,89,0.06)' : 'rgba(255,255,255,0.02)',
+                background: selected?.id===inq.id ? 'rgba(223,178,89,0.06)' : 'rgba(0,0,0,0.02)',
                 border:`1px solid ${selected?.id===inq.id ? 'rgba(223,178,89,0.3)' : 'rgba(255,255,255,0.06)'}`,
                 borderRadius:'6px', padding:'1rem', cursor:'pointer', transition:'all 0.2s',
               }}>
@@ -676,7 +676,7 @@ const InquiriesTab = () => {
 
         {/* Detail Panel */}
         {selected && (
-          <div style={{ background:'rgba(255,255,255,0.02)', border:'1px solid rgba(223,178,89,0.15)', borderRadius:'6px', padding:'1.5rem', position:'sticky', top:'1rem' }}>
+          <div style={{ background:'rgba(0,0,0,0.02)', border:'1px solid rgba(223,178,89,0.15)', borderRadius:'6px', padding:'1.5rem', position:'sticky', top:'1rem' }}>
             <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'1.25rem' }}>
               <h3 style={{ fontFamily:'Cormorant Garamond,serif', color: 'var(--text-main)', fontSize:'1.3rem' }}>Inquiry Details</h3>
               <button onClick={() => setSelected(null)} style={{ background:'none', border:'none', color: 'var(--text-muted)', fontSize:'1.2rem', cursor:'pointer' }}>✕</button>
@@ -712,7 +712,7 @@ const InquiriesTab = () => {
               {selected.message && (
                 <div>
                   <div style={{ color: 'var(--text-muted)', fontSize:'0.72rem', fontWeight:700, letterSpacing:'0.1em', textTransform:'uppercase', marginBottom:'0.4rem' }}>Message</div>
-                  <p style={{ color: 'var(--text-main)', fontSize:'0.85rem', lineHeight:1.7, background:'rgba(255,255,255,0.03)', padding:'0.85rem', borderRadius:'4px' }}>{selected.message}</p>
+                  <p style={{ color: 'var(--text-main)', fontSize:'0.85rem', lineHeight:1.7, background:'rgba(0,0,0,0.03)', padding:'0.85rem', borderRadius:'4px' }}>{selected.message}</p>
                 </div>
               )}
               <div>
@@ -722,7 +722,7 @@ const InquiriesTab = () => {
                     <button key={s} onClick={() => updateStatus(selected.id, s)} style={{
                       padding:'0.4rem 0.9rem', borderRadius:'4px', cursor:'pointer',
                       background: selected.status===s ? 'var(--primary)' : 'transparent',
-                      border:`1px solid ${selected.status===s ? 'var(--primary)' : 'rgba(255,255,255,0.1)'}`,
+                      border:`1px solid ${selected.status===s ? 'var(--primary)' : 'rgba(0,0,0,0.1)'}`,
                       color: selected.status===s ? '#000' : '#888',
                       fontSize:'0.7rem', fontWeight:700, letterSpacing:'0.08em', transition:'all 0.2s',
                     }}>{s}</button>
@@ -796,7 +796,7 @@ const TeamTab = () => {
       </div>
 
       {showForm && (
-        <div style={{ background:'rgba(255,255,255,0.02)', border:'1px solid rgba(223,178,89,0.2)', borderRadius:'6px', padding:'1.5rem', marginBottom:'1.5rem' }}>
+        <div style={{ background:'rgba(0,0,0,0.02)', border:'1px solid rgba(223,178,89,0.2)', borderRadius:'6px', padding:'1.5rem', marginBottom:'1.5rem' }}>
           <h3 style={{ fontFamily:'Cormorant Garamond,serif', color: 'var(--text-main)', marginBottom:'1.25rem', fontSize:'1.2rem' }}>{editMember ? 'Edit Team Member' : 'Add Team Member'}</h3>
           <form onSubmit={handleSubmit} style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'1rem' }}>
             <div className="form-group">
@@ -829,7 +829,7 @@ const TeamTab = () => {
       {loading ? <div style={{ color: 'var(--text-muted)', padding:'3rem 0', textAlign:'center' }}>Loading team members...</div> : (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.5rem' }}>
           {members.map(member => (
-            <div key={member.id} style={{ display: 'flex', flexDirection: 'column', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(223,178,89,0.08)', borderRadius: '6px', overflow: 'hidden', transition: 'border-color 0.2s' }}
+            <div key={member.id} style={{ display: 'flex', flexDirection: 'column', background: 'rgba(0,0,0,0.02)', border: '1px solid rgba(223,178,89,0.08)', borderRadius: '6px', overflow: 'hidden', transition: 'border-color 0.2s' }}
               onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(223,178,89,0.25)'}
               onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(223,178,89,0.08)'}
             >

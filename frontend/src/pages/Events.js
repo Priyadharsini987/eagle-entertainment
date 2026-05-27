@@ -137,9 +137,9 @@ const Events = () => {
               onClick={() => setFilter(cat)} 
               style={{
                 padding:'0.7rem 1.8rem',
-                background: filter === cat ? 'var(--primary)' : 'rgba(255,255,255, 0.04)',
-                border: `1px solid ${filter === cat ? 'var(--primary)' : 'rgba(255,255,255, 0.15)'}`,
-                color: '#fff',
+                background: filter === cat ? 'var(--primary)' : 'rgba(0,0,0,0.04)',
+                border: `1px solid ${filter === cat ? 'var(--primary)' : 'rgba(0,0,0,0.1)'}`,
+                color: filter === cat ? '#fff' : 'var(--text-main)',
                 borderRadius: '100px', 
                 cursor:'pointer', 
                 fontSize:'0.75rem',
@@ -156,8 +156,8 @@ const Events = () => {
               }}
               onMouseLeave={e => {
                 if (filter !== cat) {
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255, 0.15)';
-                  e.currentTarget.style.color = '#fff';
+                  e.currentTarget.style.borderColor = 'rgba(0,0,0,0.1)';
+                  e.currentTarget.style.color = 'var(--primary-dark)';
                 }
               }}
             >{cat}</button>
@@ -167,7 +167,7 @@ const Events = () => {
         {/* Grid Area with animations */}
         {loading ? (
           <div style={{ textAlign:'center', padding:'8rem 0', color:'var(--text-muted)' }}>
-            <div style={{ width:40, height:40, border:'3px solid rgba(255,255,255, 0.1)', borderTopColor:'var(--primary)', borderRadius:'50%', margin:'0 auto 1.8rem', animation:'pulse-glow 1.5s infinite linear' }} />
+            <div style={{ width:40, height:40, border:'3px solid rgba(0,0,0,0.1)', borderTopColor:'var(--primary)', borderRadius:'50%', margin:'0 auto 1.8rem', animation:'pulse-glow 1.5s infinite linear' }} />
             Loading events...
           </div>
         ) : filtered.length === 0 ? (

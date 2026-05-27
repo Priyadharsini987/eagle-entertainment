@@ -150,7 +150,7 @@ const AdminLogin = () => {
 
         <div style={{ textAlign: 'center', marginTop: '2rem' }}>
           <Link to="/" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none', transition: 'var(--transition)' }}
-            onMouseEnter={e => e.target.style.color = '#fff'}
+            onMouseEnter={e => e.target.style.color = 'var(--primary)'}
             onMouseLeave={e => e.target.style.color = 'var(--text-muted)'}
           >← Return to Public Portal</Link>
         </div>

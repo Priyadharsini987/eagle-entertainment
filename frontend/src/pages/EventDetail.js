@@ -55,7 +55,7 @@ const EventDetail = () => {
   if (loading) return (
     <div style={{ minHeight:'100vh', display:'flex', alignItems:'center', justifyContent:'center', background:'var(--bg-main)' }}>
       <div style={{ textAlign:'center' }}>
-        <div style={{ width:40, height:40, border:'3px solid rgba(255,255,255, 0.1)', borderTopColor:'var(--primary)', borderRadius:'50%', margin:'0 auto 1.5rem', animation:'pulse-glow 1.5s infinite linear' }} />
+        <div style={{ width:40, height:40, border:'3px solid rgba(0,0,0,0.1)', borderTopColor:'var(--primary)', borderRadius:'50%', margin:'0 auto 1.5rem', animation:'pulse-glow 1.5s infinite linear' }} />
         <div style={{ color:'var(--text-muted)', fontSize:'0.9rem', letterSpacing:'0.1em' }}>Loading event details...</div>
       </div>
     </div>
@@ -95,11 +95,11 @@ const EventDetail = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <Link to="/events" style={{ color:'var(--primary-light)', textDecoration:'none', fontSize:'0.75rem', fontWeight:800, letterSpacing:'0.22em', textTransform:'uppercase', marginBottom:'1.8rem', display:'inline-block', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = '#fff'} onMouseLeave={e => e.target.style.color = 'var(--primary-light)'}>← Back to Events</Link>
+              <Link to="/events" style={{ color:'var(--primary-light)', textDecoration:'none', fontSize:'0.75rem', fontWeight:800, letterSpacing:'0.22em', textTransform:'uppercase', marginBottom:'1.8rem', display:'inline-block', transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = 'var(--primary)'} onMouseLeave={e => e.target.style.color = 'var(--primary-light)'}>← Back to Events</Link>
               
               <div style={{ display:'flex', gap:'0.85rem', marginBottom:'1.8rem', flexWrap:'wrap' }}>
                 <span style={{ padding:'5px 15px', background:'rgba(99, 102, 241, 0.15)', border:'1px solid var(--primary)', color:'var(--primary-light)', borderRadius:'100px', fontSize:'0.65rem', fontWeight:800, textTransform:'uppercase', letterSpacing:'0.12em' }}>{event.category}</span>
-                <span style={{ padding:'5px 15px', background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.15)', color: 'var(--text-main)', borderRadius:'100px', fontSize:'0.65rem', fontWeight:800, textTransform:'uppercase', letterSpacing:'0.12em' }}>{event.upcoming ? 'Upcoming' : 'Finished'}</span>
+                <span style={{ padding:'5px 15px', background:'rgba(0,0,0,0.04)', border:'1px solid rgba(0,0,0,0.1)', color: 'var(--text-main)', borderRadius:'100px', fontSize:'0.65rem', fontWeight:800, textTransform:'uppercase', letterSpacing:'0.12em' }}>{event.upcoming ? 'Upcoming' : 'Finished'}</span>
               </div>
               
               <h1 className="display-font" style={{ fontSize:'clamp(2.5rem, 5.8vw, 4.4rem)', color: 'var(--text-main)', fontWeight:700, lineHeight:1.15, letterSpacing: '-0.02em' }}>{event.title}</h1>
@@ -175,11 +175,11 @@ const EventDetail = () => {
               <div style={{ display:'flex', justifyContent:'center', gap:'0.85rem' }}>
                 {['Share', 'Link'].map((s, i) => (
                   <button key={i} style={{ 
-                    background:'rgba(255,255,255,0.02)', border:'1px solid rgba(255,255,255, 0.15)', color: 'var(--text-main)', padding:'0.5rem 1rem', borderRadius:'100px',
+                    background:'rgba(0,0,0,0.02)', border:'1px solid rgba(0,0,0,0.1)', color: 'var(--text-main)', padding:'0.5rem 1rem', borderRadius:'100px',
                     fontSize:'0.72rem', fontWeight: 600, cursor:'pointer', transition:'var(--transition)'
                   }}
                   onMouseEnter={e => { e.currentTarget.style.borderColor='var(--primary)'; e.currentTarget.style.background='rgba(99, 102, 241, 0.08)'; e.currentTarget.style.color='var(--primary-light)'; }}
-                  onMouseLeave={e => { e.currentTarget.style.borderColor='rgba(255,255,255, 0.15)'; e.currentTarget.style.background='rgba(255,255,255,0.02)'; e.currentTarget.style.color='#fff'; }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor='rgba(0,0,0,0.1)'; e.currentTarget.style.background='rgba(0,0,0,0.02)'; e.currentTarget.style.color='var(--primary)'; }}
                   onClick={() => {
                     const url = window.location.href;
                     if (s === 'Share' && navigator.share) {

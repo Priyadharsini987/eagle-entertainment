@@ -40,7 +40,7 @@ const Hero = () => {
             }}
           >
             <img src={sl.img} alt="" style={{ width:'100%', height:'100%', objectFit:'cover' }} />
-            <div style={{ position:'absolute', inset:0, background:'linear-gradient(to right, rgba(2, 6, 23, 0.95) 0%, rgba(2, 6, 23, 0.6) 60%, rgba(2, 6, 23, 0.8) 100%)' }} />
+            <div style={{ position:'absolute', inset:0, background:'linear-gradient(to right, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.5) 60%, rgba(255, 255, 255, 0.7) 100%)' }} />
             <div style={{ position:'absolute', inset:0, background:'radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.25), transparent 55%)' }} />
           </motion.div>
         ))}
@@ -73,7 +73,7 @@ const Hero = () => {
                 </div>
                 
                 {/* Title */}
-                <h1 className="display-font" style={{ fontSize:'clamp(2.6rem, 6.2vw, 4.8rem)', color: 'var(--text-main)', lineHeight:1.1, marginBottom:'1.8rem', fontWeight: 700, letterSpacing: '-0.02em' }}>
+                <h1 className="display-font" style={{ fontSize:'clamp(2.6rem, 6.2vw, 4.8rem)', color: '#111827', lineHeight:1.1, marginBottom:'1.8rem', fontWeight: 700, letterSpacing: '-0.02em' }}>
                   {sl.title} <span className="gold-text-shine" style={{ display: 'inline-block', fontStyle: 'italic', fontWeight: 400 }}>{sl.accent}</span>
                 </h1>
                 
@@ -98,7 +98,7 @@ const Hero = () => {
       {/* Manual Navigation Arrows */}
       <button 
         onClick={prevSlide}
-        style={{ position:'absolute', left:'1.5%', top:'50%', transform:'translateY(-50%)', zIndex:10, background:'rgba(15,23,42,0.3)', border:'1px solid rgba(255,255,255,0.15)', color:'#fff', width:36, height:36, borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', cursor:'pointer', backdropFilter:'blur(10px)', fontSize:'0.9rem', transition:'var(--transition-fast)' }}
+        style={{ position:'absolute', left:'1.5%', top:'50%', transform:'translateY(-50%)', zIndex:10, background:'rgba(15,23,42,0.3)', border:'1px solid rgba(0,0,0,0.1)', color:'var(--text-main)', width:36, height:36, borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', cursor:'pointer', backdropFilter:'blur(10px)', fontSize:'0.9rem', transition:'var(--transition-fast)' }}
         onMouseOver={e => { e.currentTarget.style.background = 'rgba(99,102,241,0.6)'; e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)'; }}
         onMouseOut={e => { e.currentTarget.style.background = 'rgba(15,23,42,0.3)'; e.currentTarget.style.transform = 'translateY(-50%) scale(1)'; }}
       >
@@ -106,7 +106,7 @@ const Hero = () => {
       </button>
       <button 
         onClick={nextSlide}
-        style={{ position:'absolute', right:'1.5%', top:'50%', transform:'translateY(-50%)', zIndex:10, background:'rgba(15,23,42,0.3)', border:'1px solid rgba(255,255,255,0.15)', color:'#fff', width:36, height:36, borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', cursor:'pointer', backdropFilter:'blur(10px)', fontSize:'0.9rem', transition:'var(--transition-fast)' }}
+        style={{ position:'absolute', right:'1.5%', top:'50%', transform:'translateY(-50%)', zIndex:10, background:'rgba(15,23,42,0.3)', border:'1px solid rgba(0,0,0,0.1)', color:'var(--text-main)', width:36, height:36, borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', cursor:'pointer', backdropFilter:'blur(10px)', fontSize:'0.9rem', transition:'var(--transition-fast)' }}
         onMouseOver={e => { e.currentTarget.style.background = 'rgba(99,102,241,0.6)'; e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)'; }}
         onMouseOut={e => { e.currentTarget.style.background = 'rgba(15,23,42,0.3)'; e.currentTarget.style.transform = 'translateY(-50%) scale(1)'; }}
       >
@@ -333,7 +333,7 @@ const Home = () => {
                   <img src={getImageUrl(g.imageUrl)} alt={g.title} style={{ width:'100%', height:'100%', objectFit:'cover', transition:'transform 0.5s ease' }} onError={e => { e.target.src = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600'; }} />
                   <div style={{ position:'absolute', inset:0, background:'linear-gradient(to top, rgba(0,0,0,0.8), transparent)', display:'flex', alignItems:'flex-end', padding:'1.5rem' }}>
                     <div>
-                      <h4 style={{ color:'#fff', margin:0, fontFamily:'var(--font-display)' }}>{g.title}</h4>
+                      <h4 style={{ color:'var(--text-main)', margin:0, fontFamily:'var(--font-display)' }}>{g.title}</h4>
                       <p style={{ color:'var(--primary)', fontSize:'0.75rem', textTransform:'uppercase', letterSpacing:'0.1em', margin:0, marginTop:'4px' }}>{g.category}</p>
                     </div>
                   </div>
@@ -363,7 +363,7 @@ const Home = () => {
               transition={{ duration: 0.6 }}
               style={{ flex: '1 1 300px', maxWidth: '450px' }}
             >
-              <div style={{ position: 'relative', borderRadius: 'var(--radius-lg)', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.1)' }}>
+              <div style={{ position: 'relative', borderRadius: 'var(--radius-lg)', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0,0,0,0.4)', border: '1px solid rgba(0,0,0,0.1)' }}>
                 <img src="/arjun_raja.png" alt="Arjun Raja - CEO & Founder" style={{ width: '100%', height: 'auto', display: 'block' }} />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 40%)' }} />
               </div>
@@ -376,7 +376,7 @@ const Home = () => {
               transition={{ duration: 0.6 }}
               style={{ flex: '1 1 300px', maxWidth: '600px' }}
             >
-              <h3 className="display-font" style={{ fontSize:'2.2rem', color: 'var(--text-main)', marginBottom:'0.5rem', fontWeight: 700 }}>Arjun Raja</h3>
+              <h3 className="display-font" style={{ fontSize:'2.2rem', color: '#111827', marginBottom:'0.5rem', fontWeight: 700 }}>Arjun Raja</h3>
               <div style={{ color:'var(--primary)', fontSize:'0.9rem', fontWeight:800, letterSpacing:'0.2em', textTransform:'uppercase', marginBottom:'2rem' }}>
                 CEO & Founder
               </div>

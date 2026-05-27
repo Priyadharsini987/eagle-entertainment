@@ -80,7 +80,7 @@ const Contact = () => {
               ].map((c, i) => (
                 <div key={i} style={{ display:'flex', gap:'1.5rem', alignItems:'flex-start' }}>
                   <div style={{ 
-                    width:52, height:52, background:'rgba(255,255,255, 0.05)', border:'1px solid rgba(255,255,255, 0.15)',
+                    width:52, height:52, background:'rgba(0,0,0,0.05)', border:'1px solid rgba(0,0,0,0.1)',
                     borderRadius:'14px', display:'flex', alignItems:'center', justifyContent:'center',
                     color: 'var(--primary)', flexShrink:0, boxShadow: '0 5px 15px rgba(0,0,0,0.3)'
                   }}>{c.icon}</div>
@@ -100,7 +100,7 @@ const Contact = () => {
           {/* Right Column - Contact Form */}
           <motion.div 
             className="glass-card" 
-            style={{ padding:'4rem 3.5rem', border: '1px solid rgba(255,255,255, 0.15)', boxShadow: 'var(--shadow-glow)' }}
+            style={{ padding:'4rem 3.5rem', border: '1px solid rgba(0,0,0,0.1)', boxShadow: 'var(--shadow-glow)' }}
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -124,7 +124,7 @@ const Contact = () => {
 
             <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '2.5rem' }}>
               {[1, 2, 3].map(i => (
-                <div key={i} style={{ flex: 1, height: '4px', background: step >= i ? 'var(--primary)' : 'rgba(255,255,255,0.1)', borderRadius: '2px', transition: 'background 0.3s ease' }} />
+                <div key={i} style={{ flex: 1, height: '4px', background: step >= i ? 'var(--primary)' : 'rgba(0,0,0,0.1)', borderRadius: '2px', transition: 'background 0.3s ease' }} />
               ))}
             </div>
 

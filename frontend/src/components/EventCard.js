@@ -75,7 +75,7 @@ const EventCard = ({ event, compact = false }) => {
             background: event.upcoming ? 'var(--primary)' : 'rgba(15, 23, 42, 0.8)',
             backdropFilter: 'blur(10px)',
             border: `1px solid ${event.upcoming ? 'var(--primary-dark)' : 'rgba(255,255,255,0.1)'}`,
-            color: event.upcoming ? '#fff' : 'var(--text-muted)',
+            color: event.upcoming ? 'var(--text-main)' : 'var(--text-muted)',
             padding: '5px 14px', 
             borderRadius: '100px',
             fontSize: '0.62rem', 
@@ -156,7 +156,7 @@ const EventCard = ({ event, compact = false }) => {
           onMouseEnter={e => { 
             e.currentTarget.style.borderColor='var(--primary)'; 
             e.currentTarget.style.background='var(--primary)'; 
-            e.currentTarget.style.color='#fff';
+            e.currentTarget.style.color='var(--primary)';
             e.currentTarget.style.boxShadow='0 4px 15px rgba(99, 102, 241, 0.4)';
             e.currentTarget.style.transform='scale(1.1)';
           }}
