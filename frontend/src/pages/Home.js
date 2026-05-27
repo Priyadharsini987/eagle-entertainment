@@ -330,7 +330,7 @@ const Home = () => {
                   }}
                   className="glass-card" style={{ height: 260, overflow:'hidden', position:'relative', borderRadius:'var(--radius-md)' }}
                 >
-                  <img src={getImageUrl(g.imageUrl)} alt={g.title} style={{ width:'100%', height:'100%', objectFit:'cover', transition:'transform 0.5s ease' }} />
+                  <img src={getImageUrl(g.imageUrl)} alt={g.title} style={{ width:'100%', height:'100%', objectFit:'cover', transition:'transform 0.5s ease' }} onError={e => { e.target.src = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600'; }} />
                   <div style={{ position:'absolute', inset:0, background:'linear-gradient(to top, rgba(0,0,0,0.8), transparent)', display:'flex', alignItems:'flex-end', padding:'1.5rem' }}>
                     <div>
                       <h4 style={{ color:'#fff', margin:0, fontFamily:'var(--font-display)' }}>{g.title}</h4>
