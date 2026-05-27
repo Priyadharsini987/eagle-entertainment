@@ -15,6 +15,7 @@ public class CompanyService {
     private String name;
     private String price;
     private String accent;
+    @jakarta.persistence.Column(columnDefinition = "TEXT")
     private String features; // Comma separated list of features
 
     public CompanyService() {}

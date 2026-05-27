@@ -22,6 +22,7 @@ public class AdminController {
     @Autowired private TeamMemberRepository teamMemberRepository;
     @Autowired private CompanyServiceRepository companyServiceRepository;
     @Autowired private CompanyStatRepository companyStatRepository;
+    @Autowired private SiteSettingRepository siteSettingRepository;
 
     // ---- Dashboard Stats ----
     @GetMapping("/dashboard")
@@ -217,6 +218,17 @@ public class AdminController {
     public ResponseEntity<?> deleteStat(@PathVariable Long id) {
         companyStatRepository.deleteById(id);
         return ResponseEntity.ok(Map.of("message", "Stat deleted"));
+    }
+
+    // ---- Site Settings CRUD ----
+    @GetMapping("/settings")
+    public List<SiteSetting> getAllSettings() {
+        return siteSettingRepository.findAll();
+    }
+
+    @PostMapping("/settings")
+    public ResponseEntity<SiteSetting> updateSetting(@RequestBody SiteSetting setting) {
+        return ResponseEntity.ok(siteSettingRepository.save(setting));
     }
 
     // ---- Clear Seed Data ----

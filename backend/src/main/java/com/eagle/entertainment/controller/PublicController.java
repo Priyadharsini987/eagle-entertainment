@@ -14,6 +14,8 @@ import com.eagle.entertainment.repository.TestimonialRepository;
 import com.eagle.entertainment.repository.TeamMemberRepository;
 import com.eagle.entertainment.repository.CompanyServiceRepository;
 import com.eagle.entertainment.repository.CompanyStatRepository;
+import com.eagle.entertainment.repository.SiteSettingRepository;
+import com.eagle.entertainment.model.SiteSetting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +34,7 @@ public class PublicController {
     @Autowired private TeamMemberRepository teamMemberRepository;
     @Autowired private CompanyServiceRepository companyServiceRepository;
     @Autowired private CompanyStatRepository companyStatRepository;
+    @Autowired private SiteSettingRepository siteSettingRepository;
 
     // ---- Team Members ----
     @GetMapping("/team")
@@ -48,6 +51,11 @@ public class PublicController {
     @GetMapping("/stats")
     public List<CompanyStat> getStats() {
         return companyStatRepository.findAll();
+    }
+
+    @GetMapping("/settings")
+    public List<SiteSetting> getSettings() {
+        return siteSettingRepository.findAll();
     }
 
     @GetMapping("/events/upcoming")
@@ -100,8 +108,8 @@ public class PublicController {
     }
 
     // ---- Stats ----
-    @GetMapping("/stats")
-    public ResponseEntity<?> getStats() {
+    @GetMapping("/stats/overview")
+    public ResponseEntity<?> getStatsOverview() {
         long totalEvents = eventRepository.count();
         long upcomingEvents = eventRepository.findByIsUpcomingTrueOrderByEventDateAsc().size();
         return ResponseEntity.ok(Map.of(

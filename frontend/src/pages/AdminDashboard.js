@@ -125,6 +125,7 @@ const Sidebar = ({ active, setActive, onLogout }) => {
     { key: 'testimonials', icon: '💬', label: 'Testimonials' },
     { key: 'inquiries', icon: '📩', label: 'Inquiries' },
     { key: 'team', icon: '👥', label: 'Team Members' },
+    { key: 'settings', icon: '⚙️', label: 'Settings' },
     { key: 'view_site', icon: '🌐', label: 'View Website' },
     { key: 'logout', icon: '🚪', label: 'Sign Out' },
   ];
@@ -980,6 +981,52 @@ const StatsTab = () => {
   );
 };
 
+// ---- Settings Tab ----
+const SettingsTab = () => {
+  const [videoUrl, setVideoUrl] = useState('');
+  const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    adminApi.getSettings().then(r => {
+      const setting = r.data.find(s => s.settingKey === 'promo_video_url');
+      if (setting) setVideoUrl(setting.settingValue);
+    }).catch(() => {});
+  }, []);
+
+  const handleSave = async (e) => {
+    e.preventDefault();
+    setSaving(true);
+    try {
+      await adminApi.updateSetting({ settingKey: 'promo_video_url', settingValue: videoUrl });
+      alert('Settings updated successfully!');
+    } catch(err) { alert('Error: ' + err.message); }
+    setSaving(false);
+  };
+
+  return (
+    <div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+        <div><h2 className="display-font" style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>Platform Settings</h2><p style={{ color: 'var(--text-muted)' }}>Configure site-wide settings.</p></div>
+      </div>
+      <form onSubmit={handleSave} className="glass-card" style={{ padding: '2.5rem', maxWidth: '600px' }}>
+        <div className="form-group">
+          <label>Promotional Video YouTube URL (Embed format preferred)</label>
+          <input 
+            value={videoUrl} 
+            onChange={e => setVideoUrl(e.target.value)} 
+            placeholder="https://www.youtube.com/embed/..." 
+            style={{ marginBottom: '1rem' }} 
+          />
+          <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '1.5rem' }}>
+            Example: https://www.youtube.com/embed/jNQXAC9IVRw?autoplay=0&controls=1
+          </p>
+        </div>
+        <button type="submit" className="btn-primary" disabled={saving}>{saving ? 'Saving...' : 'Save Settings'}</button>
+      </form>
+    </div>
+  );
+};
+
 // ---- Main Admin Dashboard ----
 const AdminDashboard = () => {
   const [active, setActive] = useState('dashboard');
@@ -1001,6 +1048,7 @@ const AdminDashboard = () => {
     testimonials: <TestimonialsTab />,
     inquiries: <InquiriesTab />,
     team: <TeamTab />,
+    settings: <SettingsTab />,
   };
 
   if (!isAdmin) return null;

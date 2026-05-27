@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { publicApi } from '../services/api';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Contact = () => {
   const [form, setForm] = useState({ name:'', email:'', phone:'', eventType:'', eventDate:'', budget:'', venue:'', message:'' });
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [step, setStep] = useState(1);
+
+  const nextStep = () => setStep(s => Math.min(3, s + 1));
+  const prevStep = () => setStep(s => Math.max(1, s - 1));
 
   const handleChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
 
@@ -118,67 +122,80 @@ const Contact = () => {
               >{status.msg}</motion.div>
             )}
 
-            <form onSubmit={handleSubmit} style={{ display:'grid', gap:'1.8rem' }}>
-              <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'2rem' }} className="form-row-double">
-                <div className="form-group" style={{ marginBottom: 0 }}>
-                  <label>Your Name</label>
-                  <input name="name" value={form.name} onChange={handleChange} required placeholder="Your Name" />
-                </div>
-                <div className="form-group" style={{ marginBottom: 0 }}>
-                  <label>Your Email</label>
-                  <input name="email" type="email" value={form.email} onChange={handleChange} required placeholder="your@email.com" />
-                </div>
-              </div>
-              
-              <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'2rem' }} className="form-row-double">
-                <div className="form-group" style={{ marginBottom: 0 }}>
-                  <label>Phone Number</label>
-                  <input name="phone" value={form.phone} onChange={handleChange} placeholder="+91 90000 00000" />
-                </div>
-                <div className="form-group" style={{ marginBottom: 0 }}>
-                  <label>Event Type</label>
-                  <select name="eventType" value={form.eventType} onChange={handleChange} style={{ colorScheme: 'dark' }}>
-                    <option value="">Select Category</option>
-                    {['Award Show', 'Corporate Summit', 'Concert Production', 'Celebrity Event', 'Private Event', 'Brand Launch', 'Other'].map(t => (
-                      <option key={t} value={t} style={{ background: 'var(--bg-surface)', color: 'var(--text-main)' }}>{t}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
+            <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '2.5rem' }}>
+              {[1, 2, 3].map(i => (
+                <div key={i} style={{ flex: 1, height: '4px', background: step >= i ? 'var(--primary)' : 'rgba(255,255,255,0.1)', borderRadius: '2px', transition: 'background 0.3s ease' }} />
+              ))}
+            </div>
 
-              <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'2rem' }} className="form-row-double">
-                <div className="form-group" style={{ marginBottom: 0 }}>
-                  <label>Event Date</label>
-                  <input name="eventDate" type="text" placeholder="Select Event Date" onFocus={(e) => (e.target.type = 'date')} onBlur={(e) => { if(!e.target.value) e.target.type = 'text'; }} value={form.eventDate} onChange={handleChange} style={{ colorScheme:'dark' }} />
-                </div>
-                <div className="form-group" style={{ marginBottom: 0 }}>
-                  <label>Your Budget</label>
-                  <select name="budget" value={form.budget} onChange={handleChange} style={{ colorScheme: 'dark' }}>
-                    <option value="">Select Range</option>
-                    {['Under ₹1 Lakh', '₹1 Lakh – ₹5 Lakhs', '₹5 Lakhs – ₹20 Lakhs', 'Over ₹20 Lakhs', 'Not decided yet'].map(b => (
-                      <option key={b} value={b} style={{ background: 'var(--bg-surface)', color: 'var(--text-main)' }}>{b}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
+            <form onSubmit={handleSubmit} style={{ position: 'relative', minHeight: '320px' }}>
+              <AnimatePresence mode="wait">
+                {step === 1 && (
+                  <motion.div key="step1" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.3 }} style={{ display:'grid', gap:'1.8rem' }}>
+                    <div className="form-group" style={{ marginBottom: 0 }}>
+                      <label>What kind of event are you planning?</label>
+                      <select name="eventType" value={form.eventType} onChange={handleChange} style={{ colorScheme: 'dark' }}>
+                        <option value="">Select Category</option>
+                        {['Award Show', 'Corporate Summit', 'Concert Production', 'Celebrity Event', 'Private Event', 'Brand Launch', 'Other'].map(t => (
+                          <option key={t} value={t} style={{ background: 'var(--bg-surface)', color: 'var(--text-main)' }}>{t}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="form-group" style={{ marginBottom: 0 }}>
+                      <label>When is it happening?</label>
+                      <input name="eventDate" type="text" placeholder="Select Event Date" onFocus={(e) => (e.target.type = 'date')} onBlur={(e) => { if(!e.target.value) e.target.type = 'text'; }} value={form.eventDate} onChange={handleChange} style={{ colorScheme:'dark' }} />
+                    </div>
+                    <button type="button" onClick={nextStep} className="btn-primary" style={{ marginTop:'1rem', width:'100%', padding: '1.2rem' }}>Next Step: Details</button>
+                  </motion.div>
+                )}
 
-              <div className="form-group" style={{ marginBottom: 0 }}>
-                <label>More Details</label>
-                <textarea name="message" value={form.message} onChange={handleChange} required rows={5}
-                  placeholder="Tell us about your event, what you need, and any other details..." />
-              </div>
+                {step === 2 && (
+                  <motion.div key="step2" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.3 }} style={{ display:'grid', gap:'1.8rem' }}>
+                    <div className="form-group" style={{ marginBottom: 0 }}>
+                      <label>What is your estimated budget?</label>
+                      <select name="budget" value={form.budget} onChange={handleChange} style={{ colorScheme: 'dark' }}>
+                        <option value="">Select Range</option>
+                        {['Under ₹1 Lakh', '₹1 Lakh – ₹5 Lakhs', '₹5 Lakhs – ₹20 Lakhs', 'Over ₹20 Lakhs', 'Not decided yet'].map(b => (
+                          <option key={b} value={b} style={{ background: 'var(--bg-surface)', color: 'var(--text-main)' }}>{b}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="form-group" style={{ marginBottom: 0 }}>
+                      <label>Any specific details or requirements?</label>
+                      <textarea name="message" value={form.message} onChange={handleChange} required rows={4} placeholder="Tell us about your event, what you need, and any other details..." />
+                    </div>
+                    <div style={{ display:'flex', gap:'1rem', marginTop:'1rem' }}>
+                      <button type="button" onClick={prevStep} className="btn-outline" style={{ flex: 1, padding: '1.2rem' }}>Back</button>
+                      <button type="button" onClick={nextStep} className="btn-primary" style={{ flex: 2, padding: '1.2rem' }}>Next Step: Contact Info</button>
+                    </div>
+                  </motion.div>
+                )}
 
-              <button 
-                type="submit" 
-                className="btn-primary" 
-                disabled={loading} 
-                style={{
-                  marginTop:'1.5rem', width:'100%', padding: '1.2rem',
-                  opacity: loading ? 0.7 : 1, cursor: loading ? 'not-allowed' : 'pointer',
-                }}
-              >
-                {loading ? 'Sending...' : 'Send Message'}
-              </button>
+                {step === 3 && (
+                  <motion.div key="step3" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.3 }} style={{ display:'grid', gap:'1.8rem' }}>
+                    <div className="form-group" style={{ marginBottom: 0 }}>
+                      <label>Your Name *</label>
+                      <input name="name" value={form.name} onChange={handleChange} required placeholder="Your Name" />
+                    </div>
+                    <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'2rem' }} className="form-row-double">
+                      <div className="form-group" style={{ marginBottom: 0 }}>
+                        <label>Your Email *</label>
+                        <input name="email" type="email" value={form.email} onChange={handleChange} required placeholder="your@email.com" />
+                      </div>
+                      <div className="form-group" style={{ marginBottom: 0 }}>
+                        <label>Phone Number</label>
+                        <input name="phone" value={form.phone} onChange={handleChange} placeholder="+91 90000 00000" />
+                      </div>
+                    </div>
+                    <div style={{ display:'flex', gap:'1rem', marginTop:'1rem' }}>
+                      <button type="button" onClick={prevStep} className="btn-outline" style={{ flex: 1, padding: '1.2rem' }}>Back</button>
+                      <button type="submit" className="btn-primary" disabled={loading} style={{ flex: 2, padding: '1.2rem', opacity: loading ? 0.7 : 1, cursor: loading ? 'not-allowed' : 'pointer' }}>
+                        {loading ? 'Sending...' : 'Submit Inquiry'}
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </form>
           </motion.div>
         </div>

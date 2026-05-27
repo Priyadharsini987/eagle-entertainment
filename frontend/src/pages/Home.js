@@ -173,15 +173,64 @@ const EventsRow = ({ title, accent, events, label }) => {
   );
 };
 
+// ---- Video Reel Section ----
+const VideoReelSection = ({ videoUrl }) => {
+  if (!videoUrl) return null; // Don't show section if no video URL is configured
+
+  return (
+    <section className="section" style={{ background:'var(--bg-surface)', borderBottom:'1px solid var(--border)' }}>
+      <div className="container" style={{ textAlign: 'center' }}>
+        <div style={{ marginBottom:'3rem' }}>
+          <span className="section-label">Experience the Magic</span>
+          <h2 className="section-title">Our Best <span>Moments</span></h2>
+          <p style={{ color: 'var(--text-muted)', maxWidth: 600, margin: '0 auto' }}>Watch the highlights of our grandest events, from celebrity award shows to high-energy concerts.</p>
+        </div>
+        
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          style={{ 
+            position: 'relative', width: '100%', maxWidth: '1000px', margin: '0 auto', 
+            aspectRatio: '16/9', borderRadius: 'var(--radius-lg)', overflow: 'hidden',
+            boxShadow: '0 20px 40px rgba(0,0,0,0.5)', border: '1px solid rgba(223,178,89,0.2)'
+          }}
+        >
+          {/* Using a placeholder video or high-quality iframe embed */}
+          <iframe 
+            width="100%" 
+            height="100%" 
+            src={videoUrl} 
+            title="Eagle Entertainment Promo Reel" 
+            frameBorder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowFullScreen
+            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+          ></iframe>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
 // ---- Main Home ----
 const Home = () => {
   const { upcomingEvents, recentEvents } = useEvents();
   const [gallery, setGallery] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
+  const [videoUrl, setVideoUrl] = useState('');
 
   useEffect(() => {
     publicApi.getGallery().then(r => setGallery(Array.isArray(r.data) ? r.data.slice(0, 6) : [])).catch(() => {});
     publicApi.getTestimonials().then(r => setTestimonials(Array.isArray(r.data) ? r.data.slice(0, 3) : [])).catch(() => {});
+    publicApi.getSettings().then(r => {
+      const v = r.data?.find(s => s.settingKey === 'promo_video_url');
+      if (v) setVideoUrl(v.settingValue);
+      else setVideoUrl('https://www.youtube.com/embed/jNQXAC9IVRw?autoplay=0&mute=0&controls=1&rel=0&modestbranding=1');
+    }).catch(() => {
+      setVideoUrl('https://www.youtube.com/embed/jNQXAC9IVRw?autoplay=0&mute=0&controls=1&rel=0&modestbranding=1');
+    });
   }, []);
 
   return (
@@ -226,6 +275,8 @@ const Home = () => {
           ))}
         </div>
       </div>
+
+      <VideoReelSection videoUrl={videoUrl} />
 
       {/* Events Section */}
       <section className="section" style={{ paddingBottom:'3rem' }}>

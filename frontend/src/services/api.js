@@ -34,7 +34,8 @@ export const publicApi = {
   getStats: () => api.get('/api/public/stats'),
   submitInquiry: (data) => api.post('/api/public/inquiry', data),
   getTeam: () => api.get('/api/public/team'),
-  getServices: () => api.get('/api/public/services')
+  getServices: () => api.get('/api/public/services'),
+  getSettings: () => api.get('/api/public/settings')
 };
 
 // Auth APIs
@@ -78,6 +79,9 @@ export const adminApi = {
   addTeam: (data) => api.post('/api/admin/team', data),
   updateTeam: (id, data) => api.put(`/api/admin/team/${id}`, data),
   deleteTeam: (id) => api.delete(`/api/admin/team/${id}`),
+  // Settings
+  getSettings: () => api.get('/api/admin/settings'),
+  updateSetting: (data) => api.post('/api/admin/settings', data),
   // Image upload
   uploadImage: (formData) => api.post('/api/admin/upload', formData, {
     headers: { 'Content-Type': 'multipart/form-data' }
