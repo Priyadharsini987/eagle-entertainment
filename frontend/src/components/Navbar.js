@@ -101,7 +101,7 @@ const Navbar = () => {
                   fontSize:'0.85rem', 
                   fontWeight: 600, 
                   letterSpacing:'0.02em',
-                  color: isActive(l.path) ? 'var(--primary-dark)' : 'var(--text-muted)',
+                  color: isActive(l.path) ? '#ffffff' : 'var(--text-main)',
                   background: isActive(l.path) ? 'var(--primary)' : 'transparent',
                   borderRadius: '6px',
                   transition: 'all 0.3s ease',
@@ -110,13 +110,13 @@ const Navbar = () => {
                 }}
                 onMouseEnter={e => {
                   if (!isActive(l.path)) {
-                    e.currentTarget.style.color = 'var(--primary-dark)';
-                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                    e.currentTarget.style.color = '#ffffff';
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
                   }
                 }}
                 onMouseLeave={e => {
                   if (!isActive(l.path)) {
-                    e.currentTarget.style.color = 'var(--text-muted)';
+                    e.currentTarget.style.color = 'var(--text-main)';
                     e.currentTarget.style.background = 'transparent';
                   }
                 }}

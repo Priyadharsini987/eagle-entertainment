@@ -40,7 +40,7 @@ const Hero = () => {
             }}
           >
             <img src={sl.img} alt="" style={{ width:'100%', height:'100%', objectFit:'cover' }} />
-            <div style={{ position:'absolute', inset:0, background:'linear-gradient(to right, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.5) 60%, rgba(255, 255, 255, 0.7) 100%)' }} />
+            <div style={{ position:'absolute', inset:0, background:'linear-gradient(to right, rgba(2, 6, 23, 0.9) 0%, rgba(2, 6, 23, 0.5) 60%, rgba(2, 6, 23, 0.8) 100%)' }} />
             <div style={{ position:'absolute', inset:0, background:'radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.25), transparent 55%)' }} />
           </motion.div>
         ))}
@@ -73,7 +73,7 @@ const Hero = () => {
                 </div>
                 
                 {/* Title */}
-                <h1 className="display-font" style={{ fontSize:'clamp(2.6rem, 6.2vw, 4.8rem)', color: '#111827', lineHeight:1.1, marginBottom:'1.8rem', fontWeight: 700, letterSpacing: '-0.02em' }}>
+                <h1 className="display-font" style={{ fontSize:'clamp(2.6rem, 6.2vw, 4.8rem)', color: 'var(--text-main)', lineHeight:1.1, marginBottom:'1.8rem', fontWeight: 700, letterSpacing: '-0.02em' }}>
                   {sl.title} <span className="gold-text-shine" style={{ display: 'inline-block', fontStyle: 'italic', fontWeight: 400 }}>{sl.accent}</span>
                 </h1>
                 
