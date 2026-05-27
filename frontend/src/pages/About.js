@@ -1,16 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { publicApi, getImageUrl } from '../services/api';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const About = () => {
   const [team, setTeam] = useState([]);
-  const [stats, setStats] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     publicApi.getTeam().then(res => setTeam(Array.isArray(res.data) ? res.data : [])).catch(() => {});
-    publicApi.getStats().then(res => setStats(Array.isArray(res.data) ? res.data : [])).catch(() => {});
   }, []);
+
+  useEffect(() => {
+    if (team.length <= 1) return;
+    const timer = setInterval(() => {
+      setCurrentIndex(prev => (prev + 1) % team.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [team.length]);
+
+  const nextSlide = () => setCurrentIndex(prev => (prev + 1) % team.length);
+  const prevSlide = () => setCurrentIndex(prev => (prev - 1 + team.length) % team.length);
 
   return (
     <div style={{ paddingTop:'6rem', minHeight:'100vh' }}>
@@ -76,14 +86,6 @@ const About = () => {
               <p style={{ color:'var(--text-muted)', lineHeight:1.9, marginBottom:'3.5rem', fontSize:'1.02rem' }}>
                 Whether it's a corporate gala in Chennai, a prestigious award ceremony in Madurai, or a grand product launch in our home city of Erode, we bring professional excellence to every corner of the state. Our dedicated team works tirelessly to ensure your vision is realized with a touch of elegance and grandeur.
               </p>
-                <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'2rem', marginBottom:'3rem' }}>
-                  {stats.map((s, i) => (
-                    <div key={i} style={{ padding:'1.8rem', background:'rgba(255,255,255, 0.03)', border:'1px solid rgba(255,255,255, 0.15)', borderRadius:'var(--radius-md)', textAlign:'center', boxShadow: '0 10px 20px rgba(0,0,0,0.4)' }}>
-                      <div style={{ fontSize:'2.6rem', fontWeight:800, color:'var(--primary)', lineHeight:1, marginBottom:'6px', fontFamily: 'var(--font-display)' }}>{s.num}</div>
-                      <div style={{ fontSize:'0.75rem', color:'var(--text-muted)', letterSpacing:'0.18em', textTransform:'uppercase', fontWeight: 700 }}>{s.label}</div>
-                    </div>
-                  ))}
-                </div>
               <Link to="/contact" className="btn-primary">Initiate Collaboration</Link>
             </motion.div>
           </div>
@@ -102,39 +104,58 @@ const About = () => {
             <h2 className="section-title">Meet Our <span>Leaders</span></h2>
           </div>
           
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))', gap:'3rem' }}>
-            {team.map((member, i) => (
-              <motion.div 
-                key={i} 
-                className="glass-card" 
-                style={{
-                  textAlign:'center', padding:'3.5rem 2.2rem',
-                  position:'relative', overflow:'hidden',
-                  border: '1px solid rgba(255,255,255, 0.12)'
-                }}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.6 }}
-              >
-                <div style={{ position:'absolute', top:0, left:0, right:0, height:'4px', background:'var(--primary)' }} />
+          <div style={{ position:'relative', maxWidth: 600, margin:'0 auto' }}>
+            {team.length > 0 ? (
+              <div style={{ position: 'relative', minHeight: '420px' }}>
+                <AnimatePresence mode="wait">
+                  <motion.div 
+                    key={currentIndex}
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -50 }}
+                    transition={{ duration: 0.5 }}
+                    className="glass-card"
+                    style={{
+                      textAlign:'center', padding:'3.5rem 2.2rem',
+                      position:'absolute', width: '100%',
+                      border: '1px solid rgba(255,255,255, 0.12)'
+                    }}
+                  >
+                    <div style={{ position:'absolute', top:0, left:0, right:0, height:'4px', background:'var(--primary)' }} />
+                    <img 
+                      src={getImageUrl(team[currentIndex].imageUrl || team[currentIndex].img)} 
+                      alt={team[currentIndex].name} 
+                      style={{ width:130, height:130, borderRadius:'50%', objectFit:'cover', border:'4px solid var(--border)', marginBottom:'2rem', boxShadow: '0 10px 25px rgba(0,0,0,0.6)' }}
+                      onError={e => { e.target.src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=300'; }} 
+                    />
+                    <h3 className="display-font" style={{ fontSize:'1.6rem', color: 'var(--text-main)', marginBottom:'0.5rem', fontWeight: 600 }}>{team[currentIndex].name}</h3>
+                    <div style={{ color:'var(--primary-light)', fontSize:'0.75rem', fontWeight:800, letterSpacing:'0.18em', textTransform:'uppercase', marginBottom:'1.8rem' }}>
+                      {team[currentIndex].role}
+                    </div>
+                    <p style={{ color:'var(--text-muted)', fontSize:'0.92rem', lineHeight:1.75 }}>{team[currentIndex].bio}</p>
+                  </motion.div>
+                </AnimatePresence>
                 
-                <img 
-                  src={getImageUrl(member.imageUrl || member.img)} 
-                  alt={member.name} 
-                  style={{ width:130, height:130, borderRadius:'50%', objectFit:'cover', border:'4px solid var(--border)', marginBottom:'2rem', boxShadow: '0 10px 25px rgba(0,0,0,0.6)' }}
-                  onError={e => { e.target.src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=300'; }} 
-                />
-                
-                <h3 className="display-font" style={{ fontSize:'1.6rem', color: 'var(--text-main)', marginBottom:'0.5rem', fontWeight: 600 }}>{member.name}</h3>
-                
-                <div style={{ color:'var(--primary-light)', fontSize:'0.75rem', fontWeight:800, letterSpacing:'0.18em', textTransform:'uppercase', marginBottom:'1.8rem' }}>
-                  {member.role}
-                </div>
-                
-                <p style={{ color:'var(--text-muted)', fontSize:'0.92rem', lineHeight:1.75 }}>{member.bio}</p>
-              </motion.div>
-            ))}
+                {/* Navigation Buttons */}
+                {team.length > 1 && (
+                  <>
+                    <button onClick={prevSlide} style={{ position:'absolute', top:'50%', left:'-3rem', transform:'translateY(-50%)', background:'transparent', border:'none', color:'var(--primary)', fontSize:'2rem', cursor:'pointer' }}>
+                      &#10094;
+                    </button>
+                    <button onClick={nextSlide} style={{ position:'absolute', top:'50%', right:'-3rem', transform:'translateY(-50%)', background:'transparent', border:'none', color:'var(--primary)', fontSize:'2rem', cursor:'pointer' }}>
+                      &#10095;
+                    </button>
+                    <div style={{ position:'absolute', bottom:'-3rem', left:0, right:0, display:'flex', justifyContent:'center', gap:'0.5rem' }}>
+                      {team.map((_, idx) => (
+                        <div key={idx} onClick={() => setCurrentIndex(idx)} style={{ width: 10, height: 10, borderRadius: '50%', background: currentIndex === idx ? 'var(--primary)' : 'rgba(255,255,255,0.2)', cursor: 'pointer', transition: 'background 0.3s ease' }} />
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
+            ) : (
+              <p style={{ color: 'var(--text-muted)' }}>No team members to display.</p>
+            )}
           </div>
         </div>
       </section>
