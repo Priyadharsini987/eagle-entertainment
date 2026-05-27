@@ -332,9 +332,10 @@ const EventsTab = () => {
               <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'1rem' }}>
                 <div className="form-group">
                   <label>Category</label>
-                  <select value={form.category} onChange={e => setForm(f => ({...f, category:e.target.value}))}>
-                    {categories.map(c => <option key={c}>{c}</option>)}
-                  </select>
+                  <input list="categoriesList" value={form.category} onChange={e => setForm(f => ({...f, category:e.target.value}))} placeholder="Select or type category..." />
+                  <datalist id="categoriesList">
+                    {categories.map(c => <option key={c} value={c} />)}
+                  </datalist>
                 </div>
                 <div className="form-group">
                   <label>Status</label>
@@ -350,7 +351,7 @@ const EventsTab = () => {
                 </div>
                 <div className="form-group">
                   <label>Event Time</label>
-                  <input type="time" value={form.eventTime} onChange={e => setForm(f => ({...f, eventTime:e.target.value}))} style={{ colorScheme:'dark' }} />
+                  <input type="text" value={form.eventTime} onChange={e => setForm(f => ({...f, eventTime:e.target.value}))} placeholder="e.g. 6:00 PM - 9:00 PM or 6:00 PM onwards" />
                 </div>
               </div>
               <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'1rem' }}>
